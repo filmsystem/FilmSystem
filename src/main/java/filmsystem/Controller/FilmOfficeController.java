@@ -1,0 +1,88 @@
+package filmsystem.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import filmsystem.Model.FilmOffice;
+import filmsystem.Service.Impi.FilmOfficeServiceImpl;
+
+import javax.servlet.http.HttpSession;
+
+@RestController
+@RequestMapping("/api")
+public class FilmOfficeController {
+    //public static Logger log = LoggerFactory.getLogger(FilmOfficeController.class);
+    @Autowired
+    FilmOfficeServiceImpl filmOfficeService;
+
+    @RequestMapping(value = "/filmoffice", method = RequestMethod.POST)
+    public String addFilmOffice(@RequestParam("cinemaId") Integer cinemaId,
+                                 @RequestParam("officeId") Integer officeId,
+                                 @RequestParam("row") Integer row,
+                                 @RequestParam("col") Integer col){
+        // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
+        try{
+            FilmOffice office = new FilmOffice();
+            office.setCinemaId(cinemaId);
+            office.setOfficeId(officeId);
+            office.setRow(row);
+            office.setCol(col);
+            return filmOfficeService.createOffice(office) ? "SUCCESS" : "FAIL";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/filmoffice", method = RequestMethod.GET)
+    public String getFilmOffice(@RequestParam Integer id, Model model, HttpSession session){
+        try{
+            FilmOffice office = filmOfficeService.findOfficeById(id);
+            if(office != null){
+                session.setAttribute("filmOfficeFound", office);
+                return "SUCCESS";
+            }
+            return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/filmoffice", method = RequestMethod.PUT)
+    public String updateFilmOffice(@RequestParam("id") Integer id,
+                                    @RequestParam("row") Integer row,
+                                    @RequestParam("col") Integer col){
+        try{
+            FilmOffice office = filmOfficeService.findOfficeById(id);
+            if(office != null){
+                office.setRow(row);
+                office.setCol(col);
+                return filmOfficeService.updateOffice(office) ? "SUCCESS" : "FAIL";
+            }
+            return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+
+    }
+
+    @RequestMapping(value = "/filmoffice", method = RequestMethod.DELETE)
+    public String deleteFilmOffice(@RequestParam Integer id){
+        try{
+            return filmOfficeService.deleteOffice(id) ? "SUCCESS" : "NOT_FOUND";
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+}
