@@ -8,6 +8,8 @@ import filmsystem.Service.IAdministratorService;
 @Service("administratorService")
 public class AdministratorServiceImpl implements IAdministratorService {
     public boolean insertAdministrator(Administrator administrator){
+        if(new AdministratorDAO().searchAdministratorByName(administrator.getUsername()) != null)
+            return false;
         return new AdministratorDAO().insertAdministrator(administrator);
     }
 
@@ -28,21 +30,5 @@ public class AdministratorServiceImpl implements IAdministratorService {
     public Administrator findAdministratorByName(String name){
         // find in database
         return null;
-    }
-
-    public boolean checkAdministrator(String username, String password){
-        // check
-        Administrator administrator = null;
-        if(administrator != null){
-            if(password.equals(administrator.getPassword())){
-                return true;
-            }
-            else{   // password error
-                return false;
-            }
-        }
-        else{   // administrator not found
-            return false;
-        }
     }
 }

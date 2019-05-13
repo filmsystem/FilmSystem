@@ -28,21 +28,4 @@ public class CinemaServiceImpl implements ICinemaService{
         // find in database
         return null;
     }
-
-    public boolean checkCinema(String username, String password){
-        // TODO
-        //Cinema cinema = new CinemaDAO().getCinemaName();
-        Cinema cinema = null;
-        if(cinema != null){
-            if(password.equals(cinema.getPassword())){
-                return true;
-            }
-            else{   // password error
-                return false;
-            }
-        }
-        else{   // cinema not found
-            return false;
-        }
-    }
 }

@@ -18,27 +18,27 @@ public class CinemaController {
     @Autowired
     CinemaServiceImpl cinemaService;
 
-    @RequestMapping(value = "/cinema", method = RequestMethod.POST)
-    public String insertCustomer(@RequestParam("name") String name,
-                               @RequestParam("password") String password,
-                               @RequestParam(value = "img", defaultValue = "") String img,
-                               @RequestParam("city") String city,
-                               @RequestParam("address") String address){
-        // log.info("name = " + name + ", password = " + password + ", city = " + city + ", address = " + address);
-        try{
-            Cinema cinema = new Cinema();
-            cinema.setUsername(name);
-            cinema.setPassword(password);
-            cinema.setImg(img);
-            cinema.setCity(city);
-            cinema.setAddress(address);
-            return cinemaService.insertCinema(cinema) ? "SUCCESS" : "FAIL";
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return "DB_ERROR";
-        }
-    }
+//    @RequestMapping(value = "/cinema", method = RequestMethod.POST)
+//    public String insertCustomer(@RequestParam("name") String name,
+//                               @RequestParam("password") String password,
+//                               @RequestParam(value = "img", defaultValue = "") String img,
+//                               @RequestParam("city") String city,
+//                               @RequestParam("address") String address){
+//        // log.info("name = " + name + ", password = " + password + ", city = " + city + ", address = " + address);
+//        try{
+//            Cinema cinema = new Cinema();
+//            cinema.setUsername(name);
+//            cinema.setPassword(password);
+//            cinema.setImg(img);
+//            cinema.setCity(city);
+//            cinema.setAddress(address);
+//            return cinemaService.insertCinema(cinema) ? "SUCCESS" : "FAIL";
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            return "DB_ERROR";
+//        }
+//    }
 
     @RequestMapping(value = "/cinema", method = RequestMethod.GET)
     public String getCinema(@RequestParam Integer id, Model model, HttpSession session){

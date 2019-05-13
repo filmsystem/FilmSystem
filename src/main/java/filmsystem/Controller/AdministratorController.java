@@ -20,23 +20,23 @@ public class AdministratorController {
     @Autowired
     AdministratorServiceImpl administratorService;
 
-    @RequestMapping(value = "/administrator", method = RequestMethod.POST)
-    public String insertAdministrator(@RequestParam("name") String name,
-                                    @RequestParam(value = "img", defaultValue = "") String img,
-                                    @RequestParam("password") String password){
-        // log.info("name = " + name + ", password = " + password;
-        try{
-            Administrator administrator = new Administrator();
-            administrator.setUsername(name);
-            administrator.setPassword(password);
-            administrator.setImg(img);
-            return administratorService.insertAdministrator(administrator) ? "SUCCESS" : "FAIL";
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return "DB_ERROR";
-        }
-    }
+//    @RequestMapping(value = "/administrator", method = RequestMethod.POST)
+//    public String insertAdministrator(@RequestParam("name") String name,
+//                                    @RequestParam(value = "img", defaultValue = "") String img,
+//                                    @RequestParam("password") String password){
+//        // log.info("name = " + name + ", password = " + password;
+//        try{
+//            Administrator administrator = new Administrator();
+//            administrator.setUsername(name);
+//            administrator.setPassword(password);
+//            administrator.setImg(img);
+//            return administratorService.insertAdministrator(administrator) ? "SUCCESS" : "FAIL";
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return "DB_ERROR";
+//        }
+//    }
 
     @RequestMapping(value = "/administrator", method = RequestMethod.GET)
     public String getAllAdministrator(Model model, HttpSession session){

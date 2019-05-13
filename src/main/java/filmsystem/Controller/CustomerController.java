@@ -18,27 +18,29 @@ public class CustomerController {
     @Autowired
     CustomerServiceImpl customerService;
 
-    @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public String insertCustomer(@RequestParam("name") String name,
-                               @RequestParam("password") String password,
-                               @RequestParam(value = "img", defaultValue = "") String img,
-                               @RequestParam("gender") String gender,
-                               @RequestParam("phonenum") String phonenum){
-        // log.info("name = " + name + ", password = " + password + ", gender = " + gender + ", phonenum = " + phonenum);
-        try{
-            Customer customer = new Customer();
-            customer.setUsername(name);
-            customer.setPassword(password);
-            customer.setImg(img);
-            customer.setGender(gender);
-            customer.setPhoneNum(phonenum);
-            return customerService.insertCustomer(customer) ? "SUCCESS" : "FAIL";
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return "DB_ERROR";
-        }
-    }
+//    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+//    public String insertCustomer(@RequestParam("name") String name,
+//                                 @RequestParam("password") String password,
+//                                 @RequestParam(value = "img", defaultValue = "") String img,
+//                                 @RequestParam("gender") String gender,
+//                                 @RequestParam("phonenum") String phonenum,
+//                                 @RequestParam("city") String city){
+//        // log.info("name = " + name + ", password = " + password + ", gender = " + gender + ", phonenum = " + phonenum);
+//        try{
+//            Customer customer = new Customer();
+//            customer.setUsername(name);
+//            customer.setPassword(password);
+//            customer.setImg(img);
+//            customer.setGender(gender);
+//            customer.setPhoneNum(phonenum);
+//            customer.setCity(city);
+//            return customerService.insertCustomer(customer) ? "SUCCESS" : "FAIL";
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            return "DB_ERROR";
+//        }
+//    }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public String getCustomer(@RequestParam Integer id, Model model, HttpSession session){
@@ -61,7 +63,8 @@ public class CustomerController {
                                   @RequestParam("password") String password,
                                   @RequestParam(value = "img", defaultValue = "") String img,
                                   @RequestParam("gender") String gender,
-                                  @RequestParam("phonenum") String phonenum){
+                                  @RequestParam("phonenum") String phonenum,
+                                  @RequestParam("city") String city){
         try{
             Customer customer = customerService.findCustomerById(id);
             if(customer != null){
@@ -71,6 +74,7 @@ public class CustomerController {
                     customer.setImg(img);
                 customer.setGender(gender);
                 customer.setPhoneNum(phonenum);
+                customer.setCity(city);
                 return customerService.updateCustomer(customer) ? "SUCCESS" : "FAIL";
             }
             return "NOT_FOUND";
