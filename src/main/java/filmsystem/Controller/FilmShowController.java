@@ -1,13 +1,11 @@
 package filmsystem.Controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import filmsystem.Model.FilmShow;
 import filmsystem.Service.Impi.FilmShowServiceImpl;
@@ -45,8 +43,8 @@ public class FilmShowController {
         }
     }
 
-    @RequestMapping(value = "/filmshow", method = RequestMethod.GET)
-    public String getFilmShow(@RequestParam Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/filmshow/{id}", method = RequestMethod.GET)
+    public String getFilmShow(@PathVariable Integer id, Model model, HttpSession session){
         try{
             FilmShow show =  filmShowService.findShowById(id);
             if(show != null){
@@ -54,6 +52,31 @@ public class FilmShowController {
                 return "SUCCESS";
             }
             return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+
+    }
+
+    @RequestMapping(value = "/filmshow", method = RequestMethod.GET)
+    public String getFilmShow(@RequestParam(value = "cinemaId", defaultValue = "0") Integer cinemaId,
+                              @RequestParam(value = "filmId", defaultValue = "0") Integer filmId,
+                              Model model, HttpSession session){
+        try{
+            ArrayList<FilmShow> list = null;
+            if(filmId != 0 && cinemaId != 0) {
+                list = filmShowService.findShowByCinemaAndFilmId(cinemaId, filmId);
+            }
+            else if(cinemaId != 0){
+                list = filmShowService.findShowByCinemaId(cinemaId);
+            }
+            else if(filmId != 0){
+                list = filmShowService.findShowByFilmId(filmId);
+            }
+            session.setAttribute("filmShowList", list);
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();

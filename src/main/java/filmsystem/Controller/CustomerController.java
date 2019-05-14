@@ -2,10 +2,7 @@ package filmsystem.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import filmsystem.Model.Customer;
 import filmsystem.Service.Impi.CustomerServiceImpl;
@@ -42,10 +39,26 @@ public class CustomerController {
 //        }
 //    }
 
-    @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public String getCustomer(@RequestParam Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
+    public String getCustomer(@PathVariable Integer id, Model model, HttpSession session){
         try{
             Customer customer = customerService.findCustomerById(id);
+            if(customer != null){
+                session.setAttribute("customerFound", customer);
+                return "SUCCESS";
+            }
+            return "FAIL";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+    public String getCustomer(@RequestParam("name") String name, Model model, HttpSession session){
+        try{
+            Customer customer = customerService.findCustomerByName(name);
             if(customer != null){
                 session.setAttribute("customerFound", customer);
                 return "SUCCESS";

@@ -3,15 +3,13 @@ package filmsystem.Controller;
 import filmsystem.Model.BookingRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import filmsystem.Service.Impi.BookingRecordServiceImpl;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -20,8 +18,8 @@ public class BookingRecordController {
     @Autowired
     BookingRecordServiceImpl bookingRecordService;
 
-    @RequestMapping(value = "/bookingrecord", method = RequestMethod.GET)
-    public String getBookingRecord(@RequestParam("id") Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/bookingrecord/{id}", method = RequestMethod.GET)
+    public String getBookingRecord(@PathVariable Integer id, Model model, HttpSession session){
         try{
             BookingRecord record = bookingRecordService.findOrderById(id);
             if(record != null){
@@ -29,6 +27,27 @@ public class BookingRecordController {
                 return "SUCCESS";
             }
             return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/bookingrecord", method = RequestMethod.GET)
+    public String getBookingRecord(@RequestParam(value = "userId", defaultValue = "0") Integer userId,
+                                   @RequestParam(value = "showId", defaultValue = "0") Integer showId,
+                                   Model model, HttpSession session){
+        try{
+            ArrayList<BookingRecord> list;
+            if(userId != 0){
+                list = bookingRecordService.findOrderByUserId(userId);
+            }
+            else{
+                list = bookingRecordService.findOrderByShowId(showId);
+            }
+            session.setAttribute("bookingRecordList", list);
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();

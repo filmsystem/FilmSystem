@@ -2,15 +2,13 @@ package filmsystem.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import filmsystem.Model.FilmOffice;
 import filmsystem.Service.Impi.FilmOfficeServiceImpl;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -39,8 +37,8 @@ public class FilmOfficeController {
         }
     }
 
-    @RequestMapping(value = "/filmoffice", method = RequestMethod.GET)
-    public String getFilmOffice(@RequestParam Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/filmoffice/{id}", method = RequestMethod.GET)
+    public String getFilmOffice(@PathVariable Integer id, Model model, HttpSession session){
         try{
             FilmOffice office = filmOfficeService.findOfficeById(id);
             if(office != null){
@@ -48,6 +46,31 @@ public class FilmOfficeController {
                 return "SUCCESS";
             }
             return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/filmoffice", method = RequestMethod.GET)
+    public String getFilmOffice(@RequestParam("cinemaId") Integer cinemaId,
+                                @RequestParam(value = "officeId", defaultValue = "-1") Integer officeId,
+                                Model model, HttpSession session){
+        try{
+            if(officeId != -1){
+                ArrayList<FilmOffice> list = filmOfficeService.findOfficeByCinemaId(cinemaId);
+                session.setAttribute("filmOfficeList", list);
+                return "SUCCESS";
+            }
+            else{
+                FilmOffice office = filmOfficeService.findOfficeByOfficeId(cinemaId, officeId);
+                if(office != null){
+                    session.setAttribute("filmOfficeFound", office);
+                    return "SUCCESS";
+                }
+                return "NOT_FOUND";
+            }
         }
         catch(Exception e){
             e.printStackTrace();

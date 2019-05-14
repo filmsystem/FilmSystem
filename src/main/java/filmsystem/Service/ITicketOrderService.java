@@ -6,11 +6,11 @@ import filmsystem.Tools.RandomString;
 import java.sql.Timestamp;
 
 public interface ITicketOrderService {
-    public boolean createOrder(BookingRecord record);
+    boolean createOrder(BookingRecord record);
 
-    public boolean payOrder(BookingRecord record);
+    boolean payOrder(BookingRecord record);
 
-    public String getCollectString(BookingRecord record);
+    String getCollectString(BookingRecord record);
 
-    public boolean cancelOrder(BookingRecord record);
+    boolean cancelOrder(BookingRecord record);
 }

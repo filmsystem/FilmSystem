@@ -2,14 +2,12 @@ package filmsystem.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import filmsystem.Model.Cinema;
 import filmsystem.Service.Impi.CinemaServiceImpl;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -40,8 +38,8 @@ public class CinemaController {
 //        }
 //    }
 
-    @RequestMapping(value = "/cinema", method = RequestMethod.GET)
-    public String getCinema(@RequestParam Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/cinema/{id}", method = RequestMethod.GET)
+    public String getCinema(@PathVariable Integer id, Model model, HttpSession session){
         try{
             Cinema cinema = cinemaService.findCinemaById(id);
             if(cinema != null){
@@ -49,6 +47,33 @@ public class CinemaController {
                 return "SUCCESS";
             }
             return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/cinema", method = RequestMethod.GET)
+    public String findCinema(@RequestParam(value = "name", defaultValue = "") String name,
+                            @RequestParam(value = "city", defaultValue = "") String city,
+                            Model model, HttpSession session){
+        try{
+            ArrayList<Cinema> list;
+            if(name.equals("") && city.equals("")){
+                list = cinemaService.findAllCinemas();
+            }
+            else if(name.equals("")){
+                list = cinemaService.findCinemaByCity(city);
+            }
+            else if(city.equals("")){
+                list = cinemaService.findCinemaByName(name);
+            }
+            else{
+                list = cinemaService.findCinemaByNameAndCity(name, city);
+            }
+            session.setAttribute("cinemaList", list);
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();

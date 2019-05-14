@@ -5,6 +5,8 @@ import filmsystem.Model.Administrator;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IAdministratorService;
 
+import java.util.ArrayList;
+
 @Service("administratorService")
 public class AdministratorServiceImpl implements IAdministratorService {
     public boolean insertAdministrator(Administrator administrator){
@@ -29,6 +31,10 @@ public class AdministratorServiceImpl implements IAdministratorService {
 
     public Administrator findAdministratorByName(String name){
         // find in database
+        return null;
+    }
+
+    public ArrayList<Administrator> findAllAdministrator(){
         return null;
     }
 }

@@ -5,6 +5,8 @@ import filmsystem.Model.Cinema;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.ICinemaService;
 
+import java.util.ArrayList;
+
 @Service("cinemaService")
 public class CinemaServiceImpl implements ICinemaService{
     public boolean insertCinema(Cinema cinema){
@@ -24,8 +26,23 @@ public class CinemaServiceImpl implements ICinemaService{
         return null;
     }
 
-    public Cinema findCinemaByName(String name){
+    public ArrayList<Cinema> findCinemaByName(String name){
         // find in database
+        return null;
+    }
+
+    @Override
+    public ArrayList<Cinema> findAllCinemas() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Cinema> findCinemaByCity(String city) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Cinema> findCinemaByNameAndCity(String name, String city) {
         return null;
     }
 }

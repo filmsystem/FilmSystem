@@ -5,11 +5,13 @@ import filmsystem.Model.BookingRecord;
 import java.util.ArrayList;
 
 public interface IBookingRecordService {
-    public ArrayList<BookingRecord> findOrderByUserId(int userId);
+    ArrayList<BookingRecord> findOrderByUserId(int userId);
 
-    public BookingRecord findOrderById(int id);
+    ArrayList<BookingRecord> findOrderByShowId(int showId);
 
-    public boolean deleteOrder(int id);
+    BookingRecord findOrderById(int id);
 
-    public boolean deleteOrder(BookingRecord record);
+    boolean deleteOrder(int id);
+
+    boolean deleteOrder(BookingRecord record);
 }

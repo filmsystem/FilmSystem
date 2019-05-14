@@ -82,8 +82,13 @@ public class FilmShowServiceImpl implements IFilmShowService {
         return null;
     }
 
-    public ArrayList<FilmShow> findShowByFilmeId(int filmId){
+    public ArrayList<FilmShow> findShowByFilmId(int filmId){
         // find in database
+        return null;
+    }
+
+    @Override
+    public ArrayList<FilmShow> findShowByCinemaAndFilmId(int cinemaId, int filmId) {
         return null;
     }
 }

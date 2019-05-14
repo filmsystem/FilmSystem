@@ -39,12 +39,24 @@ public class AdministratorController {
 //    }
 
     @RequestMapping(value = "/administrator", method = RequestMethod.GET)
-    public String getAllAdministrator(Model model, HttpSession session){
-        // find all administrator by id in database
+    public String getAdministrator(@RequestParam(value = "name" , defaultValue = "") String name, Model model, HttpSession session){
+        /**
+         * @param: name: username; if name == "", find all administrators.
+         */
         try{
-            ArrayList<Administrator> list = null;
-            //TODO
-            session.setAttribute("administratorList", list);
+            if(name.equals("")){
+                ArrayList<Administrator> list = administratorService.findAllAdministrator();
+                session.setAttribute("administratorList", list);
+            }
+            else{
+                Administrator administrator = administratorService.findAdministratorByName(name);
+                if(administrator == null){
+                    return "NOT_FOUND";
+                }
+                else{
+                    session.setAttribute("administratorFound", administrator);
+                }
+            }
             return "SUCCESS";
         }
         catch (Exception e){
@@ -55,7 +67,10 @@ public class AdministratorController {
 
     @RequestMapping(value = "/administrator/{id}", method = RequestMethod.GET)
     public String getAdministrator(@PathVariable Integer id, Model model, HttpSession session){
-        // find administrator by id in database
+        /**
+         * find administrator by id in database
+         * @param: id: userid
+         */
         try{
             Administrator administrator = administratorService.findAdministratorById(id);
             if(administrator != null){

@@ -2,6 +2,8 @@ package filmsystem.Service;
 
 import filmsystem.Model.Cinema;
 
+import java.util.ArrayList;
+
 public interface ICinemaService {
     boolean insertCinema(Cinema cinema);
 
@@ -11,5 +13,11 @@ public interface ICinemaService {
 
     Cinema findCinemaById(int id);
 
-    Cinema findCinemaByName(String name);
+    ArrayList<Cinema> findCinemaByName(String name);
+
+    ArrayList<Cinema> findAllCinemas();
+
+    ArrayList<Cinema> findCinemaByCity(String city);
+
+    ArrayList<Cinema> findCinemaByNameAndCity(String name, String city);
 }

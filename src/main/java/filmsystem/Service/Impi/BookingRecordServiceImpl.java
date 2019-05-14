@@ -14,6 +14,11 @@ public class BookingRecordServiceImpl implements IBookingRecordService{
         return list;
     }
 
+    @Override
+    public ArrayList<BookingRecord> findOrderByShowId(int showId) {
+        return null;
+    }
+
     public BookingRecord findOrderById(int id){
         // find in database
         return null;

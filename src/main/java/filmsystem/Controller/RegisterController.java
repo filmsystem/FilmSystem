@@ -61,7 +61,7 @@ public class RegisterController {
         }
     }
 
-    @RequestMapping(value = "/administrator", method = RequestMethod.POST)
+    @RequestMapping(value = "/registerAdministrator", method = RequestMethod.POST)
     public String insertAdministrator(@RequestParam("name") String name,
                                       @RequestParam(value = "img", defaultValue = "") String img,
                                       @RequestParam("password") String password){

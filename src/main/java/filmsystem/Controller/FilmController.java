@@ -4,10 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import filmsystem.Model.Film;
 import filmsystem.Service.Impi.FilmServiceImpl;
@@ -50,10 +47,28 @@ public class FilmController {
         }
     }
 
-    @RequestMapping(value = "/film", method = RequestMethod.GET)
-    public String getFilm(@RequestParam Integer id, Model model, HttpSession session){
+    @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
+    public String getFilm(@PathVariable Integer id, Model model, HttpSession session){
         try{
             Film film = filmService.findFilmById(id);
+            if(film != null){
+                session.setAttribute("filmFound", film);
+                return "SUCCESS";
+            }
+            return "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
+    public String getFilm(@RequestParam(value = "info") String info, Model model, HttpSession session){
+        try{
+            //TODO
+            //Film film = filmService.findFilmById(id);
+            Film film = null;
             if(film != null){
                 session.setAttribute("filmFound", film);
                 return "SUCCESS";
