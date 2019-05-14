@@ -2,6 +2,8 @@ package filmsystem.Service;
 
 import filmsystem.Model.FilmComment;
 
+import java.util.ArrayList;
+
 public interface IFilmCommentService {
     public boolean insertComment(FilmComment comment);
 
@@ -11,7 +13,7 @@ public interface IFilmCommentService {
 
     public FilmComment findFilmCommentById(int id);
 
-    public FilmComment findFilmCommentByUserId(int userId);
+    public ArrayList<FilmComment> findFilmCommentByUserId(int userId);
 
-    public FilmComment findFilmCommentByFilmId(int filmId);
+    public ArrayList<FilmComment> findFilmCommentByFilmId(int filmId);
 }

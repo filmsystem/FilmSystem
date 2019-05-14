@@ -4,6 +4,8 @@ import filmsystem.Model.FilmComment;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IFilmCommentService;
 
+import java.util.ArrayList;
+
 @Service("filmCommentService")
 public class FilmCommentServiceImpl implements IFilmCommentService{
     public boolean insertComment(FilmComment comment){
@@ -26,12 +28,12 @@ public class FilmCommentServiceImpl implements IFilmCommentService{
         return null;
     }
 
-    public FilmComment findFilmCommentByUserId(int userId){
+    public ArrayList<FilmComment> findFilmCommentByUserId(int userId){
         // find in database
         return null;
     }
 
-    public FilmComment findFilmCommentByFilmId(int filmId){
+    public ArrayList<FilmComment> findFilmCommentByFilmId(int filmId){
         // find in database
         return null;
     }
