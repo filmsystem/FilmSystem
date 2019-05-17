@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filmsystem.Mapper.AdministratorMapper">
+
+    <resultMap id="customerList" type="filmsystem.Model.Customer">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="img" column="img"/>
+    </resultMap>
+
+    <insert id="insertCustomer" parameterType="filmsystem.Model.Customer" useGeneratedKeys="true" keyProperty="id">
+        insert into customer(username, password, img, gender, phonenum, city) values (#{username},#{password},#{img},#{gender},#{phonenum},#{city})
+    </insert>
+
+    <delete id="deleteCustomer">
+        delete from customer where id=#{id}
+    </delete>
+
+    <select id="selectCustomerById" resultType="filmsystem.Model.Customer">
+        select * from customer where id=#{id}
+    </select>
+
+    <select id="selectCustomerByName" resultType="filmsystem.Model.Customer">
+        select * from customer where username=#{username}
+    </select>
+
+    <update id="updateCustomer" parameterType="filmsystem.Model.Customer">
+        update customer set username=#{username},password=#{password},img=#{img},gender=#{gender},phonenum=#{phonenum},city=#{city} where id=#{id}
+    </update>
+</mapper>

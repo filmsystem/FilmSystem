@@ -38,7 +38,7 @@ public class RegisterServiceImpl implements IRegisterService {
             return false;
         else if(new CinemaDAO().searchCinemaByName(name) != null)
             return false;
-        else if(new CustomerDAO().searchCustomerByName(name) != null)
+        else if(new CustomerDAO().selectCustomerByName(name) != null)
             return false;
         return true;
     }
