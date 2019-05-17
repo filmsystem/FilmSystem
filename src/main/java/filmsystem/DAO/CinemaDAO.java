@@ -41,6 +41,10 @@ public class CinemaDAO {
         return cinemaMapper.selectCinemaByCity(city);
     }
 
+    public Cinema searchCinemaByFullName(String name) {
+        return cinemaMapper.selectCinemaByFullName(name);
+    }
+
     public ArrayList<Cinema> searchCinemaByName(String name) {
         name="%"+name+"%";
         return cinemaMapper.selectCinemaByName(name);

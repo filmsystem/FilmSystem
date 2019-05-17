@@ -13,6 +13,8 @@ public interface ICinemaService {
 
     Cinema findCinemaById(int id);
 
+    Cinema findCinemaByFullName(String name);
+
     ArrayList<Cinema> findCinemaByName(String name);
 
     ArrayList<Cinema> findAllCinemas();

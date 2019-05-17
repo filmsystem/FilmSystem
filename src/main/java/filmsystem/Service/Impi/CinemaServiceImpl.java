@@ -26,6 +26,11 @@ public class CinemaServiceImpl implements ICinemaService{
         return cinemaDAO.searchCinemaById(id);
     }
 
+    @Override
+    public Cinema findCinemaByFullName(String name) {
+        return cinemaDAO.searchCinemaByFullName(name);
+    }
+
     public ArrayList<Cinema> findCinemaByName(String name){
         return cinemaDAO.searchCinemaByName(name);
     }

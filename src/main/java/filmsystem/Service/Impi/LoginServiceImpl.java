@@ -19,8 +19,7 @@ public class LoginServiceImpl implements ILoginService{
     }
 
     public boolean checkCinema(String username, String password){
-        // TODO
-        Cinema cinema = new CinemaServiceImpl().findCinemaByName(username).get(0);
+        Cinema cinema = new CinemaServiceImpl().findCinemaByFullName(username);
         if(cinema != null){
             return password.equals(cinema.getPassword());
         }

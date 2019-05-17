@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 
-@Controller
+@RestController
 @RequestMapping("/api")
 //@SessionAttributes("currentUser")
 public class AdministratorController {

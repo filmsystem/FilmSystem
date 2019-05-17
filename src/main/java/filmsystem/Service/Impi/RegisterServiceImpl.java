@@ -35,11 +35,11 @@ public class RegisterServiceImpl implements IRegisterService {
 
     private boolean isNameUsed(String name){
         if(new AdministratorDAO().selectAdminByName(name) != null)
-            return false;
-        else if(new CinemaDAO().searchCinemaByName(name) != null)
-            return false;
+            return true;
+        else if(new CinemaDAO().searchCinemaByFullName(name) != null)
+            return true;
         else if(new CustomerDAO().selectCustomerByName(name) != null)
-            return false;
-        return true;
+            return true;
+        return false;
     }
 }
