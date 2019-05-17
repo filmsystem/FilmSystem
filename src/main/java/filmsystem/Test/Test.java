@@ -23,6 +23,6 @@ public class Test {
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
         AdministratorDAO administratorDAO=new AdministratorDAO();
-        administratorDAO.deleteAdministrator(1);
+        administratorDAO.getAllAdmin();
     }
 }

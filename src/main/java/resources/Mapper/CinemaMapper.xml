@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filmsystem.Mapper.CinemaMapper">
+
+    <resultMap id="cinemaList" type="filmsystem.Model.Cinema">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="img" column="img"/>
+        <result property="city" column="city"/>
+        <result property="address" column="address"/>
+    </resultMap>
+
+    <insert id="insertCinema" parameterType="filmsystem.Model.Cinema" useGeneratedKeys="true" keyProperty="id">
+        insert into cinema(username, password, img, city, address) values(#{username},#{password},#{img},#{city},#{address})
+    </insert>
+
+    <delete id="deleteCinema">
+        delete from cinema where id=#{id}
+    </delete>
+
+    <select id="selectCinemaById" resultType="filmsystem.Model.Cinema">
+        select * from cinema where id=#{id}
+    </select>
+
+    <select id="getAllCinema" resultMap="cinemaList">
+        select * from cinema
+    </select>
+
+    <select id="selectCinemaByCity" resultMap="cinemaList">
+        select * from cinema where city=#{city}
+    </select>
+
+    <select id="selectCinemaByName" resultMap="cinemaList">
+        select * from cinema where username like #{username}
+    </select>
+
+    <select id="selectCinemaByNameAndCity" resultMap="cinemaList">
+        select * from cinema where username like #{username} and city=#{city}
+    </select>
+
+    <update id="updateCinema" parameterType="filmsystem.Model.Cinema">
+        update cinema set username=#{username},password=#{password},img=#{img},city=#{city},address=#{address} where id=#{id}
+    </update>
+</mapper>
