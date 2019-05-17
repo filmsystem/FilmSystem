@@ -1,15 +1,38 @@
 package filmsystem.DAO;
 
+import filmsystem.Mapper.AdministratorMapper;
 import filmsystem.Model.Administrator;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import filmsystem.DAO.BaseDAO;
-
 
 public class AdministratorDAO {
     PreparedStatement pstmt;
+    ApplicationContext ac;
+    SqlSessionFactory factory;
+    SqlSession sqlSession;
+    AdministratorMapper administratorMapper;
+
+    public AdministratorDAO() {
+        ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //通过getBean方法找到applicationContext中的mySqlSessionFactory
+        factory = (SqlSessionFactory) ac.getBean("mySqlSessionFactory");
+        sqlSession = factory.openSession();
+        administratorMapper = sqlSession.getMapper(AdministratorMapper.class);
+    }
+
+    public Administrator selectAdminById(int id) {
+        return administratorMapper.selectAdminById(id);
+    }
+
+    public ArrayList<Administrator> getAllAdmin() {
+        return administratorMapper.getAllAdmin();
+    }
 
     public boolean insertAdministrator(Administrator admin) {
         try {
