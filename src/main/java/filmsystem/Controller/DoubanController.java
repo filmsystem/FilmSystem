@@ -30,31 +30,10 @@ public class DoubanController {
         return httpClient.client(url, method, params);
     }
 
-    @RequestMapping(value = "/doubanSearchByName", method = RequestMethod.GET)
-    public String searchFilmByName(@RequestParam("name") String name, Model model, HttpSession session){
-        try{
-            String url = "http://t.yushu.im/v2/movie/search?q=" + name + "&start=0";
-            ArrayList<String> result = getJSONString(url);
-            if(result.size() == 2){
-                HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
-                session.setAttribute("NameIdMap", map);
-                return "SUCCESS";
-            }
-            else if(result.get(0).equals("500")){
-                return "FAIL";
-            }
-            return "NETWORK_ERROR";
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return "NETWORK_ERROR";
-        }
-    }
-
-    @RequestMapping(value = "/doubanSearchNew", method = RequestMethod.GET)
-    public String searchNewFilm(Model model, HttpSession session){
-        try{
-            String url = "https://api.douban.com/v2/movie/in_theaters";
+//    @RequestMapping(value = "/doubanSearchByName", method = RequestMethod.GET)
+//    public String searchFilmByName(@RequestParam("name") String name, Model model, HttpSession session){
+//        try{
+//            String url = "http://t.yushu.im/v2/movie/search?q=" + name + "&start=0";
 //            ArrayList<String> result = getJSONString(url);
 //            if(result.size() == 2){
 //                HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
@@ -64,6 +43,27 @@ public class DoubanController {
 //            else if(result.get(0).equals("500")){
 //                return "FAIL";
 //            }
+//            return "NETWORK_ERROR";
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            return "NETWORK_ERROR";
+//        }
+//    }
+
+    @RequestMapping(value = "/doubanSearchNew", method = RequestMethod.GET)
+    public String searchNewFilm(Model model, HttpSession session){
+        try{
+            String url = "https://douban.uieee.com/v2/movie/in_theaters";
+            ArrayList<String> result = getJSONString(url);
+            if(result.size() == 2){
+                HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
+                session.setAttribute("NameIdMap", map);
+                return "SUCCESS";
+            }
+            else if(result.get(0).equals("500")){
+                return "FAIL";
+            }
             return "NETWORK_ERROR";
         }
         catch(Exception e){

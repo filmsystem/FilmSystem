@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @Service("administratorService")
 public class AdministratorServiceImpl implements IAdministratorService {
+    private AdministratorDAO administratorDAO = new AdministratorDAO();
     public boolean insertAdministrator(Administrator administrator){
         if(new AdministratorDAO().selectAdminByName(administrator.getUsername()) != null)
             return false;
@@ -35,6 +36,6 @@ public class AdministratorServiceImpl implements IAdministratorService {
     }
 
     public ArrayList<Administrator> findAllAdministrator(){
-        return null;
+        return administratorDAO.getAllAdmin();
     }
 }
