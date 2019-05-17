@@ -5,10 +5,10 @@ import filmsystem.Model.Administrator;
 import java.util.ArrayList;
 
 public interface AdministratorMapper {
-    public Administrator selectAdminById(int id);
-    public ArrayList<Administrator> getAllAdmin();
-    public Administrator selectAdminByName(String username);
-    public int insertAdmin(Administrator admin);
-    public int deleteAdmin(int id);
-    public int updateAdmin(Administrator admin);
+    Administrator selectAdminById(int id);
+    ArrayList<Administrator> getAllAdmin();
+    Administrator selectAdminByName(String username);
+    int insertAdmin(Administrator admin);
+    int deleteAdmin(int id);
+    int updateAdmin(Administrator admin);
 }

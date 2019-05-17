@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filmsystem.Mapper.FilmMapper">
+
+    <resultMap id="filmList" type="filmsystem.Model.Film">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="img" column="img"/>
+        <result property="star" column="star"/>
+        <result property="directors" column="directors"/>
+        <result property="casts" column="casts"/>
+        <result property="year" column="year"/>
+        <result property="countries" column="countries"/>
+        <result property="type" column="type"/>
+        <result property="summary" column="summary"/>
+    </resultMap>
+
+    <insert id="insertFilm" parameterType="filmsystem.Model.Cinema">
+        insert into film(id, name, img, star, directors, casts, "year", countries, type, summary) values(#{id},#{name},#{img},#{star},#{directors},#{casts},#{year},#{countries},#{type},#{summary})
+    </insert>
+
+    <delete id="deleteFilm">
+        delete from film where id=#{id}
+    </delete>
+
+    <select id="selectFilmById" resultType="filmsystem.Model.Film">
+        select * from film where id=#{id}
+    </select>
+
+    <select id="selectFilmByName" resultMap="filmList">
+        select * from film where name like #{name}
+    </select>
+
+    <select id="selectFilmByCasts" resultMap="filmList">
+        select * from film where casts like #{casts}
+    </select>
+
+    <select id="selectFilmByDirectors" resultMap="filmList">
+        select * from film where directors like #{directors}
+    </select>
+
+    <select id="selectCinemaByYear" resultMap="filmList">
+        select * from film where year=#{year}
+    </select>
+
+    <select id="selectFilmByCountries" resultMap="filmList">
+        select * from film where countries like #{countries}
+    </select>
+
+    <select id="selectCinemaByType" resultMap="filmList">
+        select * from film where type=#{type}
+    </select>
+
+    <update id="updateFilm" parameterType="filmsystem.Model.Film">
+        update film set name=#{username},img=#{img},star=#{star},directors=#{directors},casts=#{casts},year=#{year},countries=#{countries},type=#{type},summary=#{summary} where id=#{id}
+    </update>
+</mapper>

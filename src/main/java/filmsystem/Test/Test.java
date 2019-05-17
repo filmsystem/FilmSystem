@@ -23,6 +23,8 @@ public class Test {
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
         AdministratorDAO administratorDAO=new AdministratorDAO();
-        administratorDAO.getAllAdmin();
+        Administrator admin=administratorDAO.selectAdminById(100);
+        if(admin==null) System.out.println("null");
+        else System.out.println("not null");
     }
 }
