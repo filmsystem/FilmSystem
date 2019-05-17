@@ -63,7 +63,7 @@ public class FilmController {
         }
     }
 
-    @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/film", method = RequestMethod.GET)
     public String getFilm(@RequestParam(value = "info") String info, Model model, HttpSession session){
         try{
             //TODO

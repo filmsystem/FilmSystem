@@ -33,7 +33,7 @@ public class DoubanController {
     @RequestMapping(value = "/doubanSearchByName", method = RequestMethod.GET)
     public String searchFilmByName(@RequestParam("name") String name, Model model, HttpSession session){
         try{
-            String url = "https://api.douban.com/v2/movie/search?q=" + name + "&start=0";
+            String url = "http://t.yushu.im/v2/movie/search?q=" + name + "&start=0";
             ArrayList<String> result = getJSONString(url);
             if(result.size() == 2){
                 HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
@@ -51,10 +51,31 @@ public class DoubanController {
         }
     }
 
+    @RequestMapping(value = "/doubanSearchNew", method = RequestMethod.GET)
+    public String searchNewFilm(Model model, HttpSession session){
+        try{
+            String url = "https://api.douban.com/v2/movie/in_theaters";
+//            ArrayList<String> result = getJSONString(url);
+//            if(result.size() == 2){
+//                HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
+//                session.setAttribute("NameIdMap", map);
+//                return "SUCCESS";
+//            }
+//            else if(result.get(0).equals("500")){
+//                return "FAIL";
+//            }
+            return "NETWORK_ERROR";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "NETWORK_ERROR";
+        }
+    }
+
     @RequestMapping(value = "/doubanSearchById/{id}", method = RequestMethod.GET)
     public String searchFilmById(@PathVariable Integer id, Model model, HttpSession session){
         try{
-            String url = "https://api.douban.com/v2/movie/subject/" + id;
+            String url = "https://douban.uieee.com/v2/movie/subject/" + id;
             ArrayList<String> result = getJSONString(url);
             if(result.size() == 2){
                 Film film = doubanService.getOneFilm(result.get(1));
