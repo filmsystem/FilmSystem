@@ -24,6 +24,10 @@
         select * from cinema where id=#{id}
     </select>
 
+    <select id="selectCinemaByFullName" resultType="filmsystem.Model.Cinema">
+        select * from cinema where username=#{id}
+    </select>
+
     <select id="getAllCinema" resultMap="cinemaList">
         select * from cinema
     </select>
@@ -37,7 +41,7 @@
     </select>
 
     <select id="selectCinemaByNameAndCity" resultMap="cinemaList">
-        select * from cinema where username like #{username} and city=#{city}
+        select * from cinema where username like #{name} and city=#{city}
     </select>
 
     <update id="updateCinema" parameterType="filmsystem.Model.Cinema">
