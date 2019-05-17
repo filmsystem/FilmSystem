@@ -1,6 +1,5 @@
 package filmsystem.DAO;
 
-import java.sql.*;
 import java.util.ArrayList;
 
 import filmsystem.Mapper.CustomerMapper;
@@ -11,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class CustomerDAO {
-    PreparedStatement pstmt;
     ApplicationContext ac;
     SqlSessionFactory factory;
     SqlSession sqlSession;
