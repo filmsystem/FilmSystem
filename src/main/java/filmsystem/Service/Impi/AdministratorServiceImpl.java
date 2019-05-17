@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Service("administratorService")
 public class AdministratorServiceImpl implements IAdministratorService {
     public boolean insertAdministrator(Administrator administrator){
-        if(new AdministratorDAO().searchAdministratorByName(administrator.getUsername()) != null)
+        if(new AdministratorDAO().selectAdminByName(administrator.getUsername()) != null)
             return false;
         return new AdministratorDAO().insertAdministrator(administrator);
     }

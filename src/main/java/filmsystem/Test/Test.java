@@ -21,12 +21,8 @@ public class Test {
         //AdministratorMapper administratorMapper = sqlSession.getMapper(AdministratorMapper.class);
         //通过findAllStudent()方法查询数据库打印出数据的长度
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
+
         AdministratorDAO administratorDAO=new AdministratorDAO();
-        ArrayList<Administrator> adminList=administratorDAO.getAllAdmin();
-        Iterator it=adminList.iterator();
-        while (it.hasNext()){
-            Administrator admin=(Administrator)it.next();
-            System.out.println("管理员："+admin.getId()+","+admin.getUsername()+","+admin.getPassword());
-        }
+        administratorDAO.deleteAdministrator(1);
     }
 }

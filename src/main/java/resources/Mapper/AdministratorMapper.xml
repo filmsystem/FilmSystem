@@ -10,6 +10,14 @@
         <result property="img" column="img"/>
     </resultMap>
 
+    <insert id="insertAdmin" parameterType="filmsystem.Model.Administrator" useGeneratedKeys="true" keyProperty="id">
+        insert into administrator(username, password, img) values(#{username},#{password},#{img})
+    </insert>
+
+    <delete id="deleteAdmin">
+        delete from administrator where id=#{id}
+    </delete>
+
     <select id="selectAdminById" resultType="filmsystem.Model.Administrator">
         select * from administrator where id=#{id}
     </select>
@@ -17,4 +25,12 @@
     <select id="getAllAdmin" resultMap="adminList">
         select * from administrator
     </select>
+
+    <select id="selectAdminByName" resultType="filmsystem.Model.Administrator">
+        select * from administrator where username=#{username}
+    </select>
+
+    <update id="updateAdmin" parameterType="filmsystem.Model.Administrator">
+        update administrator set username=#{username},password=#{password},img=#{img} where id=#{id}
+    </update>
 </mapper>
