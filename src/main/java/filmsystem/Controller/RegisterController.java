@@ -29,7 +29,7 @@ public class RegisterController {
             customer.setPassword(password);
             customer.setImg(img);
             customer.setGender(gender);
-            customer.setPhoneNum(phonenum);
+            customer.setPhonenum(phonenum);
             customer.setCity(city);
             return registerService.customerRegister(customer) ? "SUCCESS" : "FAIL";
         }
@@ -40,7 +40,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/registerCinema", method = RequestMethod.POST)
-    public String insertCustomer(@RequestParam("name") String name,
+    public String registerCinema(@RequestParam("name") String name,
                                  @RequestParam("password") String password,
                                  @RequestParam(value = "img", defaultValue = "") String img,
                                  @RequestParam("city") String city,
@@ -62,9 +62,9 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/registerAdministrator", method = RequestMethod.POST)
-    public String insertAdministrator(@RequestParam("name") String name,
-                                      @RequestParam(value = "img", defaultValue = "") String img,
-                                      @RequestParam("password") String password){
+    public String registerAdministrator(@RequestParam("name") String name,
+                                        @RequestParam(value = "img", defaultValue = "") String img,
+                                        @RequestParam("password") String password){
         // log.info("name = " + name + ", password = " + password;
         try{
             Administrator administrator = new Administrator();

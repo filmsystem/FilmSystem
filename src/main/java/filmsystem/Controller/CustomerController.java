@@ -86,7 +86,7 @@ public class CustomerController {
                 if(!img.equals(""))
                     customer.setImg(img);
                 customer.setGender(gender);
-                customer.setPhoneNum(phonenum);
+                customer.setPhonenum(phonenum);
                 customer.setCity(city);
                 return customerService.updateCustomer(customer) ? "SUCCESS" : "FAIL";
             }

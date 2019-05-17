@@ -1,33 +1,30 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.CustomerDAO;
 import filmsystem.Model.Customer;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.ICustomerService;
 
 @Service("customerService")
 public class CustomerServiceImpl implements ICustomerService{
+    private CustomerDAO customerDAO = new CustomerDAO();
     public boolean insertCustomer(Customer customer) {
-
-        return true;
+        return customerDAO.insertCustomer(customer);
     }
 
     public boolean updateCustomer(Customer customer) {
-        // add to database
-        return true;
+        return customerDAO.updateCustomer(customer);
     }
 
     public boolean deleteCustomer(int id) {
-        //delete in database
-        return true;
+        return customerDAO.deleteCustomer(id);
     }
 
     public Customer findCustomerById(int id) {
-        // find in database
-        return null;
+        return customerDAO.selectCustomerById(id);
     }
 
     public Customer findCustomerByName(String name) {
-        // find in database
-        return null;
+        return customerDAO.selectCustomerByName(name);
     }
 }

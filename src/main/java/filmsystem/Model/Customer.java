@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Customer extends User implements Serializable {
     private String gender;
-    private String phoneNum;
+    private String phonenum;
     private String city;
 
     public String getGender() {
@@ -15,12 +15,12 @@ public class Customer extends User implements Serializable {
         this.gender = gender;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhonenum() {
+        return phonenum;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
     }
 
     public String getCity() {

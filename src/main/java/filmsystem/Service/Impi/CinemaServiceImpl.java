@@ -9,40 +9,39 @@ import java.util.ArrayList;
 
 @Service("cinemaService")
 public class CinemaServiceImpl implements ICinemaService{
+    private CinemaDAO cinemaDAO = new CinemaDAO();
     public boolean insertCinema(Cinema cinema){
-        return new CinemaDAO().insertCinema(cinema);
+        return cinemaDAO.insertCinema(cinema);
     }
 
     public boolean updateCinema(Cinema cinema){
-        return new CinemaDAO().updateCinema(cinema);
+        return cinemaDAO.updateCinema(cinema);
     }
 
     public boolean deleteCinema(int id){
-        return new CinemaDAO().deleteCinema(id);
+        return cinemaDAO.deleteCinema(id);
     }
 
     public Cinema findCinemaById(int id){
-        // find in database
-        return null;
+        return cinemaDAO.searchCinemaById(id);
     }
 
     public ArrayList<Cinema> findCinemaByName(String name){
-        // find in database
-        return null;
+        return cinemaDAO.searchCinemaByName(name);
     }
 
     @Override
     public ArrayList<Cinema> findAllCinemas() {
-        return null;
+        return cinemaDAO.listAllCinema();
     }
 
     @Override
     public ArrayList<Cinema> findCinemaByCity(String city) {
-        return null;
+        return cinemaDAO.searchCinemaByCity(city);
     }
 
     @Override
     public ArrayList<Cinema> findCinemaByNameAndCity(String name, String city) {
-        return null;
+        return cinemaDAO.searchCinemaByNameAndCity(name, city);
     }
 }
