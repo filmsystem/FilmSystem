@@ -1,5 +1,6 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.FilmOfficeDAO;
 import filmsystem.Model.FilmOffice;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IFilmOfficeService;
@@ -8,35 +9,28 @@ import java.util.ArrayList;
 
 @Service("filmOfficeService")
 public class FilmOfficeServiceImpl implements IFilmOfficeService {
+    private FilmOfficeDAO filmOfficeDAO = new FilmOfficeDAO();
     public boolean createOffice(FilmOffice office){
-        // add to database
-        return true;
+        return filmOfficeDAO.insertFilmOffice(office);
     }
 
     public boolean updateOffice(FilmOffice office){
-        // update to database
-
-        return true;
+        return filmOfficeDAO.equals(office);
     }
 
     public boolean deleteOffice(int id){
-        // delete in database
-
-        return true;
+        return filmOfficeDAO.deleteFilmOffice(id);
     }
 
     public FilmOffice findOfficeById(int id){
-        // find in database
-        return null;
+        return filmOfficeDAO.searchFilmOfficeById(id);
     }
 
     public ArrayList<FilmOffice> findOfficeByCinemaId(int cinemaId){
-        // find in database
-        return null;
+        return filmOfficeDAO.searchFilmOfficeByCinemaId(cinemaId);
     }
 
     public FilmOffice findOfficeByOfficeId(int cinemaId, int officeId){
-        // find in database
-        return null;
+        return filmOfficeDAO.searchFilmOfficeByOfficeId(cinemaId, officeId);
     }
 }

@@ -1,0 +1,128 @@
+<%@ page import="filmsystem.Model.Administrator" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <title>SHU-MOVIE</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+  <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+  <%--<link href="../image/favicon.ico" rel="shortcut icon">--%>
+  <link href="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js" rel="stylesheet">
+  <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
+  <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+  <link rel="stylesheet" href="../layui/css/layui.css">
+  <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
+  <%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+
+  %>
+
+</head>
+
+<body>
+
+
+<div class="sui-navbar">
+  <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
+    <ul class="sui-nav">
+
+      <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影院管理      <i class="caret"></i></a>
+        <ul role="menu" class="sui-dropdown-menu">
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">增加影院</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">修改影院</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除影院</a></li>
+        </ul>
+      </li>
+
+      <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影片管理      <i class="caret"></i></a>
+        <ul role="menu" class="sui-dropdown-menu">
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">增加影片</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">修改影片</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除影片</a></li>
+        </ul>
+      </li>
+
+
+      <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">管理员      <i class="caret"></i></a>
+        <ul role="menu" class="sui-dropdown-menu">
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查看用户信息</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">添加管理员</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除管理员</a></li>
+        </ul>
+      </li>
+    </ul>
+
+
+    <ul class="sui-nav pull-right">
+      <li><a href="#">个人中心</a></li>
+      <li><a href="#">退出登录</a></li>
+    </ul>
+
+
+
+  </div>
+</div>
+
+
+
+<form action="<%=basePath%>/api/administrator" method="get">
+  <button type="submit">查询</button>
+</form>
+<%!
+  ArrayList<Administrator> list;
+%>
+<%
+  list = (ArrayList<Administrator>) session.getAttribute("administratorList");
+%>
+<% if(list != null){%>
+<table class="sui-table table-zebra">
+  <thead>
+  <tr>
+
+    <th>管理员ID</th>
+    <th>管理员ID</th>
+    <th>用户名</th>
+
+
+
+  </tr>
+  </thead>
+
+  <%
+    for(int i = 0; i < list.size(); i++){
+  %>
+
+  <tbody>
+  <tr>
+    <td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>
+    <td> <p> <%=list.get(i).getId()%> </p> </td>
+    <td> <p> <%=list.get(i).getUsername()%> </p> </td>
+
+
+  </tr>
+  <%}
+  }
+  else{%>
+  <tr align="center">
+    <th> <p><%="数据库无记录！"%></p></th>
+  </tr>
+  </tbody>
+</table>
+<%}%>
+
+</table>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 package filmsystem.Controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,16 +65,37 @@ public class FilmController {
     }
 
     @RequestMapping(value = "/film", method = RequestMethod.GET)
-    public String getFilm(@RequestParam(value = "info") String info, Model model, HttpSession session){
+    public String getFilm(@RequestParam(value = "type") String type,
+                          @RequestParam(value = "info") Object info,
+                          Model model, HttpSession session){
         try{
-            //TODO
-            //Film film = filmService.findFilmById(id);
-            Film film = null;
-            if(film != null){
-                session.setAttribute("filmFound", film);
+            ArrayList<Film> list;
+            if(type.equals("name")){
+                list = filmService.findFilmByName((String)info);
+            }
+            else if(type.equals("cast")){
+                list = filmService.findFilmByCast((String)info);
+            }
+            else if(type.equals("director")){
+                list = filmService.findFilmByDirector((String)info);
+            }
+            else if(type.equals("year")){
+                list = filmService.findFilmByYear((Integer)info);
+            }
+            else if(type.equals("country")){
+                list = filmService.findFilmByCountry((String)info);
+            }
+            else if(type.equals("type")){
+                list = filmService.findFilmByType((String)info);
+            }
+            else{
+                list = null;
+            }
+            if(list != null){
+                session.setAttribute("filmList", list);
                 return "SUCCESS";
             }
-            return "NOT_FOUND";
+            return "FAIL";
         }
         catch(Exception e){
             e.printStackTrace();
