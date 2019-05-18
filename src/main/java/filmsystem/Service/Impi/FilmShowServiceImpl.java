@@ -41,8 +41,7 @@ public class FilmShowServiceImpl implements IFilmShowService {
             if(buffer.substring(seatNum, seatNum).equals("0")){
                 buffer.replace(seatNum, seatNum, "1");
                 show.setSeat(buffer.toString());
-                // update
-                return true;
+                return updateShow(show);
             }
             else{
                 return false;
