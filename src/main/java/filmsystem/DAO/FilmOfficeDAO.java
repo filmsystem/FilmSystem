@@ -7,11 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.sql.*;
 import java.util.ArrayList;
 
 public class FilmOfficeDAO {
-    PreparedStatement pstmt;
     ApplicationContext ac;
     SqlSessionFactory factory;
     SqlSession sqlSession;

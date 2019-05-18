@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filmsystem.Mapper.FilmShowMapper">
+
+    <resultMap id="showList" type="filmsystem.Model.FilmShow">
+        <id property="id" column="id"/>
+        <result property="filmId" column="filmId"/>
+        <result property="cinemaId" column="cinemaId"/>
+        <result property="officeId" column="officeId"/>
+        <result property="beginTime" column="beginTime"/>
+        <result property="duration" column="duration"/>
+        <result property="seat" column="seat"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <insert id="insertShow" parameterType="filmsystem.Model.FilmShow" useGeneratedKeys="true" keyProperty="id">
+        insert into filmshow(filmId, cinemaId, officeId, beginTime, duration, seat, price) values(#{filmId},#{cinemaId},#{officeId},#{beginTime},#{duration},#{seat},#{price})
+    </insert>
+
+    <delete id="deleteShow">
+        delete from filmshow where id=#{id}
+    </delete>
+
+    <select id="selectShowById" resultType="filmsystem.Model.FilmShow">
+        select * from filmshow where id=#{id}
+    </select>
+
+    <select id="selectOfficeByCinemaId" resultMap="showList">
+        select * from filmshow where cinemaId=#{cinemaId}
+        <if test="time!=null "> and beginTime>CURRENT_TIMESTAMP </if>
+         order by beginTime asc
+    </select>
+
+    <select id="selectOfficeByFilmId" resultMap="showList">
+        select * from filmshow where filmId=#{cinemaId}
+        <if test="time!=null ">and beginTime>CURRENT_TIMESTAMP</if>
+        order by beginTime asc
+    </select>
+
+    <select id="selectOfficeByCinemaAndFilmId" resultMap="showList">
+        select * from filmshow where cinemaId=#{cinemaId} and filmId=#{filmId}
+        <if test="time!=null ">and beginTime>CURRENT_TIMESTAMP</if>
+        order by beginTime asc
+    </select>
+
+    <update id="updateShow" parameterType="filmsystem.Model.FilmShow">
+        update filmshow set filmId=#{filmId},cinemaId=#{cinemaId},officeId=#{officeId},beginTime=#{beginTime},duration=#{duration},seat=#{seat},price=#{price} where id=#{id}
+    </update>
+</mapper>
