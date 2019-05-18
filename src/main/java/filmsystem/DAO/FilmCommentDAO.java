@@ -34,6 +34,10 @@ public class FilmCommentDAO {
         return false;
     }
 
+    public FilmComment searchCommentById(int id){
+        return filmCommentMapper.selectFilmCommentById(id);
+    }
+
     public ArrayList<FilmComment> searchCommentByUserId(int id) {
         return filmCommentMapper.selectFilmCommentByUserId(id);
     }
