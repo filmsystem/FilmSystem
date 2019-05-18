@@ -16,9 +16,9 @@ public interface IFilmShowService {
 
     FilmShow findShowById(int id);
 
-    ArrayList<FilmShow> findShowByCinemaId(int cinemaId);
+    ArrayList<FilmShow> findShowByCinemaId(int cinemaId, boolean timeFlag);
 
-    ArrayList<FilmShow> findShowByFilmId(int filmId);
+    ArrayList<FilmShow> findShowByFilmId(int filmId, boolean timeFlag);
 
-    ArrayList<FilmShow> findShowByCinemaAndFilmId(int cinemaId, int filmId);
+    ArrayList<FilmShow> findShowByCinemaAndFilmId(int cinemaId, int filmId, boolean timeFlag);
 }

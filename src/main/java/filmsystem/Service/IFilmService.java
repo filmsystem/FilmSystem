@@ -18,4 +18,10 @@ public interface IFilmService {
     ArrayList<Film> findFilmByCast(String cast);
 
     ArrayList<Film> findFilmByDirector(String director);
+
+    ArrayList<Film> findFilmByCountry(String country);
+
+    ArrayList<Film> findFilmByType(String type);
+
+    ArrayList<Film> findFilmByYear(int year);
 }

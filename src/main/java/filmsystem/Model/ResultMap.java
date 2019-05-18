@@ -2,11 +2,12 @@ package filmsystem.Model;
 
 public class ResultMap<T> {
     private String msg;
-    private  T data;
-    private  int code;
-    private  int count;
+    private T data;
+    private int code;
+    private int count;
 
-    public ResultMap(int code,String msg,  int count,T data) { this.code = code;
+    public ResultMap(int code,String msg,  int count,T data) {
+        this.code = code;
         this.msg = msg;
         this.count = count;
         this.data = data;

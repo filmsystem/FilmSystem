@@ -63,17 +63,22 @@ public class FilmShowController {
     @RequestMapping(value = "/filmshow", method = RequestMethod.GET)
     public String getFilmShow(@RequestParam(value = "cinemaId", defaultValue = "0") Integer cinemaId,
                               @RequestParam(value = "filmId", defaultValue = "0") Integer filmId,
+                              @RequestParam(value="flag", defaultValue = "true") String flag,
                               Model model, HttpSession session){
+        /**
+         * @param: flag: 需不需要将已过期的过滤掉。
+         *               默认会过滤过期信息，如果不需要过滤（例如电影院方需要查询）则输入除了“true”外的字符串。
+         */
         try{
             ArrayList<FilmShow> list = null;
             if(filmId != 0 && cinemaId != 0) {
-                list = filmShowService.findShowByCinemaAndFilmId(cinemaId, filmId);
+                list = filmShowService.findShowByCinemaAndFilmId(cinemaId, filmId, flag.equals("true"));
             }
             else if(cinemaId != 0){
-                list = filmShowService.findShowByCinemaId(cinemaId);
+                list = filmShowService.findShowByCinemaId(cinemaId, flag.equals("true"));
             }
             else if(filmId != 0){
-                list = filmShowService.findShowByFilmId(filmId);
+                list = filmShowService.findShowByFilmId(filmId, flag.equals("true"));
             }
             session.setAttribute("filmShowList", list);
             return "SUCCESS";
