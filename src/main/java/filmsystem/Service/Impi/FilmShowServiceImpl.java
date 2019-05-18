@@ -26,7 +26,9 @@ public class FilmShowServiceImpl implements IFilmShowService {
         return filmShowDAO.updateShow(show);
     }
 
-    public boolean updateSeat(FilmShow show, int seatNum, int status){
+    public boolean updateSeat(FilmShow show, int row, int col, int status){
+        FilmOffice office = new FilmOfficeServiceImpl().findOfficeById(show.getOfficeId());
+        int seatNum = (row - 1) * office.getCol() + (col - 1);
         if(status == 0){    // 取消订单
             StringBuilder buffer = new StringBuilder(show.getSeat());
             buffer.replace(seatNum, seatNum, "0");
@@ -68,7 +70,7 @@ public class FilmShowServiceImpl implements IFilmShowService {
     }
 
     public boolean deleteShow(int id){
-        return true;
+        return filmShowDAO.deleteShow(id);
     }
 
     public FilmShow findShowById(int id){

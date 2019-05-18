@@ -62,8 +62,8 @@ public class BookingRecordController {
 //        return true;
 //    }
 
-    @RequestMapping(value = "/bookingrecord", method = RequestMethod.DELETE)
-    public String deleteBookingRecord(@RequestParam("id") Integer id){
+    @RequestMapping(value = "/bookingrecord/{id}", method = RequestMethod.DELETE)
+    public String deleteBookingRecord(@PathVariable Integer id){
         try{
             return bookingRecordService.deleteOrder(id) ? "SUCCESS" : "NOT_FOUND";
         }

@@ -99,8 +99,8 @@ public class CustomerController {
 
     }
 
-    @RequestMapping(value = "/customer", method = RequestMethod.DELETE)
-    public String deleteCustomer(@RequestParam Integer id){
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
+    public String deleteCustomer(@PathVariable Integer id){
         try{
             return customerService.deleteCustomer(id) ? "SUCCESS" : "NOT_FOUND";
         }

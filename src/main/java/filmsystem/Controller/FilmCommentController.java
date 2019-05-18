@@ -94,8 +94,8 @@ public class FilmCommentController {
 
     }
 
-    @RequestMapping(value = "/filmcomment", method = RequestMethod.DELETE)
-    public String deleteFilmComment(@RequestParam Integer id){
+    @RequestMapping(value = "/filmcomment/{id}", method = RequestMethod.DELETE)
+    public String deleteFilmComment(@PathVariable Integer id){
         try{
             return filmCommentService.deleteComment(id) ? "SUCCESS" : "NOT_FOUND";
         }

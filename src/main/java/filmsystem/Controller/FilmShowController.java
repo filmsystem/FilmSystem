@@ -92,14 +92,10 @@ public class FilmShowController {
 
     @RequestMapping(value = "/filmshow", method = RequestMethod.PUT)
     public String updateFilmShow(@RequestParam("id") Integer id,
-                                  @RequestParam(value = "officeId") Integer officeId,
-                                  @RequestParam(value = "beginTime") Timestamp beginTime,
-                                  @RequestParam(value = "seat") String seat){
+                                  @RequestParam(value = "beginTime") Timestamp beginTime){
         try{
             FilmShow show = filmShowService.findShowById(id);
-            show.setOfficeId(officeId);
             show.setBeginTime(beginTime);
-            show.setSeat(seat);
             return filmShowService.updateShow(show) ? "SUCCESS" : "FAIL";
         }
         catch(Exception e){
@@ -109,8 +105,8 @@ public class FilmShowController {
 
     }
 
-    @RequestMapping(value = "/filmshow", method = RequestMethod.DELETE)
-    public String deleteFilmShow(@RequestParam Integer id){
+    @RequestMapping(value = "/filmshow/{id}", method = RequestMethod.DELETE)
+    public String deleteFilmShow(@PathVariable Integer id){
         try{
             return filmShowService.deleteShow(id) ? "SUCCESS" : "NOT_FOUND";
         }

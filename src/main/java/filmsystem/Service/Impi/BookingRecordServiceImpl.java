@@ -1,5 +1,6 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.BookingRecordDAO;
 import filmsystem.Model.BookingRecord;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IBookingRecordService;
@@ -8,33 +9,29 @@ import java.util.ArrayList;
 
 @Service("bookingRecordService")
 public class BookingRecordServiceImpl implements IBookingRecordService{
+    private BookingRecordDAO bookingRecordDAO = new BookingRecordDAO();
     public ArrayList<BookingRecord> findOrderByUserId(int userId){
-        ArrayList<BookingRecord> list = new ArrayList<>();
-        // find in database
-        return list;
+        return bookingRecordDAO.selectRecordByUserId(userId);
     }
 
     @Override
     public ArrayList<BookingRecord> findOrderByShowId(int showId) {
-        return null;
+        return bookingRecordDAO.selectRecordByShowId(showId);
     }
 
     public BookingRecord findOrderById(int id){
-        // find in database
-        return null;
+        return bookingRecordDAO.selectRecordById(id);
     }
 
     public boolean deleteOrder(int id){
-        BookingRecord record = new BookingRecord(); // find in database
-        return deleteOrder(record);
+        return bookingRecordDAO.deleteRecord(id);
     }
 
     public boolean deleteOrder(BookingRecord record){
-        if(record.getStatus() == 1 || record.getStatus() == 2){    // 鍙湁鍙栨秷鎴栧凡鍑虹エ鐨勮鍗曟墠鍙垹闄�
+        if(record.getStatus() == 1 || record.getStatus() == 2){    // 不可取消
             return false;
         }
-        record.setStatus(-1);           // 淇敼璁㈠崟鐘舵�佷负宸插彇娑�
-        // delete in database
-        return true;
+        record.setStatus(-1);           // 取消订单
+        return deleteOrder(record.getId());
     }
 }

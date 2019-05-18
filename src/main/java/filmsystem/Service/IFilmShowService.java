@@ -8,7 +8,7 @@ public interface IFilmShowService {
 
     boolean updateShow(FilmShow show);
 
-    boolean updateSeat(FilmShow show, int seatNum, int status);
+    boolean updateSeat(FilmShow show, int row, int col, int status);
 
     int getRemainSeatNum(int filmShowId);
 

@@ -108,8 +108,8 @@ public class CinemaController {
 
     }
 
-    @RequestMapping(value = "/cinema", method = RequestMethod.DELETE)
-    public String deleteCustomer(@RequestParam Integer id){
+    @RequestMapping(value = "/cinema/{id}", method = RequestMethod.DELETE)
+    public String deleteCustomer(@PathVariable Integer id){
         try{
             return cinemaService.deleteCinema(id) ? "SUCCESS" : "NOT_FOUND";
         }

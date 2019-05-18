@@ -1,5 +1,6 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.FilmCommentDAO;
 import filmsystem.Model.FilmComment;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IFilmCommentService;
@@ -8,33 +9,28 @@ import java.util.ArrayList;
 
 @Service("filmCommentService")
 public class FilmCommentServiceImpl implements IFilmCommentService{
+    private FilmCommentDAO filmCommentDAO = new FilmCommentDAO();
     public boolean insertComment(FilmComment comment){
-        // add to database
-        return true;
+        return filmCommentDAO.insertComment(comment);
     }
 
     public boolean deleteComment(int id){
-        // delete in database
-        return true;
+        return filmCommentDAO.deleteComment(id);
     }
 
     public boolean updateComment(FilmComment comment){
-        // update in database
-        return true;
+        return filmCommentDAO.updateComment(comment);
     }
 
     public FilmComment findFilmCommentById(int id){
-        // find in database
-        return null;
+        return filmCommentDAO.searchCommentById(id);
     }
 
     public ArrayList<FilmComment> findFilmCommentByUserId(int userId){
-        // find in database
-        return null;
+        return filmCommentDAO.searchCommentByUserId(userId);
     }
 
     public ArrayList<FilmComment> findFilmCommentByFilmId(int filmId){
-        // find in database
-        return null;
+        return filmCommentDAO.searchCommentByFilmId(filmId);
     }
 }

@@ -1,6 +1,8 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.BookingRecordDAO;
 import filmsystem.Model.BookingRecord;
+import filmsystem.Model.FilmShow;
 import filmsystem.Tools.RandomString;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.ITicketOrderService;
@@ -12,9 +14,11 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
     public boolean createOrder(BookingRecord record){
         record.setStatus(1);
         record.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        // insert in database
-        // update seat
-        return true;
+        if(new BookingRecordDAO().insertRecord(record)){
+            FilmShow filmShow = new FilmShowServiceImpl().findShowById(record.getShowId());
+            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRow(), record.getCol(), 1);
+        }
+        return false;
     }
 
     public boolean payOrder(BookingRecord record){
@@ -23,8 +27,7 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
         }
         record.setStatus(2);            // 已支付
         record.setPayTime(new Timestamp(System.currentTimeMillis()));
-        // update in database
-        return true;
+        return new BookingRecordDAO().updateRecord(record);
     }
 
     public String getCollectString(BookingRecord record){
@@ -34,8 +37,7 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
         record.setStatus(3);            // 已出票
         String randomStr = randomString();
         record.setCollectingString(randomStr);
-
-        // update in database
+        new BookingRecordDAO().updateRecord(record);
         return randomStr;
     }
 
@@ -44,8 +46,11 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
             return false;
         }
         record.setStatus(-1);           // 已取消
-        // update in database
-        return true;
+        if(new BookingRecordDAO().updateRecord(record)){
+            FilmShow filmShow = new FilmShowServiceImpl().findShowById(record.getShowId());
+            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRow(), record.getCol(), 0);
+        }
+        return false;
     }
 
     private String randomString(){

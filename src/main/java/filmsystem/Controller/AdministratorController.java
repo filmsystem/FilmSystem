@@ -115,8 +115,8 @@ public class AdministratorController {
 
     }
 
-    @RequestMapping(value = "/administrator", method = RequestMethod.DELETE)
-    public String deleteAdministrator(@RequestParam Integer id){
+    @RequestMapping(value = "/administrator/{id}", method = RequestMethod.DELETE)
+    public String deleteAdministrator(@PathVariable Integer id){
         try{
             return administratorService.deleteAdministrator(id) ? "SUCCESS" : "NOT_FOUND";
         }

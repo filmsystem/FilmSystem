@@ -121,8 +121,8 @@ public class FilmController {
 //        }
 //    }
 
-    @RequestMapping(value = "/film", method = RequestMethod.DELETE)
-    public String deleteFilm(@RequestParam Integer id){
+    @RequestMapping(value = "/film/{id}", method = RequestMethod.DELETE)
+    public String deleteFilm(@PathVariable Integer id){
         try{
             return filmService.deleteFilm(id) ? "SUCCESS" : "NOT_FOUND";
         }

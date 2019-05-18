@@ -98,8 +98,8 @@ public class FilmOfficeController {
 
     }
 
-    @RequestMapping(value = "/filmoffice", method = RequestMethod.DELETE)
-    public String deleteFilmOffice(@RequestParam Integer id){
+    @RequestMapping(value = "/filmoffice/{id}", method = RequestMethod.DELETE)
+    public String deleteFilmOffice(@PathVariable Integer id){
         try{
             return filmOfficeService.deleteOffice(id) ? "SUCCESS" : "NOT_FOUND";
         }
