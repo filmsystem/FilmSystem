@@ -3,7 +3,6 @@ package filmsystem.DAO;
 import java.sql.*;
 import java.util.ArrayList;
 
-import filmsystem.DAO.BaseDAO;
 import filmsystem.Mapper.FilmMapper;
 import filmsystem.Model.Film;
 import org.apache.ibatis.session.SqlSession;

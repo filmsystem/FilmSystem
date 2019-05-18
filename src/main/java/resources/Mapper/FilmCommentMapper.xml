@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filmsystem.Mapper.FilmCommentMapper">
+
+    <resultMap id="commentList" type="filmsystem.Model.FilmComment">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="filmId" column="filmId"/>
+        <result property="filmstar" column="filmstar"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+
+    <insert id="insertComment" parameterType="filmsystem.Model.FilmComment" useGeneratedKeys="true" keyProperty="id">
+        insert into filmcomment(userId, filmId, filmstar, comment) values(#{userId},#{filmId},#{filmstar},#{comment})
+    </insert>
+
+    <delete id="deleteComment">
+        delete from filmcomment where id=#{id}
+    </delete>
+
+    <select id="selectCommentById" resultType="filmsystem.Model.FilmComment">
+        select * from filmcomment where id=#{id}
+    </select>
+
+    <select id="selectFilmCommentByUserId" resultMap="commentList">
+        select * from filmcomment where userId=#{userId}
+        order by id desc
+    </select>
+
+    <select id="selectFilmCommentByFilmId" resultMap="commentList">
+        select * from filmcomment where filmId=#{filmId}
+        order by id desc
+    </select>
+
+    <update id="updateComment" parameterType="filmsystem.Model.FilmComment">
+        update filmcomment set userId=#{filmId},filmId=#{cinemaId},filmstar=#{filmstar},comment=#{comment} where id=#{id}
+    </update>
+</mapper>
