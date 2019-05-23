@@ -3,6 +3,7 @@ package filmsystem.Service;
 import filmsystem.Model.BookingRecord;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IBookingRecordService {
     ArrayList<BookingRecord> findOrderByUserId(int userId);
@@ -14,4 +15,6 @@ public interface IBookingRecordService {
     boolean deleteOrder(int id);
 
     boolean deleteOrder(BookingRecord record);
+
+    HashMap<String, Object> getRelatedInfo(BookingRecord record);
 }

@@ -3,13 +3,21 @@ package filmsystem.Service.Impi;
 import filmsystem.DAO.FilmShowDAO;
 import filmsystem.Model.FilmOffice;
 import filmsystem.Model.FilmShow;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IFilmShowService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service("filmShowService")
 public class FilmShowServiceImpl implements IFilmShowService {
+    @Autowired
+    FilmServiceImpl filmService;
+
+    @Autowired
+    FilmOfficeServiceImpl filmOfficeService;
+
     private FilmShowDAO filmShowDAO = new FilmShowDAO();
     public boolean createShow (FilmShow show){
         StringBuffer buffer = new StringBuffer();
@@ -88,5 +96,16 @@ public class FilmShowServiceImpl implements IFilmShowService {
     @Override
     public ArrayList<FilmShow> findShowByCinemaAndFilmId(int cinemaId, int filmId, boolean timeFlag) {
         return filmShowDAO.selectShowByCinemaAndFilmId(cinemaId, filmId, timeFlag ? "" : null);
+    }
+
+    @Override
+    public HashMap<String, Object> getRelatedInfo(FilmShow show) {
+        if(show == null)
+            return null;
+
+        HashMap<String, Object> resultMap = filmOfficeService.getRelatedInfo(filmOfficeService.findOfficeById(show.getOfficeId()));
+        resultMap.put("film", filmService.findFilmById(show.getFilmId()));
+        resultMap.put("filmShow", show);
+        return resultMap;
     }
 }

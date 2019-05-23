@@ -3,6 +3,7 @@ package filmsystem.Service;
 import filmsystem.Model.FilmOffice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IFilmOfficeService {
     boolean createOffice(FilmOffice office);
@@ -16,4 +17,6 @@ public interface IFilmOfficeService {
     ArrayList<FilmOffice> findOfficeByCinemaId(int cinemaId);
 
     FilmOffice findOfficeByOfficeId(int cinemaId, int officeId);
+
+    HashMap<String, Object> getRelatedInfo(FilmOffice office);
 }
