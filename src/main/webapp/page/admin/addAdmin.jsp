@@ -68,35 +68,39 @@
 
 <blockquote class="layui-elem-quote"><h1>添加管理员</h1></blockquote>
 <br><br>
-<form id="registerForm" class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">管理员名</label>
-        <div class="layui-input-block">
-            <input type="text" name="name" required id="uname" lay-verify="required" autocomplete="off"
-                   class="layui-input">
+<div align="center">
+    <form id="registerForm" class="layui-form">
+        <div style="width:30%" align="center">
+            <div class="layui-form-item">
+                <label class="layui-form-label">管理员名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required id="uname" lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+
+
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="password" id="pwd" required lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <br><br>
+
+
+            <br><br>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
         </div>
-    </div>
-
-
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
-        <div class="layui-input-block">
-            <input type="text" name="password" id="pwd" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
-        </div>
-    </div>
-    <br><br>
-
-
-    <br><br>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 </body>
 </html>
 <script type="text/javascript">

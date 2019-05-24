@@ -67,48 +67,52 @@
 
 <blockquote class="layui-elem-quote"><h1>添加放映厅</h1></blockquote>
 <br><br>
-<form id="registerForm" class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">影院编号</label>
-        <div class="layui-input-block">
-            <input type="text" name="cinemaId" required id="cinemaId" lay-verify="required" autocomplete="off"
-                   class="layui-input">
-        </div>
-    </div>
+<div align="center">
+    <form id="registerForm" class="layui-form">
+        <div style="width:30%" align="center">
+            <div class="layui-form-item">
+                <label class="layui-form-label">影院编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cinemaId" required id="cinemaId" lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
 
 
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">影厅编号</label>
-        <div class="layui-input-block">
-            <input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">影厅编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">排数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="rowNum" id="row" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">列数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="col" id="col" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">排数</label>
-        <div class="layui-input-block">
-            <input type="text" name="rowNum" id="row" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">列数</label>
-        <div class="layui-input-block">
-            <input type="text" name="col" id="col" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 <br><br>
 </body>
 </html>

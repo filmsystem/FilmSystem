@@ -68,64 +68,68 @@
 
 <blockquote class="layui-elem-quote"><h1>添加放映场次</h1></blockquote>
 <br><br>
-<form id="registerForm" class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">电影编号</label>
-        <div class="layui-input-block">
-            <input type="text" name="filmId" required id="filmId" lay-verify="required" autocomplete="off"
-                   class="layui-input">
-        </div>
-    </div>
+<div align="center">
+    <form id="registerForm" class="layui-form">
+        <div style="width:30%" align="center">
+            <div class="layui-form-item">
+                <label class="layui-form-label">电影编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="filmId" required id="filmId" lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
 
 
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">影院编号</label>
-        <div class="layui-input-block">
-            <input type="text" name="cinemaId" id="cinemaId" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">影院编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cinemaId" id="cinemaId" required lay-verify="required" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">影厅编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="beginTime" id="beginTime" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">放映时长</label>
+                <div class="layui-input-block">
+                    <input type="text" name="duration" id="duration" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">票价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="price" id="price" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required">
+                </div>
+            </div>
+            <br><br>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">影厅编号</label>
-        <div class="layui-input-block">
-            <input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">开始时间</label>
-        <div class="layui-input-block">
-            <input type="text" name="beginTime" id="beginTime" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">放映时长</label>
-        <div class="layui-input-block">
-            <input type="text" name="duration" id="duration" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <label class="layui-form-label">票价</label>
-        <div class="layui-input-block">
-            <input type="text" name="price" id="price" required lay-verify="required" autocomplete="off"
-                   class="layui-input" required="required">
-        </div>
-    </div>
-    <br><br>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 </body>
 </html>
 <script type="text/javascript">
