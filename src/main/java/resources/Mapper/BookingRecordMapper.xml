@@ -7,9 +7,9 @@
         <id property="id" column="id"/>
         <result property="userId" column="username"/>
         <result property="showId" column="password"/>
-        <result property="createtime" column="createtime"/>
-        <result property="paytime" column="paytime"/>
-        <result property="collectstring" column="collectstring"/>
+        <result property="createTime" column="createtime"/>
+        <result property="payTime" column="paytime"/>
+        <result property="collectString" column="collectstring"/>
         <result property="status" column="status"/>
         <result property="row" column="row"/>
         <result property="col" column="col"/>
