@@ -39,7 +39,7 @@ public class FilmShowServiceImpl implements IFilmShowService {
         int seatNum = (row - 1) * office.getCol() + (col - 1);
         if(status == 0){    // 取消订单
             StringBuilder buffer = new StringBuilder(show.getSeat());
-            buffer.replace(seatNum, seatNum, "0");
+            buffer.replace(seatNum, seatNum+1, "0");
             show.setSeat(buffer.toString());
             return updateShow(show);
         }
