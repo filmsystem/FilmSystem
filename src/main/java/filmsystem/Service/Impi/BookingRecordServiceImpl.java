@@ -14,6 +14,9 @@ public class BookingRecordServiceImpl implements IBookingRecordService{
     @Autowired
     FilmShowServiceImpl filmShowService;
 
+    @Autowired
+    CustomerServiceImpl customerService;
+
     private BookingRecordDAO bookingRecordDAO = new BookingRecordDAO();
     public ArrayList<BookingRecord> findOrderByUserId(int userId){
         return bookingRecordDAO.selectRecordByUserId(userId);
@@ -45,7 +48,7 @@ public class BookingRecordServiceImpl implements IBookingRecordService{
             return null;
 
         HashMap<String, Object> resultMap = filmShowService.getRelatedInfo(filmShowService.findShowById(bookingRecord.getShowId()));
-        resultMap.put("customer", bookingRecord.getUserId());
+        resultMap.put("customer", customerService.findCustomerById(bookingRecord.getUserId()));
         resultMap.put("bookingRecord", bookingRecord);
         return resultMap;
     }

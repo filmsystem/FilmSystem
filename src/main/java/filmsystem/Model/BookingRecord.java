@@ -11,7 +11,7 @@ public class BookingRecord implements Serializable {
     private Timestamp payTime;
     private String collectingString;
     private int status;
-    private int row;
+    private int rowNum;
     private int col;
 
     public int getId() {
@@ -71,12 +71,12 @@ public class BookingRecord implements Serializable {
         this.status = status;
     }
 
-    public int getRow() {
-        return row;
+    public int getRowNum() {
+        return rowNum;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
     }
 
     public int getCol() {

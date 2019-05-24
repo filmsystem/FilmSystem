@@ -16,7 +16,7 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
         record.setCreateTime(new Timestamp(System.currentTimeMillis()));
         if(new BookingRecordDAO().insertRecord(record)){
             FilmShow filmShow = new FilmShowServiceImpl().findShowById(record.getShowId());
-            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRow(), record.getCol(), 1);
+            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRowNum(), record.getCol(), 1);
         }
         return false;
     }
@@ -48,7 +48,7 @@ public class TicketOrderServiceImpl implements ITicketOrderService {
         record.setStatus(-1);           // 已取消
         if(new BookingRecordDAO().updateRecord(record)){
             FilmShow filmShow = new FilmShowServiceImpl().findShowById(record.getShowId());
-            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRow(), record.getCol(), 0);
+            return new FilmShowServiceImpl().updateSeat(filmShow, record.getRowNum(), record.getCol(), 0);
         }
         return false;
     }

@@ -33,7 +33,7 @@
     </select>
 
     <select id="selectOfficeByFilmId" resultMap="showList">
-        select * from filmshow where filmId=#{cinemaId}
+        select * from filmshow where filmId=#{filmId}
         <if test="time!=null ">and beginTime>CURRENT_TIMESTAMP</if>
         order by beginTime asc
     </select>

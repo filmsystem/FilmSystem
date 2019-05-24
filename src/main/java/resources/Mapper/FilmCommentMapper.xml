@@ -7,19 +7,19 @@
         <id property="id" column="id"/>
         <result property="userId" column="userId"/>
         <result property="filmId" column="filmId"/>
-        <result property="filmStar" column="filmstar"/>
+        <result property="filmStar" column="filmStar"/>
         <result property="comment" column="comment"/>
     </resultMap>
 
     <insert id="insertComment" parameterType="filmsystem.Model.FilmComment" useGeneratedKeys="true" keyProperty="id">
-        insert into filmcomment(userId, filmId, filmstar, comment) values(#{userId},#{filmId},#{filmstar},#{comment})
+        insert into filmcomment(userId, filmId, filmstar, comment) values(#{userId},#{filmId},#{filmStar},#{comment})
     </insert>
 
     <delete id="deleteComment">
         delete from filmcomment where id=#{id}
     </delete>
 
-    <select id="selectCommentById" resultType="filmsystem.Model.FilmComment">
+    <select id="selectFilmCommentById" resultType="filmsystem.Model.FilmComment">
         select * from filmcomment where id=#{id}
     </select>
 
@@ -34,6 +34,6 @@
     </select>
 
     <update id="updateComment" parameterType="filmsystem.Model.FilmComment">
-        update filmcomment set userId=#{filmId},filmId=#{cinemaId},filmstar=#{filmstar},comment=#{comment} where id=#{id}
+        update filmcomment set userId=#{userId},filmId=#{filmId},filmstar=#{filmStar},comment=#{comment} where id=#{id}
     </update>
 </mapper>

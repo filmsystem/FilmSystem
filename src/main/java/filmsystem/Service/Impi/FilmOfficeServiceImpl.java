@@ -20,7 +20,7 @@ public class FilmOfficeServiceImpl implements IFilmOfficeService {
     }
 
     public boolean updateOffice(FilmOffice office){
-        return filmOfficeDAO.equals(office);
+        return filmOfficeDAO.updateFilmOffice(office);
     }
 
     public boolean deleteOffice(int id){

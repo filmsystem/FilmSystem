@@ -21,14 +21,14 @@ public class FilmOfficeController {
     @RequestMapping(value = "/filmoffice", method = RequestMethod.POST)
     public String addFilmOffice(@RequestParam("cinemaId") Integer cinemaId,
                                  @RequestParam("officeId") Integer officeId,
-                                 @RequestParam("row") Integer row,
+                                 @RequestParam("row") Integer rowNum,
                                  @RequestParam("col") Integer col){
         // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
         try{
             FilmOffice office = new FilmOffice();
             office.setCinemaId(cinemaId);
             office.setOfficeId(officeId);
-            office.setRow(row);
+            office.setRowNum(rowNum);
             office.setCol(col);
             return filmOfficeService.createOffice(office) ? "SUCCESS" : "FAIL";
         }
@@ -59,7 +59,7 @@ public class FilmOfficeController {
                                 @RequestParam(value = "officeId", defaultValue = "-1") Integer officeId,
                                 Model model, HttpSession session){
         try{
-            if(officeId != -1){
+            if(officeId == -1){
                 ArrayList<FilmOffice> list = filmOfficeService.findOfficeByCinemaId(cinemaId);
                 ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
 
@@ -88,12 +88,12 @@ public class FilmOfficeController {
 
     @RequestMapping(value = "/filmoffice", method = RequestMethod.PUT)
     public String updateFilmOffice(@RequestParam("id") Integer id,
-                                    @RequestParam("row") Integer row,
+                                    @RequestParam("row") Integer rowNum,
                                     @RequestParam("col") Integer col){
         try{
             FilmOffice office = filmOfficeService.findOfficeById(id);
             if(office != null){
-                office.setRow(row);
+                office.setRowNum(rowNum);
                 office.setCol(col);
                 return filmOfficeService.updateOffice(office) ? "SUCCESS" : "FAIL";
             }

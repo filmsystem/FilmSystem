@@ -5,19 +5,19 @@
 
     <resultMap id="recordList" type="filmsystem.Model.BookingRecord">
         <id property="id" column="id"/>
-        <result property="userId" column="username"/>
-        <result property="showId" column="password"/>
+        <result property="userId" column="userId"/>
+        <result property="showId" column="showId"/>
         <result property="createTime" column="createtime"/>
         <result property="payTime" column="paytime"/>
-        <result property="collectString" column="collectstring"/>
+        <result property="collectingString" column="collectstring"/>
         <result property="status" column="status"/>
-        <result property="row" column="row"/>
+        <result property="rowNum" column="rowNum"/>
         <result property="col" column="col"/>
     </resultMap>
 
     <insert id="insertRecord" parameterType="filmsystem.Model.BookingRecord" useGeneratedKeys="true" keyProperty="id">
-        insert into bookingrecord(userId, showId, createtime, paytime, collectstring, status, row, col)
-        values(#{userId},#{showId},#{createtime},#{paytime},#{collectstring},#{status},#{row},#{col})
+        insert into bookingrecord(userId, showId, createtime, paytime, collectstring, status, rowNum, col)
+        values(#{userId},#{showId},#{createTime},#{payTime},#{collectingString},#{status},#{rowNum},#{col});
     </insert>
 
     <delete id="deleteRecord">
@@ -39,7 +39,7 @@
     </select>
 
     <update id="updateRecord" parameterType="filmsystem.Model.BookingRecord">
-        update bookingrecord set userId=#{userId},showId=#{showId},createtime=#{createtime},paytime=#{paytime},collectstring=#{collectstring},status=#{status},row=#{row},col=#{col} where id=#{id}
+        update bookingrecord set userId=#{userId},showId=#{showId},createtime=#{createTime},paytime=#{payTime},collectstring=#{collectingString},status=#{status},rowNum=#{rowNum},col=#{col} where id=#{id}
     </update>
 
     <select id="countTypeByUserId" resultType="java.util.HashMap">

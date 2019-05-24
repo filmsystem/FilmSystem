@@ -2,9 +2,12 @@ package filmsystem.Test;
 
 import filmsystem.DAO.BookingRecordDAO;
 import filmsystem.DAO.FilmDAO;
+import filmsystem.DAO.FilmOfficeDAO;
 import filmsystem.Mapper.AdministratorMapper;
 import filmsystem.Model.Administrator;
 import filmsystem.DAO.AdministratorDAO;
+import filmsystem.Model.BookingRecord;
+import filmsystem.Model.FilmOffice;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;
@@ -25,10 +28,17 @@ public class Test {
         //通过findAllStudent()方法查询数据库打印出数据的长度
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
-        BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
+        /*BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
         Map<String,Integer> resultMap=bookingRecordDAO.countTimesByMonth(1000);
         for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
-        }
+        }*/
+        FilmOfficeDAO filmOfficeDAO=new FilmOfficeDAO();
+        FilmOffice filmOffice=new FilmOffice();
+        filmOffice.setCinemaId(201);
+        filmOffice.setOfficeId(3);
+        filmOffice.setRowNum(4);
+        filmOffice.setCol(3);
+        System.out.println(filmOfficeDAO.insertFilmOffice(filmOffice));
     }
 }

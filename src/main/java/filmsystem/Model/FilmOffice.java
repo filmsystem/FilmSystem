@@ -6,7 +6,7 @@ public class FilmOffice implements Serializable {
     private int id;
     private int cinemaId;
     private int officeId;
-    private int row;
+    private int rowNum;
     private int col;
 
     public int getOfficeId() {
@@ -17,12 +17,12 @@ public class FilmOffice implements Serializable {
         this.officeId = officeId;
     }
 
-    public int getRow() {
-        return row;
+    public int getRowNum() {
+        return rowNum;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
     }
 
     public int getCol() {

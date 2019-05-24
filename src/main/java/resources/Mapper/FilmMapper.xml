@@ -17,7 +17,7 @@
     </resultMap>
 
     <insert id="insertFilm" parameterType="filmsystem.Model.Cinema">
-        insert into film(id, name, img, star, directors, casts, "year", countries, type, summary) values(#{id},#{name},#{img},#{star},#{directors},#{casts},#{year},#{countries},#{type},#{summary})
+        insert into film(id, name, img, star, directors, casts, year, countries, type, summary) values(#{id},#{name},#{img},#{star},#{directors},#{casts},#{year},#{countries},#{type},#{summary})
     </insert>
 
     <delete id="deleteFilm">
@@ -40,7 +40,7 @@
         select * from film where directors like #{directors}
     </select>
 
-    <select id="selectCinemaByYear" resultMap="filmList">
+    <select id="selectFilmByYear" resultMap="filmList">
         select * from film where year=#{year}
     </select>
 
@@ -48,12 +48,12 @@
         select * from film where countries like #{countries}
     </select>
 
-    <select id="selectCinemaByType" resultMap="filmList">
-        select * from film where type=#{type}
+    <select id="selectFilmByType" resultMap="filmList">
+        select * from film where type like #{type}
     </select>
 
     <update id="updateFilm" parameterType="filmsystem.Model.Film">
-        update film set name=#{username},img=#{img},star=#{star},directors=#{directors},casts=#{casts},year=#{year},countries=#{countries},type=#{type},summary=#{summary} where id=#{id}
+        update film set name=#{name},img=#{img},star=#{star},directors=#{directors},casts=#{casts},year=#{year},countries=#{countries},type=#{type},summary=#{summary} where id=#{id}
     </update>
     <select id="countTest" resultType="java.util.HashMap">
         select type,count(*) as count1 from film group by type

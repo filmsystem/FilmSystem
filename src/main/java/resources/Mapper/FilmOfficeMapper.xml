@@ -7,12 +7,12 @@
         <id property="id" column="id"/>
         <result property="cinemaId" column="cinemaId"/>
         <result property="officeId" column="officeId"/>
-        <result property="row" column="row"/>
+        <result property="rowNum" column="rowNum"/>
         <result property="col" column="col"/>
     </resultMap>
 
     <insert id="insertOffice" parameterType="filmsystem.Model.FilmOffice" useGeneratedKeys="true" keyProperty="id">
-        insert into filmoffice(cinemaId, officeId, row, col) values(#{cinemaId},#{officeId},#{row},#{col})
+        insert into filmoffice (cinemaId, officeId, rowNum, col) values (#{cinemaId},#{officeId},#{rowNum},#{col})
     </insert>
 
     <delete id="deleteOffice">
@@ -24,7 +24,7 @@
     </select>
 
     <select id="selectOfficeByOfficeId" resultType="filmsystem.Model.FilmOffice">
-        select * from filmoffice where cinemaId=#{cinemaId} and officeId=#{officeId}
+        select * from filmoffice where cinemaId=#{arg0} and officeId=#{arg1}
     </select>
 
     <select id="selectOfficeByCinemaId" resultMap="officeList">
@@ -32,6 +32,6 @@
     </select>
 
     <update id="updateOffice" parameterType="filmsystem.Model.FilmOffice">
-        update filmoffice set cinemaId=#{cinemaId},officeId=#{officeId},row=#{row},col=#{col} where id=#{id}
+        update filmoffice set cinemaId=#{cinemaId},officeId=#{officeId},rowNum=#{rowNum},col=#{col} where id=#{id}
     </update>
 </mapper>

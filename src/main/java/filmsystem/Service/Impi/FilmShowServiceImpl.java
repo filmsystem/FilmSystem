@@ -22,7 +22,7 @@ public class FilmShowServiceImpl implements IFilmShowService {
     public boolean createShow (FilmShow show){
         StringBuffer buffer = new StringBuffer();
         FilmOffice office = new FilmOfficeServiceImpl().findOfficeById(show.getOfficeId());
-        int len = office.getRow() * office.getCol();
+        int len = office.getRowNum() * office.getCol();
         for (int i = 0; i < len; i++) {
             buffer.append("0");
         }

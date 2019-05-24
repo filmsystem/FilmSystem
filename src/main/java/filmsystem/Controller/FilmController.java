@@ -19,7 +19,7 @@ public class FilmController {
     //public static Logger log = LoggerFactory.getLogger(FilmController.class);
     @Autowired
     FilmServiceImpl filmService;
-
+    //todo:改成豆瓣插入？
     @RequestMapping(value = "/film", method = RequestMethod.POST)
     public String insertFilm(@RequestParam("name") String name,
                            @RequestParam(value = "img" , defaultValue = "") String img,
@@ -80,7 +80,7 @@ public class FilmController {
                 list = filmService.findFilmByDirector((String)info);
             }
             else if(type.equals("year")){
-                list = filmService.findFilmByYear((Integer)info);
+                list = filmService.findFilmByYear(Integer.parseInt((String)info));
             }
             else if(type.equals("country")){
                 list = filmService.findFilmByCountry((String)info);

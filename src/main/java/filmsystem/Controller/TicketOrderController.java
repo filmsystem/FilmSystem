@@ -27,7 +27,7 @@ public class TicketOrderController {
             BookingRecord record = new BookingRecord();
             record.setUserId(userId);
             record.setShowId(showId);
-            record.setRow(row);
+            record.setRowNum(row);
             record.setCol(col);
             return ticketOrderService.createOrder(record) ? "SUCCESS" : "FAIL";
         }
