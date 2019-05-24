@@ -9,6 +9,7 @@ import filmsystem.Service.Impi.FilmCommentServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -43,6 +44,7 @@ public class FilmCommentController {
             FilmComment comment = filmCommentService.findFilmCommentById(id);
             if(comment != null){
                 session.setAttribute("filmCommentFound", comment);
+                session.setAttribute("filmCommentMap", filmCommentService.getRelatedInfo(comment));
                 return "SUCCESS";
             }
             return "NOT_FOUND";
@@ -59,13 +61,19 @@ public class FilmCommentController {
                                  Model model, HttpSession session){
         try{
             ArrayList<FilmComment> list = null;
+            ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
             if(userId != 0){
                 list = filmCommentService.findFilmCommentByUserId(userId);
             }
             else if(filmId != 0){
                 list = filmCommentService.findFilmCommentByFilmId(filmId);
             }
+
+            for(int i = 0; i < list.size(); i++){
+                mapList.add(filmCommentService.getRelatedInfo(list.get(i)));
+            }
             session.setAttribute("filmCommentList", list);
+            session.setAttribute("bookingRecordMapList", mapList);
             return "SUCCESS";
         }
         catch(Exception e){

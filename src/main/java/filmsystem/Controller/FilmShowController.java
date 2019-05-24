@@ -2,6 +2,7 @@ package filmsystem.Controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -49,6 +50,7 @@ public class FilmShowController {
             FilmShow show =  filmShowService.findShowById(id);
             if(show != null){
                 session.setAttribute("filmShowFound", show);
+                session.setAttribute("filmShowMap", filmShowService.getRelatedInfo(show));
                 return "SUCCESS";
             }
             return "NOT_FOUND";
@@ -71,6 +73,8 @@ public class FilmShowController {
          */
         try{
             ArrayList<FilmShow> list = null;
+            ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
+
             if(filmId != 0 && cinemaId != 0) {
                 list = filmShowService.findShowByCinemaAndFilmId(cinemaId, filmId, flag.equals("true"));
             }
@@ -80,7 +84,12 @@ public class FilmShowController {
             else if(filmId != 0){
                 list = filmShowService.findShowByFilmId(filmId, flag.equals("true"));
             }
+
+            for(int i = 0; i < list.size(); i++){
+                mapList.add(filmShowService.getRelatedInfo(list.get(i)));
+            }
             session.setAttribute("filmShowList", list);
+            session.setAttribute("filmShowMapList", mapList);
             return "SUCCESS";
         }
         catch(Exception e){

@@ -10,6 +10,7 @@ import filmsystem.Service.Impi.BookingRecordServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -24,6 +25,7 @@ public class BookingRecordController {
             BookingRecord record = bookingRecordService.findOrderById(id);
             if(record != null){
                 session.setAttribute("bookingRecordFound", record);
+                session.setAttribute("bookingRecordMap", bookingRecordService.getRelatedInfo(record));
                 return "SUCCESS";
             }
             return "NOT_FOUND";
@@ -46,7 +48,14 @@ public class BookingRecordController {
             else{
                 list = bookingRecordService.findOrderByShowId(showId);
             }
+
+
+            ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
+            for(int i = 0; i < list.size(); i++){
+                mapList.add(bookingRecordService.getRelatedInfo(list.get(i)));
+            }
             session.setAttribute("bookingRecordList", list);
+            session.setAttribute("bookingRecordMapList", mapList);
             return "SUCCESS";
         }
         catch(Exception e){

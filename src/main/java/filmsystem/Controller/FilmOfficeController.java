@@ -9,6 +9,7 @@ import filmsystem.Service.Impi.FilmOfficeServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -60,13 +61,20 @@ public class FilmOfficeController {
         try{
             if(officeId != -1){
                 ArrayList<FilmOffice> list = filmOfficeService.findOfficeByCinemaId(cinemaId);
+                ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
+
+                for(int i = 0; i < list.size(); i++){
+                    mapList.add(filmOfficeService.getRelatedInfo(list.get(i)));
+                }
                 session.setAttribute("filmOfficeList", list);
+                session.setAttribute("filmOfficeMapList", mapList);
                 return "SUCCESS";
             }
             else{
                 FilmOffice office = filmOfficeService.findOfficeByOfficeId(cinemaId, officeId);
                 if(office != null){
                     session.setAttribute("filmOfficeFound", office);
+                    session.setAttribute("filmOfficeMap", filmOfficeService.getRelatedInfo(office));
                     return "SUCCESS";
                 }
                 return "NOT_FOUND";
