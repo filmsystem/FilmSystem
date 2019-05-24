@@ -20,7 +20,7 @@
   <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
   <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
-  <link rel="stylesheet" href="../layui/css/layui.css">
+  <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
   <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
   <%
     String path = request.getContextPath();
@@ -72,55 +72,65 @@
   </div>
 </div>
 
-<blockquote class="layui-elem-quote"><h1>添加影院</h1></blockquote>
-<br><br>
+<blockquote class="layui-elem-quote"><h1>添加管理员</h1></blockquote>
 
 
 
-<form action="<%=basePath%>/api/administrator" method="get">
-  <button type="submit">查询</button>
-</form>
+
 <%!
   ArrayList<Administrator> list;
 %>
 <%
   list = (ArrayList<Administrator>) session.getAttribute("administratorList");
 %>
-<% if(list != null){%>
-<table class="sui-table table-zebra">
+<%--<% if(list != null){%>--%>
+<table class="layui-table" lay-even="" lay-skin="nob">
   <thead>
   <tr>
+    <th width="300px" ></th>
+    <th width="200px" ><h3>管理员名</h3></th>
+    <th width="200px"><h3>删除</h3></th>
+    <th width="200px" ></th>
 
-    <th>管理员ID</th>
-    <th>管理员ID</th>
-    <th>用户名</th>
+
+
 
 
 
   </tr>
   </thead>
 
+  <%--<%--%>
+    <%--for(int i = 0; i < list.size(); i++){--%>
+  <%--%>--%>
+
   <%
-    for(int i = 0; i < list.size(); i++){
+    for(int i = 0; i < 10; i++){
   %>
 
   <tbody>
+
   <tr>
-    <td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>
-    <td> <p> <%=list.get(i).getId()%> </p> </td>
-    <td> <p> <%=list.get(i).getUsername()%> </p> </td>
+    <%--<td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>--%>
+    <%--<td> <p> <%=list.get(i).getId()%> </p> </td>--%>
+    <%--<td> <p> <%=list.get(i).getUsername()%> </p> </td>--%>
+      <td width="300px"></td>
+      <td width="200px"><p class="sui-text-xlarge">admin</p></td>
+      <td width="200px"><button class="sui-btn btn-bordered btn-large btn-danger">删除</button></td>
+      <td width="200px"></td>
 
 
   </tr>
-  <%}
-  }
-  else{%>
-  <tr align="center">
-    <th> <p><%="数据库无记录！"%></p></th>
-  </tr>
+  <%}%>
+  <%--<%}--%>
+  <%--}--%>
+<%--//  else{%>--%>
+<%--//  <tr align="center">--%>
+<%--//    <th> <p><%="数据库无记录！"%></p></th>--%>
+<%--//  </tr>--%>
   </tbody>
 </table>
-<%}%>
+<%--<%}%>--%>
 
 </table>
 
