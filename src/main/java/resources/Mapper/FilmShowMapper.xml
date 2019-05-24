@@ -26,21 +26,21 @@
         select * from filmshow where id=#{id}
     </select>
 
-    <select id="selectOfficeByCinemaId" resultMap="showList">
-        select * from filmshow where cinemaId=#{cinemaId}
-        <if test="time!=null "> and beginTime>CURRENT_TIMESTAMP </if>
+    <select id="selectShowByCinemaId" resultMap="showList">
+        select * from filmshow where cinemaId=#{arg0}
+        <if test="arg1!=null "> and beginTime>CURRENT_TIMESTAMP </if>
          order by beginTime asc
     </select>
 
-    <select id="selectOfficeByFilmId" resultMap="showList">
-        select * from filmshow where filmId=#{filmId}
-        <if test="time!=null ">and beginTime>CURRENT_TIMESTAMP</if>
+    <select id="selectShowByFilmId" resultMap="showList">
+        select * from filmshow where filmId=#{arg0}
+        <if test="arg1!=null ">and beginTime>CURRENT_TIMESTAMP</if>
         order by beginTime asc
     </select>
 
-    <select id="selectOfficeByCinemaAndFilmId" resultMap="showList">
-        select * from filmshow where cinemaId=#{cinemaId} and filmId=#{filmId}
-        <if test="time!=null ">and beginTime>CURRENT_TIMESTAMP</if>
+    <select id="selectShowByCinemaAndFilmId" resultMap="showList">
+        select * from filmshow where cinemaId=#{arg0} and filmId=#{arg1}
+        <if test="arg2!=null ">and beginTime>CURRENT_TIMESTAMP</if>
         order by beginTime asc
     </select>
 
