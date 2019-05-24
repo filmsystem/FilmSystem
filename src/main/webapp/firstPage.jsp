@@ -110,15 +110,15 @@
                     </div>
                   </div>
                   <div class="control-group">
-                    <label for="inputPassword" class="control-label">密码：</label>
+                    <label for="newPassword" class="control-label">密码：</label>
                     <div class="controls">
-                      <input type="password" id="inputPassword" name="password" placeholder="密码" data-rules="required" title="密码">
+                      <input type="password" id="newPassword" name="password" placeholder="密码" data-rules="required" title="密码">
                     </div>
                   </div>
                   <div class="control-group">
-                    <label for="inputRepassword" class="control-label">重复密码：</label>
+                    <label for="newRepassword" class="control-label">重复密码：</label>
                     <div class="controls">
-                      <input type="password" id="inputRepassword" name="repassword" placeholder="重复密码" data-rules="required|match=password">
+                      <input type="password" id="newRepassword" name="repassword" placeholder="重复密码" data-rules="required|match=password">
                     </div>
                   </div>
                   <div class="control-group">
