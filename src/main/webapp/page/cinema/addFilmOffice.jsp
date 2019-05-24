@@ -1,3 +1,4 @@
+<%@ page import="filmsystem.Model.Cinema" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -70,15 +71,6 @@
 <div align="center">
     <form id="registerForm" class="layui-form">
         <div style="width:30%" align="center">
-            <div class="layui-form-item">
-                <label class="layui-form-label">影院编号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="cinemaId" required id="cinemaId" lay-verify="required" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-
-
             <br><br>
             <div class="layui-form-item">
                 <label class="layui-form-label">影厅编号</label>
@@ -120,6 +112,7 @@
     $(function () {
         $("#submitBtn").on('click', function () {
             var params = $("#registerForm").serialize();
+            params.add("cinemaId",<%=((Cinema)session.getAttribute("currentUser")).getId()%>);
             $.ajax({
                 type: "POST",
                 url: '<%=basePath%>/api/filmoffice',
