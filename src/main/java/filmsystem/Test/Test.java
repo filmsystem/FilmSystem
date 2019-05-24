@@ -1,5 +1,6 @@
 package filmsystem.Test;
 
+import filmsystem.DAO.BookingRecordDAO;
 import filmsystem.DAO.FilmDAO;
 import filmsystem.Mapper.AdministratorMapper;
 import filmsystem.Model.Administrator;
@@ -24,8 +25,8 @@ public class Test {
         //通过findAllStudent()方法查询数据库打印出数据的长度
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
-        FilmDAO filmDAO=new FilmDAO();
-        Map<String,Integer> resultMap=filmDAO.countTest();
+        BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
+        Map<String,Integer> resultMap=bookingRecordDAO.countTimesByMonth(1000);
         for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
         }

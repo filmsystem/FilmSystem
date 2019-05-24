@@ -72,4 +72,22 @@ public class BookingRecordDAO {
         }
         return resultMap;
     }
+
+    public Map<String,Integer> countTimesByMonth(int userId){
+        List<Map<String, Object>> baseList = bookingRecordMapper.countTimesByMonth(userId);
+        Map<String,Integer> resultMap=new HashMap<String, Integer>();
+        for (Map<String, Object> map : baseList) {
+            String month1=null;
+            int count1=0;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if("month1".equals(entry.getKey())){
+                    month1=(String)entry.getValue();
+                }else if("count1".equals(entry.getKey())){
+                    count1 = ((Number)entry.getValue()).intValue();
+                }
+            }
+            resultMap.put(month1,count1);
+        }
+        return resultMap;
+    }
 }

@@ -46,4 +46,8 @@
         select type,count(*)as count1 from bookingrecord where userId=#{userId} group by type order by count1 desc
     </select>
 
+    <select id="countTimesByMonth" resultType="java.util.HashMap">
+        select date_format(createtime,'%Y-%m') as month1,count(*) as count1 from bookingrecord where userId=#{userId} group by month1 order by month1 desc
+    </select>
+
 </mapper>
