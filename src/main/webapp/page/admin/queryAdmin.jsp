@@ -33,46 +33,47 @@
 <body>
 
 
-<div class="sui-navbar">
+
+<div class="sui-navbar navbar-inverse">
   <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
     <ul class="sui-nav">
 
       <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影院管理      <i class="caret"></i></a>
         <ul role="menu" class="sui-dropdown-menu">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">增加影院</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">修改影院</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除影院</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="addCinema.jsp">增加影院</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="queryCinema.jsp">查询影院</a></li>
         </ul>
       </li>
 
       <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影片管理      <i class="caret"></i></a>
         <ul role="menu" class="sui-dropdown-menu">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">增加影片</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">修改影片</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除影片</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilm.jsp">增加影片</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilm.jsp">查询影片</a></li>
         </ul>
       </li>
 
 
       <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">管理员      <i class="caret"></i></a>
         <ul role="menu" class="sui-dropdown-menu">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查看用户信息</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">添加管理员</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">删除管理员</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="addAdmin.jsp">增加管理员</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="queryAdmin.jsp">查询管理员</a></li>
         </ul>
       </li>
     </ul>
 
 
     <ul class="sui-nav pull-right">
-      <li><a href="#">个人中心</a></li>
-      <li><a href="#">退出登录</a></li>
+      <li><a href="adminInfo.jsp">个人中心</a></li>
+      <li><a href="/FilmSystem/firstPage.jsp">退出登录</a></li>
     </ul>
 
 
 
   </div>
 </div>
+
+<blockquote class="layui-elem-quote"><h1>添加影院</h1></blockquote>
+<br><br>
 
 
 
