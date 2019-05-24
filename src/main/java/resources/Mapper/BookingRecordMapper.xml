@@ -42,4 +42,8 @@
         update bookingrecord set userId=#{userId},showId=#{showId},createtime=#{createtime},paytime=#{paytime},collectstring=#{collectstring},status=#{status},row=#{row},col=#{col} where id=#{id}
     </update>
 
+    <select id="countTypeByUserId" resultType="java.util.HashMap">
+        select type,count(*)as count1 from bookingrecord where userId=#{userId} group by type order by count1 desc
+    </select>
+
 </mapper>

@@ -55,4 +55,7 @@
     <update id="updateFilm" parameterType="filmsystem.Model.Film">
         update film set name=#{username},img=#{img},star=#{star},directors=#{directors},casts=#{casts},year=#{year},countries=#{countries},type=#{type},summary=#{summary} where id=#{id}
     </update>
+    <select id="countTest" resultType="java.util.HashMap">
+        select type,count(*) as count1 from film group by type
+    </select>
 </mapper>

@@ -3,6 +3,8 @@ package filmsystem.Mapper;
 import filmsystem.Model.Film;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public interface FilmMapper {
     int insertFilm(Film film);
@@ -15,4 +17,5 @@ public interface FilmMapper {
     ArrayList<Film> selectFilmByYear(int year);
     ArrayList<Film> selectFilmByCountries(String countries);
     ArrayList<Film> selectFilmByType(String type);
+    List<Map<String,Object>> countTest();
 }

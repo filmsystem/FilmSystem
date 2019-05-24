@@ -1,5 +1,6 @@
 package filmsystem.Test;
 
+import filmsystem.DAO.FilmDAO;
 import filmsystem.Mapper.AdministratorMapper;
 import filmsystem.Model.Administrator;
 import filmsystem.DAO.AdministratorDAO;
@@ -10,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Test {
     public static void main(String args[]){
@@ -22,9 +24,10 @@ public class Test {
         //通过findAllStudent()方法查询数据库打印出数据的长度
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
-        AdministratorDAO administratorDAO=new AdministratorDAO();
-        Administrator admin=administratorDAO.selectAdminById(100);
-        if(admin==null) System.out.println("null");
-        else System.out.println("not null");
+        FilmDAO filmDAO=new FilmDAO();
+        Map<String,Integer> resultMap=filmDAO.countTest();
+        for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
     }
 }
