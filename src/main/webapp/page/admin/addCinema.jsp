@@ -17,7 +17,11 @@
     <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
     <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
     <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
+    <%
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 
+    %>
 
 </head>
 
@@ -64,11 +68,11 @@
 
 <blockquote class="layui-elem-quote"><h1>添加影院</h1></blockquote>
 <br><br>
-<form action="http://localhost:8080/FilmSystem/api/registercinema" method="POST">
+<form id="registerForm" class="layui-form">
     <div class="layui-form-item">
         <label class="layui-form-label">影院名</label>
         <div class="layui-input-block">
-            <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="username" class="layui-input" >
+            <input type="text" name="name" required id="uname" lay-verify="required" autocomplete="off" class="layui-input" >
         </div>
     </div>
 
@@ -77,7 +81,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
-            <input type="text" name="password" lay-verify="required" autocomplete="off" placeholder="password" class="layui-input">
+            <input type="text" name="password" id="pwd" required lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
 
@@ -85,7 +89,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">城市</label>
         <div class="layui-input-block">
-            <input type="text" name="city" lay-verify="required" autocomplete="off" placeholder="city" class="layui-input">
+            <input type="text" name="city" id="city" required lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     </div>
@@ -93,7 +97,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">地址</label>
         <div class="layui-input-block">
-            <input type="text" name="address" lay-verify="required" autocomplete="off" placeholder="address" class="layui-input" required="required">
+            <input type="text" name="address" id="addr" required lay-verify="required" autocomplete="off" class="layui-input" required="required">
         </div>
     </div>
 
@@ -101,11 +105,34 @@
     <br><br>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submitBtn" type="button">提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 </form>
 </body>
 </html>
-<
+<script type="text/javascript">
+    $(function(){
+        $("#submitBtn").on('click', function() {
+            var params = $("#registerForm").serialize();
+            $.ajax({
+                type: "POST",
+                url: '<%=basePath%>/api/registerCinema',
+                // dataType: "json",
+                data: params,
+                success: function (res) {
+                    if(res == "SUCCESS")
+                        alert("插入成功！")
+                    else if(res == "FAIL")
+                        alert("插入失败！")
+                    else if(res == "DB_ERROR")
+                        alert("数据库出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        });
+    });
+</script>
