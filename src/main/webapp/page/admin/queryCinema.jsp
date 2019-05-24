@@ -1,29 +1,33 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <!DOCTYPE html>
 <html>
 <head>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <title>SHU-MOVIE</title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>SHU-MOVIE</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+    <%--<link href="../image/favicon.ico" rel="shortcut icon">--%>
+    <link href="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+    <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
+    <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
+    <%
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 
-        <link href="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js" rel="stylesheet">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
-        <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
-        <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
-        <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
-    </head>
+    %>
+
 </head>
 <body>
 
@@ -70,11 +74,11 @@
 
 
 
-    <%!
-  ArrayList<Administrator> list;
+<%!
+  ArrayList<Cinema> list;
 %>
-    <%
-  list = (ArrayList<Administrator>) session.getAttribute("administratorList");
+<%
+  list = (ArrayList<Cinema>) session.getAttribute("cinemaList");
 %>
 <%--<% if(list != null){%>--%>
 <table class="layui-table" lay-even="" lay-skin="nob">
@@ -87,12 +91,6 @@
         <th width="100px"><h3>修改</h3></th>
         <th width="100px"><h3>删除</h3></th>
         <th width="200px" ></th>
-
-
-
-
-
-
     </tr>
     </thead>
 
@@ -101,7 +99,8 @@
     <%--%>--%>
 
     <%
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; list != null && i < list.size(); i++){
+            Cinema temp = list.get(i);
     %>
 
     <tbody>
@@ -111,46 +110,39 @@
         <%--<td> <p> <%=list.get(i).getId()%> </p> </td>--%>
         <%--<td> <p> <%=list.get(i).getUsername()%> </p> </td>--%>
         <td width="300px"></td>
-        <td width="100px"><p class="sui-text-large">万达</p></td>
-            <td width="200px"><p class="sui-text-large">上海</p></td>
-            <td width="300px"><p class="sui-text-large">聚丰园路88号</p></td>
-            <td width="200px"><button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog" data-width="large" data-backdrop="static" class="sui-btn btn-primary">添加供应商</button></td><div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade" data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
+        <td width="100px"><p class="sui-text-large"><%=temp.getUsername()%></p></td>
+            <td width="200px"><p class="sui-text-large"><%=temp.getCity()%></p></td>
+            <td width="300px"><p class="sui-text-large"><%=temp.getAddress()%></p></td>
+            <td width="100px"><button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog" data-width="large" data-backdrop="static" class="sui-btn btn-bordered btn-large btn-success"><i class="sui-icon icon-pencil"></i>修改</button>
+            <div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade" data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
+                <form class="updateForm" + <%=i%>>
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                            <h4 id="myModalLabel" class="modal-title">供应商收编</h4>
+                            <h4 id="myModalLabel" class="modal-title">修改影院</h4>
                         </div>
                         <div class="modal-body sui-form form-horizontal">
                             <div class="sui-msg msg-block msg-default msg-tips">
-                                <div class="msg-con">以下为供销平台上已经获得小二授权经营您的品牌但还未被您进行收编的供应商</div>
+                                <div class="msg-con">以下为需要修改的影院信息</div>
                                 <s class="msg-icon"></s>
                             </div>
                             <table class="sui-table table-bordered-simple">
                                 <thead>
                                 <tr>
-                                    <th>供应商昵称</th>
-                                    <th>公司名称</th>
-                                    <th>供应商类型</th>
-                                    <th>分销商数量</th>
-                                    <th>授权品牌</th>
+                                    <th>影院名</th>
+                                    <th>城市</th>
+                                    <th>地址</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><span>only淘宝商城官方旗舰店</span></td>
-                                    <td><span>九牧官方旗舰店</span></td>
-                                    <td><span>企业</span></td>
-                                    <td><span class="distributor-num">432</span></td>
-                                    <td>
-                                        <ul class="authorize-brand">
-                                            <li>海尔</li>
-                                            <li>统帅</li>
-                                        </ul>
-                                    </td>
+                                    <td align="left"><p align="left"><%=temp.getUsername()%></p></td>
+                                    <td><input type="text" name="city" id="city_qc" value=<%=temp.getCity()%> class="input-medium"></td>
+                                    <td><input type="text" name="address" id="address_qc" value=<%=temp.getAddress()%> class="input-large"></td>
                                     <td data-supplierid="111">
-                                        <button class="sui-btn btn-small J_addOneSupplier">添加</button>
+                                        <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button" onclick="doUpdate(<%=i%>, <%=temp.getId()%>">修改</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -158,14 +150,18 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
+            </td>
+            <form class="deleteForm">
+                <td width="100px"><button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger" onclick="doDelete(<%=list.get(i).getId()%>)" type="button">删除</button></td>
+            </form>
 
-        <td width="100px"><button class="sui-btn btn-bordered btn-large btn-danger">删除</button></td>
         <td width="200px"></td>
 
 
     </tr>
-    <%}%>
+
     <%--<%}--%>
     <%--}--%>
     <%--//  else{%>--%>
@@ -173,33 +169,69 @@
     <%--//    <th> <p><%="数据库无记录！"%></p></th>--%>
     <%--//  </tr>--%>
     </tbody>
+    <%}%>
 </table>
 <%--<%}%>--%>
 
-</table>
 
 <script>
-    $supDialog = $('#J_addsuppliersDialog')
-    $supDialog.on('click', '.J_addOneSupplier', function(e) {
-        $supDialog.modal('shadeIn');
-        return $.confirm({
-            title: '确认',
-            body: '您确认添加该供应商吗？',
-            backdrop: false,
-            okHide: function() {
-                $.alert({
-                    hasfoot: false,
-                    backdrop: false,
-                    title: '不管发生了什么，总之成功了',
-                    body: 'msg-large msg-block msg-',
-                    timeout: 1000
-                });
+    window.onload=function () {
+        $.ajax({
+            type:"GET",
+            url:'<%=basePath%>/api/cinema',
+            success: function(res) {
+                if(res != "SUCCESS")
+                    alert("数据获取出错！")
             },
-            hide: function() {
-                return $supDialog.modal('shadeOut');
+            error: function () {
+                alert("操作失败！")
             }
-        });
-    });
+        })
+    };
+
+    function doDelete(id) {
+        $.ajax({
+            type: "DELETE",
+            url: '<%=basePath%>/api/cinema/' + id,
+            success: function (res) {
+                if(res == "SUCCESS")
+                    alert("删除成功！")
+                else if(res == "NOT_FOUND")
+                    alert("无该用户！")
+                else if(res == "DB_ERROR")
+                    alert("数据库出错！")
+                location.reload();
+            },
+            error: function () {
+                alert("操作失败！")
+
+            }
+        })
+    };
+
+    function doUpdate(i, id) {
+        var params = $("#updateForm" + i).serialize();
+        params.add("id", id);
+        $.ajax({
+            type: "PUT",
+            url: '<%=basePath%>/api/cinema',
+            data: params,
+            success: function (res) {
+                if(res == "SUCCESS")
+                    alert("修改成功！")
+                else if(res == "FAIL")
+                    alert("修改失败！")
+                else if(res == "NOT_FOUND")
+                    alert("未知用户！")
+                else if(res == "DB_ERROR")
+                    alert("数据库出错！")
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+
 
 
 </script>
