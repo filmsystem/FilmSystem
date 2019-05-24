@@ -33,12 +33,12 @@ public class Test {
         for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
         }*/
-        FilmOfficeDAO filmOfficeDAO=new FilmOfficeDAO();
-        FilmOffice filmOffice=new FilmOffice();
-        filmOffice.setCinemaId(201);
-        filmOffice.setOfficeId(3);
-        filmOffice.setRowNum(4);
-        filmOffice.setCol(3);
-        System.out.println(filmOfficeDAO.insertFilmOffice(filmOffice));
+        StringBuilder buffer = new StringBuilder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+        int seatNum = (3 - 1) * 10 + (3 - 1);
+        System.out.println("test:"+buffer.substring(seatNum, seatNum+1));
+        System.out.println(buffer);
+        buffer.replace(seatNum, seatNum+1, "1");
+        System.out.println(buffer);
+
     }
 }

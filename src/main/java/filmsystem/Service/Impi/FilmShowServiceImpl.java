@@ -45,8 +45,8 @@ public class FilmShowServiceImpl implements IFilmShowService {
         }
         else{               // 订票
             StringBuilder buffer = new StringBuilder(show.getSeat());
-            if(buffer.substring(seatNum, seatNum).equals("0")){
-                buffer.replace(seatNum, seatNum, "1");
+            if(buffer.substring(seatNum, seatNum+1).equals("0")){
+                buffer.replace(seatNum, seatNum+1, "1");
                 show.setSeat(buffer.toString());
                 return updateShow(show);
             }
