@@ -142,7 +142,7 @@
                                     <td><input type="text" name="city" id="city_qc" value=<%=temp.getCity()%> class="input-medium"></td>
                                     <td><input type="text" name="address" id="address_qc" value=<%=temp.getAddress()%> class="input-large"></td>
                                     <td data-supplierid="111">
-                                        <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button" onclick="doUpdate(<%=i%>, <%=temp.getId()%>">修改</button>
+                                        <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button" onclick="doUpdate(<%=i%>, <%=temp.getId()%>)">修改</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -211,7 +211,9 @@
 
     function doUpdate(i, id) {
         var params = $("#updateForm" + i).serialize();
-        params.add("id", id);
+
+        params = params + "&id=" + id;
+        console.log(params);
         $.ajax({
             type: "PUT",
             url: '<%=basePath%>/api/cinema',
