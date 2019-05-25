@@ -79,6 +79,7 @@ public class DoubanController {
             ArrayList<String> result = getJSONString(url);
             if(result.size() == 2){
                 Film film = doubanService.getOneFilm(result.get(1));
+//                film.setId(id);
                 session.setAttribute("filmSearch", film);
                 return "SUCCESS";
             }
