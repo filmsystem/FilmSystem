@@ -4,6 +4,12 @@
          pageEncoding="UTF-8" %>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <!DOCTYPE html>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+
+%>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,12 +28,6 @@
     <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
     <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
     <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css">
-    <%
-        String path = request.getContextPath();
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-
-    %>
-
 </head>
 <body>
 
@@ -72,8 +72,6 @@
 </div>
 
 <blockquote class="layui-elem-quote"><h1>影院查询</h1></blockquote>
-
-
     <%!
   ArrayList<Cinema> list;
 %>
@@ -205,8 +203,7 @@
                 alert("操作失败！")
             }
         })
-    };
-
+    }
     function doDelete(id) {
         $.ajax({
             type: "DELETE",

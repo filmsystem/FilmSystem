@@ -70,6 +70,7 @@
 <br><br>
 <div align="center">
     <form id="registerForm" class="layui-form">
+        <input type="hidden" name="cinemaId" value="<%=((Cinema)session.getAttribute("currentUser")).getId()%>"/>
         <div style="width:30%" align="center">
             <br><br>
             <div class="layui-form-item">
@@ -83,7 +84,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">排数</label>
                 <div class="layui-input-block">
-                    <input type="text" name="rowNum" id="row" required lay-verify="required" autocomplete="off"
+                    <input type="text" name="row" id="row" required lay-verify="required" autocomplete="off"
                            class="layui-input" required="required">
                 </div>
             </div>
@@ -112,7 +113,8 @@
     $(function () {
         $("#submitBtn").on('click', function () {
             var params = $("#registerForm").serialize();
-            params.add("cinemaId",<%=((Cinema)session.getAttribute("currentUser")).getId()%>);
+            //params.add("cinemaId",<%=((Cinema)session.getAttribute("currentUser")).getId()%>);
+
             $.ajax({
                 type: "POST",
                 url: '<%=basePath%>/api/filmoffice',
