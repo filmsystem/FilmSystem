@@ -19,34 +19,34 @@ public class FilmController {
     //public static Logger log = LoggerFactory.getLogger(FilmController.class);
     @Autowired
     FilmServiceImpl filmService;
-    //todo:改成豆瓣插入？
-    @RequestMapping(value = "/film", method = RequestMethod.POST)
-    public String insertFilm(@RequestParam("name") String name,
-                           @RequestParam(value = "img" , defaultValue = "") String img,
-                           @RequestParam("dircetors") Collection<String> directors,
-                           @RequestParam("casts") Collection<String> casts,
-                           @RequestParam("type") Collection<String> type,
-                           @RequestParam("year") Integer year,
-                           @RequestParam("countries") Collection<String> countries,
-                           @RequestParam("summary") String summary){
-        // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
-        try{
-            Film film = new Film();
-            film.setName(name);
-            film.setImg(img);
-            film.setDirectors(ListToString.collectionToString(directors, ", "));
-            film.setCasts(ListToString.collectionToString(casts, ", "));
-            film.setType(ListToString.collectionToString(type, ", "));
-            film.setYear(year);
-            film.setCountries(ListToString.collectionToString(countries, ", "));
-            film.setSummary(summary);
-            return filmService.insertFilm(film) ? "SUCCESS" : "FAIL";
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return "DB_ERROR";
-        }
-    }
+
+//    @RequestMapping(value = "/film", method = RequestMethod.POST)
+//    public String insertFilm(@RequestParam("name") String name,
+//                           @RequestParam(value = "img" , defaultValue = "") String img,
+//                           @RequestParam("dircetors") Collection<String> directors,
+//                           @RequestParam("casts") Collection<String> casts,
+//                           @RequestParam("type") Collection<String> type,
+//                           @RequestParam("year") Integer year,
+//                           @RequestParam("countries") Collection<String> countries,
+//                           @RequestParam("summary") String summary){
+//        // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
+//        try{
+//            Film film = new Film();
+//            film.setName(name);
+//            film.setImg(img);
+//            film.setDirectors(ListToString.collectionToString(directors, ", "));
+//            film.setCasts(ListToString.collectionToString(casts, ", "));
+//            film.setType(ListToString.collectionToString(type, ", "));
+//            film.setYear(year);
+//            film.setCountries(ListToString.collectionToString(countries, ", "));
+//            film.setSummary(summary);
+//            return filmService.insertFilm(film) ? "SUCCESS" : "FAIL";
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            return "DB_ERROR";
+//        }
+//    }
 
     @RequestMapping(value = "/film/{id}", method = RequestMethod.GET)
     public String getFilm(@PathVariable Integer id, Model model, HttpSession session){

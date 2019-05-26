@@ -103,8 +103,8 @@ public class DoubanController {
         }
     }
 
-    @RequestMapping(value = "/cinema", method = RequestMethod.POST)
-    public String addNewFilm(@RequestParam("id") Integer id){
+    @RequestMapping(value = "/film/{id}", method = RequestMethod.POST)
+    public String addNewFilm(@PathVariable Integer id){
         try{
             Film film = searchFilmById(id);
             if(film != null){
