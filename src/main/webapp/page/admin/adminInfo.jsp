@@ -1,3 +1,4 @@
+<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -61,6 +62,7 @@
 </div>
 
 <blockquote class="layui-elem-quote"><h1>添加影院</h1></blockquote>
+
 <br><br>
 </body>
 </html>

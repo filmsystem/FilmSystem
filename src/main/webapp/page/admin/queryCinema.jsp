@@ -123,7 +123,7 @@
             </button>
             <div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade"
                  data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
-                <form class="updateForm" + <%=i%>>
+                <form name="updateForm" + <%=i%>>
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
