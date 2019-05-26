@@ -109,9 +109,9 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td><p style="color:RGB(80,56,88)">导演</p></td>
-                    </tr>
+<%--                    <tr>--%>
+<%--                        <td><p style="color:RGB(80,56,88)">导演</p></td>--%>
+<%--                    </tr>--%>
                     </tbody>
                 </table>
             </div>
@@ -121,7 +121,8 @@
                 <td><p style="color:RGB(80,56,88)">导演</p></td>
             </tr>
             <tr>
-                <td><button class="layui-btn layui-btn-danger" style="width:180px">购  买</button>
+                <td><button class="layui-btn layui-btn-danger" style="width:180px">购  买</button></td>
+            </tr>
         </div>
     </div>
 
@@ -144,9 +145,57 @@
     <div class="layui-col-md4 layui-col-md-offset1" >
         <div class="grid-demo grid-demo-bg1"><h2><span class="sui-text-danger">热门评论</span></h2></div>
     </div>
+    <div class="layui-col-md1 layui-col-md-offset3" >
+        <div class="grid-demo grid-demo-bg1"><button class="layui-btn layui-btn-danger layui-btn-radius" data-toggle="modal" data-target="#myModal2" data-keyboard="false">写评论</button></div>
+        <div id="myModal2" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+                        <h4 id="myModalLabel2" class="modal-title">写评论</h4>
+                    </div>
+                    <div id="test7" style="margin-left:150px"></div>
+                    <div class="layui-input-block" style="margin-left:10px">
+                        <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
+                        <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
+<%--<%--%>
+<%--    for(int i=0;i<10;i++){--%>
+<%--%>--%>
+<%--<table class="layui-table" lay-even="" lay-skin="nob">--%>
+<%--    <tbody>--%>
+<%--    <td width="260px"></td>--%>
+<%--    <li>--%>
+<%--        <td><img src="/FilmSystem/img/2.png"width=60px height=60px></td>--%>
+<%--    <td>--%>
+<%--     <li><h3>balabalab</h3></li>--%>
+<%--     <li><p class="sui-text-large"><span class="sui-text-disabled">balabalab</span></p></li>--%>
+<%--    </td>--%>
+
+
+<%--    <li><p>balabala</p></li>--%>
+<%--    </tbody>--%>
+<%--    <br>--%>
+<%--    <%--%>
+<%--        }--%>
+<%--    %>--%>
+
+<%--</table>--%>
+
+<%
+    for(int i=0;i<10;i++){
+%>
 <div class="layui-row layui-col-md-offset1">
+
     <div class="layui-col-md1">
         <div class="grid-demo grid-demo-bg1"><img src="/FilmSystem/img/2.png"width=60px height=60px></div>
     </div>
@@ -161,10 +210,13 @@
         <div class="grid-demo grid-demo-bg1" >balabala</div>
     </div>
 </div>
+<br>
+<hr class="layui-bg-gray">
+<br>
 
-
-
-
+<%
+    }
+%>
 
 
 
@@ -227,7 +279,12 @@
         //自定义长度
         rate.render({
             elem: '#test7'
-            ,length: 3
+            ,value: 5
+            ,half: true
+            ,text: true
+            ,setText: function(value){
+                this.span.text(value+'分');
+            }
         });
         rate.render({
             elem: '#test8'

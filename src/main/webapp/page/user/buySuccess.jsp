@@ -66,14 +66,14 @@
         </div>
         <label>选择座位</label>
     </div>
-    <div class="current">
+    <div class="finished">
         <div class="wrap">
             <div class="round">3</div>
             <div class="bar"></div>
         </div>
         <label>15分钟内付款</label>
     </div>
-    <div class="todo last">
+    <div class="current">
         <div class="wrap">
             <div class="round">4</div>
         </div>
@@ -88,49 +88,17 @@
     list = (ArrayList<Administrator>) session.getAttribute("administratorList");
 %>
 <%--<% if(list != null){%>--%>
-
-<div align="center" >
-    <div style="background-color: #FFCCFF;width:1150px" align="center" >
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-            <legend style="color:#ffffff" style="margin-left: 250px;"><h1>倒计时</h1></legend>
-        </fieldset>
-        <h2 class="sui-text-danger" style="margin-left:20px"><div id="test2"></div></h2>
-        <br>
-            <div><h4 style="margin-left:20px">超时订单会自动取消</h4></div>
-        <br>
-    </div>
-</div>
 <br><br>
-<div class="sui-msg msg-tips">
-    <div class="msg-con" style="margin-left:220px">请仔细核对场次信息，出票后将无法退票和改签</div>
-    <s class="msg-icon"style="margin-left:219px"></s>
-</div>
-<br><br>
-<table class="layui-table" lay-even="" lay-skin="nob">
-    <thead>
-    <th width="200px"></th>
-    <th><h3>影片</h3></th>
-    <th><h3>时间</h3></th>
-    <th><h3>影院</h3></th>
-    <th><h3>座位</h3></th>
-    </thead>
-    <tbody>
-    <tr>
-        <td ></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
+<h1 class="sui-text-danger" align="center" >您已购买成功！</h1>
+<br>
+<h1 class="sui-text-xlarge" align="center" >取票号</h1>
+<br>
+<h1 class="sui-text-xxlarge" align="center" >53554333222222</h1>
+<br>
+<h1 class="sui-text-xlarge" align="center" >二维码</h1>
+<br>
+<img src="/FilmSystem/img/2.png"width=220px height=600px style="margin-left:580px"/>
 
-    </tr>
-    </tbody>
-</table>
-<br>
-<span class="sui-text-xlarge" style="margin-left:1050px">实际支付：55元</span>
-<br>
-<br>
-<button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:1060px;text-align:center" width="260px"><h3>确 认 支 付</h3></button>
-<br><br><br><br>
 
         <%--<%}--%>
         <%--}--%>
