@@ -117,19 +117,19 @@
         <td width="300px"><p class="sui-text-large"><%=temp.getAddress()%>
         </p></td>
         <td width="100px">
-            <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog" data-width="large"
+            <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog<%=i%>" data-width="large"
                     data-backdrop="static" class="sui-btn btn-bordered btn-large btn-success"><i
                     class="sui-icon icon-pencil"></i>修改
             </button>
-            <div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade"
+            <div id="J_addsuppliersDialog<%=i%>" tabindex="-1" role="dialog" class="sui-modal hide fade"
                  data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
-                <form name="updateForm" + <%=i%>>
+                <form name="updateForm<%=i%>">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
                                 </button>
-                                <h4 id="myModalLabel" class="modal-title">修改影院</h4>
+                                <h4 id="myModalLabel<%=i%>" class="modal-title">修改影院</h4>
                             </div>
                             <div class="modal-body sui-form form-horizontal">
                                 <div class="sui-msg msg-block msg-default msg-tips">
