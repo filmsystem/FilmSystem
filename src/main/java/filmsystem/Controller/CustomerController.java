@@ -75,7 +75,6 @@ public class CustomerController {
     public String updateCustomer(@RequestParam("id") Integer id,
                                   @RequestParam("password") String password,
                                   @RequestParam(value = "img", defaultValue = "") String img,
-                                  @RequestParam("gender") String gender,
                                   @RequestParam("phonenum") String phonenum,
                                   @RequestParam("city") String city){
         try{
@@ -85,7 +84,6 @@ public class CustomerController {
                     customer.setPassword(password);
                 if(!img.equals(""))
                     customer.setImg(img);
-                customer.setGender(gender);
                 customer.setPhonenum(phonenum);
                 customer.setCity(city);
                 return customerService.updateCustomer(customer) ? "SUCCESS" : "FAIL";
