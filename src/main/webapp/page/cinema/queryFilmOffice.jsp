@@ -29,16 +29,16 @@
             <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">电影场次管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmShow.jsp.jsp">增加场次</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmShow.jsp.jsp">查询场次</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmShow.jsp">增加场次</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmShow.jsp">查询场次</a></li>
                 </ul>
             </li>
 
             <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">放映厅管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmOffice.jsp.jsp">增加放映厅</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmOffice.jsp.jsp">查询放映厅</a>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmOffice.jsp">增加放映厅</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmOffice.jsp">查询放映厅</a>
                     </li>
                 </ul>
             </li>

@@ -39,7 +39,7 @@ public class LoginController {
                 }
             case 2:     // cinema
                 if(loginService.checkCinema(username, password)){
-                    session.setAttribute("currentUser", new CinemaServiceImpl().findCinemaByName(username));
+                    session.setAttribute("currentUser", new CinemaServiceImpl().findCinemaByFullName(username));
                     return "SUCCESS";
                 }
                 else{
