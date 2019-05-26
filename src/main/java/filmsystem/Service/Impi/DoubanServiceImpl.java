@@ -1,10 +1,12 @@
 package filmsystem.Service.Impi;
 
+import filmsystem.DAO.FilmDAO;
 import filmsystem.Model.Film;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import filmsystem.Tools.ListToString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.IDoubanService;
 
@@ -14,10 +16,12 @@ import java.util.Map;
 
 @Service("doubanService")
 public class DoubanServiceImpl implements IDoubanService {
+    @Autowired
+    FilmServiceImpl filmService;
 
-    public HashMap<String,Integer> getName_IDMap(String JSONString){
+    public HashMap<String,Integer> getName_IDMap(String JSONString, boolean flag){
         /**
-         * @param: json string
+         * @param: JSONString: json string; flag: need filter?
          * @return: map with filmId and film name.
          */
         HashMap<String,Integer> resultMap = new HashMap<String,Integer>();
@@ -27,7 +31,16 @@ public class DoubanServiceImpl implements IDoubanService {
         for (int i= 0; i < resultArray.size(); i++ ){
             Map<String,Object> filmMap = (Map) JSONObject.parse(resultArray.get(i).toString());
             System.out.println(filmMap.get("title") + " " + filmMap.get("id"));
-            resultMap.put((String)filmMap.get("title"), Integer.parseInt((String)filmMap.get("id")));
+            int id = Integer.parseInt((String)filmMap.get("id"));
+            if(flag){   // 过滤已存在的数据
+                Film film = filmService.findFilmById(id);
+                if(film == null){
+                    resultMap.put((String)filmMap.get("title"), id);
+                }
+            }
+            else{
+                resultMap.put((String)filmMap.get("title"), id);
+            }
         }
         return resultMap;
     }
@@ -95,5 +108,10 @@ public class DoubanServiceImpl implements IDoubanService {
             result.add((String) nameMap.get(attribute));
         }
         return result;
+    }
+
+    public int getTotal(String JSONString){
+        Map<String,Object> jsonMap = (Map) JSONObject.parse(JSONString);
+        return (Integer) jsonMap.get("total");
     }
 }

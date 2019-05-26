@@ -2,8 +2,11 @@ package filmsystem.Controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import filmsystem.Service.Impi.DoubanServiceImpl;
+import filmsystem.Service.Impi.FilmServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.ui.Model;
@@ -23,6 +26,9 @@ public class DoubanController {
 
     @Autowired
     DoubanServiceImpl doubanService;
+
+    @Autowired
+    FilmServiceImpl filmService;
 
     private ArrayList<String> getJSONString(String url){
         HttpMethod method = HttpMethod.GET;
@@ -52,19 +58,28 @@ public class DoubanController {
 //    }
 
     @RequestMapping(value = "/doubanSearchNew", method = RequestMethod.GET)
-    public String searchNewFilm(Model model, HttpSession session){
+    public String searchNewFilm(@RequestParam(value = "filter", defaultValue = "") String filter,
+                                Model model, HttpSession session){
+        /**
+         * @param: filter: 是否需要过滤器（过滤掉已在数据库中存在的电影信息）。默认有过滤器，如果不需要过滤，输入任意字符串即可。
+         */
         try{
-            String url = "https://douban.uieee.com/v2/movie/in_theaters";
-            ArrayList<String> result = getJSONString(url);
-            if(result.size() == 2){
-                HashMap<String, Integer> map = doubanService.getName_IDMap(result.get(1));
-                session.setAttribute("NameIdMap", map);
-                return "SUCCESS";
+            String url = "https://douban.uieee.com/v2/movie/in_theaters&start=";
+            HashMap<String, Integer> map = new HashMap<>();
+
+            int count = 20;
+            for(Integer i = 0; i < count; i+=20){
+                ArrayList<String> result = getJSONString(url + i.toString());
+                if(result.size() == 2){
+                    count = doubanService.getTotal(result.get(1));
+                    map.putAll(doubanService.getName_IDMap(result.get(1), filter.equals("") ? true : false));
+                }
+                else {
+                    return "FAIL";
+                }
             }
-            else if(result.get(0).equals("500")){
-                return "FAIL";
-            }
-            return "NETWORK_ERROR";
+            session.setAttribute("NameIdMap", map);
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();
@@ -75,22 +90,40 @@ public class DoubanController {
     @RequestMapping(value = "/doubanSearchById/{id}", method = RequestMethod.GET)
     public String searchFilmById(@PathVariable Integer id, Model model, HttpSession session){
         try{
-            String url = "https://douban.uieee.com/v2/movie/subject/" + id;
-            ArrayList<String> result = getJSONString(url);
-            if(result.size() == 2){
-                Film film = doubanService.getOneFilm(result.get(1));
-//                film.setId(id);
-                session.setAttribute("filmSearch", film);
+            Film film = searchFilmById(id);
+            if(film != null){
+                session.setAttribute("filmFound", film);
                 return "SUCCESS";
             }
-            else if(result.get(0).equals("500")){
-                return "FAIL";
-            }
-            return "NETWORK_ERROR";
+            return "FAIL";
         }
         catch(Exception e){
             e.printStackTrace();
             return "NETWORK_ERROR";
         }
+    }
+
+    @RequestMapping(value = "/cinema", method = RequestMethod.POST)
+    public String addNewFilm(@RequestParam("id") Integer id){
+        try{
+            Film film = searchFilmById(id);
+            if(film != null){
+                return filmService.insertFilm(film) ? "SUCCESS" : "FAIL";
+            }
+            return "FAIL";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "NETWORK_ERROR";
+        }
+    }
+
+    public Film searchFilmById(int id) throws Exception{
+            String url = "https://douban.uieee.com/v2/movie/subject/" + id;
+            ArrayList<String> result = getJSONString(url);
+            if(result.size() == 2){
+                return doubanService.getOneFilm(result.get(1));
+            }
+            return null;
     }
 }
