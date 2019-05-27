@@ -213,8 +213,11 @@
     };
 
     function doUpdate(i, id) {
-        var params = $("#updateForm" + i).serialize();
-        params.add("id", id);
+        // var buffer = new StringBuffer();
+        // buffer.append(i.toString());
+        var params = $("#updateForm" + i.toString()).serialize();
+        console.log(id)
+        // params.add("id", id);
         $.ajax({
             type: "PUT",
             url: '<%=basePath%>/api/cinema',

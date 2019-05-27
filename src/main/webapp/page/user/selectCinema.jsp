@@ -1,5 +1,10 @@
 <%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.Film" %>
+<%@ page import="filmsystem.Model.FilmShow" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -27,7 +32,49 @@
 </head>
 
 <body>
+<%!
+    Film film = new Film();
+    ArrayList<HashMap<String, Object>> showMapList = new ArrayList<>();
+%>
+<%
+//    film = (Film) session.getAttribute("filmFound");
+    showMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmShowMapList");
 
+    /**** test data ****/
+    film.setId(26662282);
+    film.setName("复仇者联盟4");
+    film.setCasts("");
+    film.setDirectors("");
+    film.setCountries("中美合拍");
+    film.setType("");
+    film.setYear(2019);
+    film.setSummary("无可奉告");
+
+    Cinema cinema = new Cinema();
+    cinema.setUsername("bilibili");
+    cinema.setAddress("国正中心");
+    cinema.setId(200);
+
+//    FilmShow filmShow = new FilmShow();
+//    filmShow.setId(5);
+    HashMap<String,Object> map = new HashMap<>();
+    map.put("film", film);
+//    map.put("filmShow", filmShow);
+    map.put("cinema", cinema);
+//    showMapList.add(map);
+//
+//    for(int i = 0; i < 5; i++){
+//        FilmShow show = new FilmShow();
+//        show.setFilmId(26835471);
+//        show.setCinemaId(202);
+//        show.setBeginTime(new Timestamp(System.currentTimeMillis()));
+//        show.setPrice(40.5);
+//        show.setOfficeId(3);
+//        show.setDuration(100);
+//        showList.add(show);
+//    }
+
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -51,7 +98,7 @@
 </div>
 <div style="padding: 20px; background-color: RGB(80,56,88);">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend style="color:#ffffff;margin-left:160px">反贪风暴</legend>
+        <legend style="color:#ffffff;margin-left:160px">  </legend>
     </fieldset>
     <div class="layui-row">
         <div class="layui-col-md4">
@@ -64,7 +111,7 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff">导演 </p></td>
                     </tr>
                     <tr>
                         <td><p style="color:#ffffff">导演</p></td>
@@ -87,25 +134,25 @@
                     </tr>
 
                     <tr>
-                        <td><button data-toggle="modal" data-target="#myModal" data-keyboard="false" class="layui-btn layui-btn-primary" style="width:180px">☆☆☆☆☆评分</button>
-                            <div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                                            <h4 id="myModalLabel" class="modal-title">写评论</h4>
-                                        </div>
-                                        <div id="test6" style="margin-left:150px"></div>
-                                        <div class="layui-input-block" style="margin-left:10px">
-                                            <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
-                                            <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <%--<td><button data-toggle="modal" data-target="#myModal" data-keyboard="false" class="layui-btn layui-btn-primary" style="width:180px">☆☆☆☆☆评分</button>--%>
+                            <%--<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">--%>
+                                <%--<div class="modal-dialog">--%>
+                                    <%--<div class="modal-content">--%>
+                                        <%--<div class="modal-header">--%>
+                                            <%--<button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>--%>
+                                            <%--<h4 id="myModalLabel" class="modal-title">写评论</h4>--%>
+                                        <%--</div>--%>
+                                        <%--<div id="test6" style="margin-left:150px"></div>--%>
+                                        <%--<div class="layui-input-block" style="margin-left:10px">--%>
+                                            <%--<textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="modal-footer">--%>
+                                            <%--<button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>--%>
+                                            <%--<button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                         </td>
                     </tr>
 
@@ -135,24 +182,61 @@
     </div>
 </div>
 <br>
+<%
+    for(int i = 0; i < showMapList.size(); i++){
+%>
 <div class="layui-row layui-col-md-offset1">
     <div class="layui-col-md1">
-        <li><h3>万达影院</h3></li>
-        <li><p class="sui-text-large"><span class="sui-text-disabled">balabalab</span></p></li>
+        <li><h3><%=((Cinema)showMapList.get(i).get("cinema")).getUsername()%></h3></li>
+        <li><p class="sui-text-large"><span class="sui-text-disabled"><%=((Cinema)showMapList.get(i).get("cinema")).getAddress()%></span></p></li>
     </div>
     <div class="layui-col-md1 layui-col-md-offset8" >
-        <div  align="right"><h2><span class="sui-text-danger">45元</span></h2></div>
+        <div  align="right"><h2><span class="sui-text-danger"><%=((FilmShow)showMapList.get(i).get("filmShow")).getPrice()%></span></h2></div>
     </div>
     <div class="layui-col-md1" >
-        <button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:60px">选 票</button>
+        <button id="selectBtn<%=i%>" class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:60px" onclick="doSelect(<%=((FilmShow)showMapList.get(i).get("filmShow")).getId()%>)">选 票</button>
     </div>
+<%
+    }
+%>
 </div>
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmshow?filmId=' + <%=film.getId()%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+    function doSelect(id) {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmshow/' + id,
+            success: function (res) {
+                if (res == "SUCCESS")
+                    location.replace("selectSeat.jsp")
+                else if (res == "NOT_FOUND")
+                    alert("无该电影场次！")
+                else if (res == "DB_ERROR")
+                    alert("数据库出错！")
+            },
+            error: function () {
+                alert("操作失败！")
 
-
-
-
-
-
+            }
+        })
+    };
+</script>
 
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -259,6 +343,8 @@
             ,theme: '#FE0000'
         })
     });
+
+
 </script>
 
 </body>

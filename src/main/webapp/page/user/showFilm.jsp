@@ -123,7 +123,7 @@
 
       <tbody>
       <%
-        for(int i = 0; i < 5; i+=5){
+        for(int i = 0; i < list.size(); i+=5){
       %>
       <tr style="margin-left:30px">
         <td width="140px"></td>
