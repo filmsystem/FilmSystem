@@ -1,5 +1,9 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.Film" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="filmsystem.Model.Cinema" %>
+<%@ page import="filmsystem.Model.FilmShow" %>
+<%@ page import="filmsystem.Model.FilmOffice" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -27,7 +31,52 @@
 </head>
 
 <body>
+<%!
+    Film film = new Film();
+    Cinema cinema = new Cinema();
+    ArrayList<HashMap<String, Object>> showMapList = new ArrayList<>();
+%>
+<%
+    //    film = (Film) session.getAttribute("filmFound");
+    showMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmShowMapList");
+    if(showMapList == null)
+        showMapList = new ArrayList<>();
 
+    /**** test data ****/
+    film.setId(26662282);
+    film.setName("复仇者联盟4");
+    film.setCasts("");
+    film.setDirectors("");
+    film.setCountries("中美合拍");
+    film.setType("");
+    film.setYear(2019);
+    film.setSummary("无可奉告");
+
+    Cinema cinema = new Cinema();
+    cinema.setUsername("bilibili");
+    cinema.setAddress("国正中心");
+    cinema.setId(200);
+
+//    FilmShow filmShow = new FilmShow();
+//    filmShow.setId(5);
+    HashMap<String,Object> map = new HashMap<>();
+    map.put("film", film);
+//    map.put("filmShow", filmShow);
+    map.put("cinema", cinema);
+//    showMapList.add(map);
+//
+//    for(int i = 0; i < 5; i++){
+//        FilmShow show = new FilmShow();
+//        show.setFilmId(26835471);
+//        show.setCinemaId(202);
+//        show.setBeginTime(new Timestamp(System.currentTimeMillis()));
+//        show.setPrice(40.5);
+//        show.setOfficeId(3);
+//        show.setDuration(100);
+//        showList.add(show);
+//    }
+
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -51,7 +100,7 @@
 </div>
 <div style="padding: 20px; background-color: RGB(80,56,88);">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend style="color:#ffffff;margin-left:160px">万达影院</legend>
+        <legend style="color:#ffffff;margin-left:160px"><%=cinema.getUsername()%></legend>
     </fieldset>
     <div class="layui-row">
         <div class="layui-col-md4">
@@ -64,7 +113,7 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td><p style="color:#ffffff">地址</p></td>
+                        <td><h1 style="color:#ffffff">地址: <%=cinema.getAddress()%></h1></td>
                     </tr>
                     <tr>
                         <td><p style="color:RGB(80,56,88)">导演</p></td>
@@ -110,7 +159,7 @@
 
 <div class="layui-row">
     <div class="layui-col-md4 layui-col-md-offset1" >
-        <div class="grid-demo grid-demo-bg1"><h2>反弹风暴</span></h2></div>
+        <div class="grid-demo grid-demo-bg1"><h2>反弹风暴</h2></div>
         <div><p class="sui-text-large"><span class="sui-text-disabled">时长：   类型：    主演：  </span></p></div>
     </div>
 </div>
@@ -129,10 +178,11 @@
     <thead>
     <tr>
         <th width="180px"></th>
-        <th width="240px"><h3>放映时间</h3></th>
-        <th width="240px"><h3>放映时间</h3></th>
-        <th width="240px"><h3>放映时间</h3></th>
-        <th width="240px"><h3>放映时间</h3></th>
+        <th width="300px"><h3>放映时间</h3></th>
+        <th width="300px"><h3>放映厅</h3></th>
+        <th width="300px"><h3>票 价</h3></th>
+        <th width="300px"><h3>订 票</h3></th>
+        <th width="50px"></th>
     </tr>
     </thead>
     <tbody>
@@ -141,14 +191,16 @@
     <%--%>--%>
 
     <%
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < showMapList.size(); i++){
+            FilmShow showTemp = (FilmShow)showMapList.get(i).get("filmShow");
+            FilmOffice officeTemp = (FilmOffice)showMapList.get(i).get("office");
     %>
     <tr style="margin-left:30px" height="50">
         <td width="140px"></td>
-        <td width="180px">三号厅</td>
-        <td width="180px">三号厅</td>
-        <td width="180px">三号厅</td>
-        <td width="180px"><button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:6px">选 座</button></td>
+        <td width="180px"><%=showTemp.getBeginTime()%></td>
+        <td width="180px"><%=officeTemp.getOfficeId()%> 号放映厅</td>
+        <td width="180px"><%=showTemp.getPrice()%></td>
+        <td width="180px"><button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:6px" onclick="doSelect(<%=((FilmShow)showMapList.get(i).get("filmShow")).getId()%>)">选 座</button></td>
         <td></td>
     </tr>
 
@@ -156,11 +208,43 @@
     </tbody>
 </table>
 
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmshow?filmId=' + <%=film.getId()%> + '&cinemaId=' + <%=cinema.getId()%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+    function doSelect(id) {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmshow/' + id,
+            success: function (res) {
+                if (res == "SUCCESS")
+                    location.replace("selectSeat.jsp")
+                else if (res == "NOT_FOUND")
+                    alert("无该电影场次！")
+                else if (res == "DB_ERROR")
+                    alert("数据库出错！")
+            },
+            error: function () {
+                alert("操作失败！")
 
-
-
-
-
+            }
+        })
+    };
+</script>
 
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->

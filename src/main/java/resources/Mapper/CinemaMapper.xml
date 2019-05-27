@@ -49,6 +49,6 @@
     </update>
 
     <select id="selectCinemaInFilmShowByFilmId" resultMap="cinemaList">
-        select * from cinema where id=(select unique cinemaId from filmshow where filmId=#{filmId})
+        select * from cinema where id in (select distinct cinemaId from filmshow where filmId=#{filmId})
     </select>
 </mapper>

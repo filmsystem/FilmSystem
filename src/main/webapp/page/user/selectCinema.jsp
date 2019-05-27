@@ -32,11 +32,13 @@
 <body>
 <%!
     Film film = new Film();
-    ArrayList<HashMap<String, Object>> showMapList = new ArrayList<>();
+    ArrayList<Cinema> cinemaList = new ArrayList<>();
 %>
 <%
 //    film = (Film) session.getAttribute("filmFound");
-    showMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmShowMapList");
+    cinemaList = (ArrayList<Cinema>)session.getAttribute("cinemaList");
+    if(cinemaList == null)
+        cinemaList = new ArrayList<>();
 
     /**** test data ****/
     film.setId(26662282);
@@ -48,17 +50,17 @@
     film.setYear(2019);
     film.setSummary("无可奉告");
 
-    Cinema cinema = new Cinema();
-    cinema.setUsername("bilibili");
-    cinema.setAddress("国正中心");
-    cinema.setId(200);
+//    Cinema cinema = new Cinema();
+//    cinema.setUsername("bilibili");
+//    cinema.setAddress("国正中心");
+//    cinema.setId(200);
 
 //    FilmShow filmShow = new FilmShow();
 //    filmShow.setId(5);
-    HashMap<String,Object> map = new HashMap<>();
-    map.put("film", film);
+//    HashMap<String,Object> map = new HashMap<>();
+//    map.put("film", film);
 //    map.put("filmShow", filmShow);
-    map.put("cinema", cinema);
+//    map.put("cinema", cinema);
 //    showMapList.add(map);
 //
 //    for(int i = 0; i < 5; i++){
@@ -181,18 +183,18 @@
 </div>
 <br>
 <%
-    for(int i = 0; i < showMapList.size(); i++){
+    for(int i = 0; i < cinemaList.size(); i++){
 %>
 <div class="layui-row layui-col-md-offset1">
     <div class="layui-col-md4">
-        <li><h3><%=((Cinema)showMapList.get(i).get("cinema")).getUsername()%></h3></li>
-        <li><p class="sui-text-large"><span class="sui-text-disabled"><%=((Cinema)showMapList.get(i).get("cinema")).getAddress()%></span></p></li>
+        <li><h3><%=cinemaList.get(i).getUsername()%></h3></li>
+        <li><p class="sui-text-large"><span class="sui-text-disabled"><%=cinemaList.get(i).getAddress()%></span></p></li>
     </div>
-    <div class="layui-col-md1 layui-col-md-offset8" >
-        <%--<div  align="right"><h2><span class="sui-text-danger"><%=((FilmShow)showMapList.get(i).get("filmShow")).getPrice()%></span></h2></div>--%>
+     <div class="layui-col-md1 layui-col-md-offset4" >
+        <div  align="right"><h6><span class="sui-text-danger" style="color:#ffffff">233</span></h6></div>
     </div>
     <div class="layui-col-md1" >
-        <button id="selectBtn<%=i%>" class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:60px" onclick="doSelect(<%=((FilmShow)showMapList.get(i).get("filmShow")).getId()%>)">选 票</button>
+        <button id="selectBtn<%=i%>" class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:60px" onclick="doSelect(<%=cinemaList.get(i).getId()%>)">选 票</button>
     </div>
 <%
     }
@@ -202,7 +204,7 @@
     window.onload = function () {
         $.ajax({
             type: "GET",
-            url: '<%=basePath%>/api/filmshow?filmId=' + <%=film.getId()%>,
+            url: '<%=basePath%>/api/film_cinema/' + <%=film.getId()%>,
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
@@ -219,10 +221,10 @@
     function doSelect(id) {
         $.ajax({
             type: "GET",
-            url: '<%=basePath%>/api/filmshow/' + id,
+            url: '<%=basePath%>/api/filmshow?cinemaId=' + id + '&filmId=' + <%=film.getId()%>,
             success: function (res) {
                 if (res == "SUCCESS")
-                    location.replace("selectSeat.jsp")
+                    location.replace("selectFilmoffice.jsp")
                 else if (res == "NOT_FOUND")
                     alert("无该电影场次！")
                 else if (res == "DB_ERROR")

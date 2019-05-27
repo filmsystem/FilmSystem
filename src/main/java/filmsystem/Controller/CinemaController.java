@@ -121,9 +121,11 @@ public class CinemaController {
     }
 
     @RequestMapping(value = "/film_cinema/{id}", method = RequestMethod.GET)
-    public String getCinemaByFilmId(@PathVariable Integer id){
+    public String getCinemaByFilmId(@PathVariable Integer id, Model model, HttpSession session){
         try{
-            return cinemaService.deleteCinema(id) ? "SUCCESS" : "NOT_FOUND";
+            ArrayList<Cinema> list = cinemaService.findCinemaByFilmId(id);
+            session.setAttribute("cinemaList", list);
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();

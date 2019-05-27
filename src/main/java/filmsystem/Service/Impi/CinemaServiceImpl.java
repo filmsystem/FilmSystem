@@ -55,6 +55,6 @@ public class CinemaServiceImpl implements ICinemaService{
 
     @Override
     public ArrayList<Cinema> findCinemaByFilmId(int id) {
-        return null;
+        return cinemaDAO.selectCinemaInFilmShowByFilmId(id);
     }
 }

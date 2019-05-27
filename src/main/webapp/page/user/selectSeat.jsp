@@ -88,14 +88,15 @@
     FilmOffice filmOffice = new FilmOffice();
 %>
 <%
-//    filmShowMap = (HashMap<String, Object>) session.getAttribute("filmShowMap");
-//    selectedShow = (FilmShow) filmShowMap.get("filmShow");
-//    filmOffice = (FilmOffice) filmShowMap.get("filmOffice");
+    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShowMap");
+    selectedShow = (FilmShow) filmShowMap.get("filmShow");
+    filmOffice = (FilmOffice) filmShowMap.get("office");
 //    selectedShow.setSeat("000000000010000000000000010000000000000010000000000000010000000000000010000");
 //    filmOffice.setOfficeId(2);
 //    filmOffice.setRowNum(5);
 //    filmOffice.setCol(15);
-    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShow");
+//    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShow");
+
 %>
 <%--<% if(list != null){%>--%>
 
