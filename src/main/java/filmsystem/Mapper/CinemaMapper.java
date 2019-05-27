@@ -13,4 +13,5 @@ public interface CinemaMapper {
     ArrayList<Cinema> getAllCinema();
     ArrayList<Cinema> selectCinemaByCity(String city);
     ArrayList<Cinema> selectCinemaByNameAndCity(String name, String city);
+    ArrayList<Cinema> selectCinemaInFilmShowByFilmId(int filmId);
 }

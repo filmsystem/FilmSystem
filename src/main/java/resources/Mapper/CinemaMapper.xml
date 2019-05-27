@@ -47,4 +47,8 @@
     <update id="updateCinema" parameterType="filmsystem.Model.Cinema">
         update cinema set username=#{username},password=#{password},img=#{img},city=#{city},address=#{address} where id=#{id}
     </update>
+
+    <select id="selectCinemaInFilmShowByFilmId" resultMap="cinemaList">
+        select * from cinema where id=(select unique cinemaId from filmshow where filmId=#{filmId})
+    </select>
 </mapper>

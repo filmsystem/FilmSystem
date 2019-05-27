@@ -64,4 +64,8 @@ public class CinemaDAO {
             return true;
         return false;
     }
+
+    public ArrayList<Cinema> selectCinemaInFilmShowByFilmId(int filmId){
+        return cinemaMapper.selectCinemaInFilmShowByFilmId(filmId);
+    }
 }
