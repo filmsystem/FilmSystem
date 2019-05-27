@@ -112,7 +112,7 @@
             </button>
             <div id="J_addsuppliersDialog<%=i%>" tabindex="-1" role="dialog" class="sui-modal hide fade"
                  data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
-                <form name="updateForm<%=i%>">
+                <form name="updateForm<%=i%>" id="updateForm<%=i%>">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -136,6 +136,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
+                                        <input type="hidden" name="id" value="<%=temp.getId()%>"/>
                                         <td align="left"><p align="left"><%=temp.getUsername()%>
                                         </p></td>
                                         <td><input type="text" name="city" id="city_qc"
@@ -144,7 +145,7 @@
                                                    value=<%=temp.getAddress()%> class="input-large"></td>
                                         <td data-supplierid="111">
                                             <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
-                                                    onclick="doUpdate(<%=i%>, <%=temp.getId()%>)">修改
+                                                    onclick="doUpdate(<%=i%>)">修改
                                             </button>
                                         </td>
                                     </tr>
@@ -212,16 +213,14 @@
         })
     };
 
-    function doUpdate(i, id) {
-        // var buffer = new StringBuffer();
-        // buffer.append(i.toString());
-        var params = $("#updateForm" + i.toString()).serialize();
-        console.log(id)
-        // params.add("id", id);
+    function doUpdate(i) {
+        var formString="#updateForm"+i.toString()
+        var params = $(formString).serialize();
+        console.log("form:"+formString);
+        console.log("test:"+params.toString());
         $.ajax({
             type: "PUT",
-            url: '<%=basePath%>/api/cinema',
-            data: params,
+            url: '<%=basePath%>/api/cinema?'+params,
             success: function (res) {
                 if (res == "SUCCESS")
                     alert("修改成功！")

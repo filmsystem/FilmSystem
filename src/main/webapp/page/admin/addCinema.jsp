@@ -131,8 +131,10 @@
                 // dataType: "json",
                 data: params,
                 success: function (res) {
-                    if (res == "SUCCESS")
+                    if (res == "SUCCESS"){
                         alert("插入成功！")
+                        //location.replace("queryCinema.jsp");
+                    }
                     else if (res == "FAIL")
                         alert("插入失败！")
                     else if (res == "DB_ERROR")
