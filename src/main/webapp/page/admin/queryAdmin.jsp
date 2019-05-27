@@ -131,6 +131,10 @@
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
             },
             error: function () {
                 alert("操作失败！")
@@ -149,7 +153,7 @@
                     alert("无该用户！")
                 else if (res == "DB_ERROR")
                     alert("数据库出错！")
-                location.reload();
+                location.replace("queryAdmin.jsp");
             },
             error: function () {
                 alert("操作失败！")

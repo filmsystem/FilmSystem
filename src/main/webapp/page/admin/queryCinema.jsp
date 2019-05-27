@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8" isELIgnored="false"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <!DOCTYPE html>
 <%
@@ -9,7 +9,6 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 
 %>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -91,11 +90,6 @@
         <th width="200px"></th>
     </tr>
     </thead>
-
-    <%--<%--%>
-    <%--for(int i = 0; i < list.size(); i++){--%>
-    <%--%>--%>
-
     <%
         for (int i = 0; list != null && i < list.size(); i++) {
             Cinema temp = list.get(i);
@@ -104,9 +98,6 @@
     <tbody>
 
     <tr>
-        <%--<td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>--%>
-        <%--<td> <p> <%=list.get(i).getId()%> </p> </td>--%>
-        <%--<td> <p> <%=list.get(i).getUsername()%> </p> </td>--%>
         <td width="300px"></td>
         <td width="100px"><p class="sui-text-large"><%=temp.getUsername()%>
         </p></td>
@@ -178,16 +169,9 @@
 
     </tr>
 
-    <%--<%}--%>
-    <%--}--%>
-    <%--//  else{%>--%>
-    <%--//  <tr align="center">--%>
-    <%--//    <th> <p><%="数据库无记录！"%></p></th>--%>
-    <%--//  </tr>--%>
     </tbody>
     <%}%>
 </table>
-<%--<%}%>--%>
 
 
 <script>
@@ -198,12 +182,16 @@
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
             },
             error: function () {
                 alert("操作失败！")
             }
         })
-    }
+    };
     function doDelete(id) {
         $.ajax({
             type: "DELETE",
@@ -215,7 +203,7 @@
                     alert("无该用户！")
                 else if (res == "DB_ERROR")
                     alert("数据库出错！")
-                location.reload();
+                location.replace("queryCinema.jsp");
             },
             error: function () {
                 alert("操作失败！")
@@ -240,6 +228,7 @@
                     alert("未知用户！")
                 else if (res == "DB_ERROR")
                     alert("数据库出错！")
+                location.replace("queryCinema.jsp");
             },
             error: function () {
                 alert("操作失败！")
