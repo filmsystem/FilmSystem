@@ -76,7 +76,6 @@
     Administrator admin = (Administrator) session.getAttribute("currentUser");
 %>
 <blockquote class="layui-elem-quote"><h1>我的信息</h1></blockquote>
-<form id="registerForm" class="layui-form">
     <img src="/FilmSystem/img/<%=n%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
     <br><br>
     <table class="layui-table" lay-even="" lay-skin="nob">
@@ -122,16 +121,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td align="left"><p align="left" class="sui-text-large">1
-                                </p></td>
-                                <td align="left"><p align="left" class="sui-text-large">1
-                                </p></td>
                                 <input type="hidden" name="id" value="<%=admin.getId()%>"/>
                                 <td><input type="text" name="password" id="password_qc"
                                            value="<%=admin.getPassword()%>" class="input-medium"/></td>
                                 <td data-supplierid="111">
-                                    <button id="updateBtn" class="sui-btn btn-bordered" type="button"
-                                            onclick="doUpdate()">修改
+                                    <button id="updateBtn" class="sui-btn btn-bordered" type="button">修改
                                     </button>
                                 </td>
                             </tr>
@@ -142,30 +136,28 @@
             </div>
         </form>
     </div>
-</form>
 </body>
 </html>
 <script>
-    function doUpdate() {
-        var params = $("#updateForm").serialize();
-        $.ajax({
-            type: "PUT",
-            url: '<%=basePath%>/api/administrator',
-            data: params,
-            success: function (res) {
-                if (res == "SUCCESS")
-                    alert("修改成功！")
-                else if (res == "FAIL")
-                    alert("修改失败！")
-                else if (res == "NOT_FOUND")
-                    alert("未知用户！")
-                else if (res == "DB_ERROR")
-                    alert("数据库出错！")
-                location.replace("adminInfo.jsp");
-            },
-            error: function () {
-                alert("操作失败！")
-            }
-        })
-    };
+    $(function () {
+        $("#updateBtn").on('click', function () {
+            var params = $("#updateForm").serialize();
+            $.ajax({
+                type: "PUT",
+                url: '<%=basePath%>/api/administrator?'+params,
+                success: function (res) {
+                    console.log("trying……")
+                    if (res == "SUCCESS")
+                        alert("更新成功！")
+                    else if (res == "FAIL")
+                        alert("更新失败！")
+                    else if (res == "DB_ERROR")
+                        alert("数据库出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        });
+    });
 </script>
