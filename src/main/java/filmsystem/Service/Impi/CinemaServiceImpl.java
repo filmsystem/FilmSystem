@@ -1,7 +1,9 @@
 package filmsystem.Service.Impi;
 
 import filmsystem.DAO.CinemaDAO;
+import filmsystem.DAO.FilmShowDAO;
 import filmsystem.Model.Cinema;
+import filmsystem.Model.FilmShow;
 import org.springframework.stereotype.Service;
 import filmsystem.Service.ICinemaService;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 @Service("cinemaService")
 public class CinemaServiceImpl implements ICinemaService{
     private CinemaDAO cinemaDAO = new CinemaDAO();
+
     public boolean insertCinema(Cinema cinema){
         return cinemaDAO.insertCinema(cinema);
     }
@@ -48,5 +51,10 @@ public class CinemaServiceImpl implements ICinemaService{
     @Override
     public ArrayList<Cinema> findCinemaByNameAndCity(String name, String city) {
         return cinemaDAO.searchCinemaByNameAndCity(name, city);
+    }
+
+    @Override
+    public ArrayList<Cinema> findCinemaByFilmId(int id) {
+        return null;
     }
 }

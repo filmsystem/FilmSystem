@@ -91,10 +91,11 @@
 //    filmShowMap = (HashMap<String, Object>) session.getAttribute("filmShowMap");
 //    selectedShow = (FilmShow) filmShowMap.get("filmShow");
 //    filmOffice = (FilmOffice) filmShowMap.get("filmOffice");
-    selectedShow.setSeat("000000000010000000000000010000000000000010000000000000010000000000000010000");
-    filmOffice.setOfficeId(2);
-    filmOffice.setRowNum(5);
-    filmOffice.setCol(15);
+//    selectedShow.setSeat("000000000010000000000000010000000000000010000000000000010000000000000010000");
+//    filmOffice.setOfficeId(2);
+//    filmOffice.setRowNum(5);
+//    filmOffice.setCol(15);
+    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShow");
 %>
 <%--<% if(list != null){%>--%>
 
@@ -150,7 +151,7 @@
                         <h3 class="modal-body">请确认您选择的座位</h3>
                         <h2 class="modal-body" ><span id="MyNum" class="sui-text-danger" style="margin-left:160px"><%=i%> 排 <%=j%> 座</span></h2>
                         <div class="modal-footer">
-                            <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
+                            <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large" onclick="">确定</button>
                             <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
                         </div>
                     </div>

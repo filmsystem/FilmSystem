@@ -22,4 +22,6 @@ public interface ICinemaService {
     ArrayList<Cinema> findCinemaByCity(String city);
 
     ArrayList<Cinema> findCinemaByNameAndCity(String name, String city);
+
+    ArrayList<Cinema> findCinemaByFilmId(int id);
 }

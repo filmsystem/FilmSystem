@@ -119,4 +119,15 @@ public class CinemaController {
         }
 
     }
+
+    @RequestMapping(value = "/film_cinema/{id}", method = RequestMethod.GET)
+    public String getCinemaByFilmId(@PathVariable Integer id){
+        try{
+            return cinemaService.deleteCinema(id) ? "SUCCESS" : "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
 }

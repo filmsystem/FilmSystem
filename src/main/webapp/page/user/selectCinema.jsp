@@ -1,8 +1,6 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Model.Film" %>
 <%@ page import="filmsystem.Model.FilmShow" %>
-<%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -98,7 +96,7 @@
 </div>
 <div style="padding: 20px; background-color: RGB(80,56,88);">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend style="color:#ffffff;margin-left:160px">  </legend>
+        <legend style="color:#ffffff;margin-left:160px"> <%=film.getName()%> </legend>
     </fieldset>
     <div class="layui-row">
         <div class="layui-col-md4">
@@ -111,28 +109,28 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td><p style="color:#ffffff">导演 </p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">导演: <%=film.getDirectors()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">主演：<%=film.getCasts()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">国家：<%=film.getCountries()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">类型: <%=film.getType()%></p></td>
                     </tr>
-                    <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td><p style="color:#ffffff; min-height: 30px;"><%=film.getSummary()%></p></td>--%>
+                    <%--</tr>--%>
 
                     <tr>
-                        <td><p style="color:RGB(80,56,88)">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">评分：<%=film.getStar()%> / 5</p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:RGB(80,56,88)">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;"><%=film.getYear()%> 年上映</p></td>
                     </tr>
-
+                    <br/><br/>
                     <tr>
                         <%--<td><button data-toggle="modal" data-target="#myModal" data-keyboard="false" class="layui-btn layui-btn-primary" style="width:180px">☆☆☆☆☆评分</button>--%>
                             <%--<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">--%>
@@ -186,12 +184,12 @@
     for(int i = 0; i < showMapList.size(); i++){
 %>
 <div class="layui-row layui-col-md-offset1">
-    <div class="layui-col-md1">
+    <div class="layui-col-md4">
         <li><h3><%=((Cinema)showMapList.get(i).get("cinema")).getUsername()%></h3></li>
         <li><p class="sui-text-large"><span class="sui-text-disabled"><%=((Cinema)showMapList.get(i).get("cinema")).getAddress()%></span></p></li>
     </div>
     <div class="layui-col-md1 layui-col-md-offset8" >
-        <div  align="right"><h2><span class="sui-text-danger"><%=((FilmShow)showMapList.get(i).get("filmShow")).getPrice()%></span></h2></div>
+        <%--<div  align="right"><h2><span class="sui-text-danger"><%=((FilmShow)showMapList.get(i).get("filmShow")).getPrice()%></span></h2></div>--%>
     </div>
     <div class="layui-col-md1" >
         <button id="selectBtn<%=i%>" class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:60px" onclick="doSelect(<%=((FilmShow)showMapList.get(i).get("filmShow")).getId()%>)">选 票</button>
