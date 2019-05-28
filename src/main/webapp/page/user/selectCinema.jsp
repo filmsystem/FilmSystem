@@ -1,7 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Model.Film" %>
-<%@ page import="filmsystem.Model.FilmShow" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>

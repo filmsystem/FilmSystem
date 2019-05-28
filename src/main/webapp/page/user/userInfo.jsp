@@ -1,5 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="filmsystem.Model.Cinema" %>
 <%@ page import="java.util.Random" %>
 <%@ page import="filmsystem.Model.Customer" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

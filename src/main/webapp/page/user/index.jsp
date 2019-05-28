@@ -1,4 +1,3 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Service.Impi.FilmServiceImpl" %>
 <%@ page import="filmsystem.Model.Film" %>
