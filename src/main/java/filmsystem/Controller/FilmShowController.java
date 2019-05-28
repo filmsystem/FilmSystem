@@ -101,10 +101,12 @@ public class FilmShowController {
 
     @RequestMapping(value = "/filmshow", method = RequestMethod.PUT)
     public String updateFilmShow(@RequestParam("id") Integer id,
-                                  @RequestParam(value = "beginTime") Timestamp beginTime){
+                                  @RequestParam(value = "beginTime") Timestamp beginTime,
+                                 @RequestParam(value = "price") Double price){
         try{
             FilmShow show = filmShowService.findShowById(id);
             show.setBeginTime(beginTime);
+            show.setPrice(price);
             return filmShowService.updateShow(show) ? "SUCCESS" : "FAIL";
         }
         catch(Exception e){

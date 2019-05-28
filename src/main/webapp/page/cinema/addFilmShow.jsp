@@ -83,6 +83,7 @@
                 </div>
             </div>
             <br><br>
+            <input type="hidden" name="cinemaId" value="<%=((Cinema)session.getAttribute("currentUser")).getId()%>"/>
             <div class="layui-form-item">
                 <label class="layui-form-label">影厅编号</label>
                 <div class="layui-input-block">
@@ -130,7 +131,6 @@
     $(function () {
         $("#submitBtn").on('click', function () {
             var params = $("#registerForm").serialize();
-            params.add("cinemaId",<%=((Cinema)session.getAttribute("currentUser")).getId()%>);
             $.ajax({
                 type: "POST",
                 url: '<%=basePath%>/api/filmshow',

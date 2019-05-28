@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Model.FilmShow" %>
+<%@ page import="filmsystem.Model.Cinema" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -55,7 +56,8 @@
                 <ul role="menu" class="sui-dropdown-menu">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
                     </li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
                 </ul>
             </li>
 
@@ -113,109 +115,75 @@
         </p></td>
         <td width="100px"><p class="sui-text-xlarge"><%=temp.getPrice()%>
         </p></td>
-        <form class="updateForm">
-            <td width="100px">
-                <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog<%=i%>"
-                        data-width="large"
-                        data-backdrop="static" class="sui-btn btn-bordered btn-large btn-success"><i
-                        class="sui-icon icon-pencil"></i>修改
-                </button>
-                <div id="J_addsuppliersDialog<%=i%>" tabindex="-1" role="dialog" class="sui-modal hide fade"
-                     data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
-                    <form name="updateForm<%=i%>">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
-                                    </button>
-                                    <h4 id="myModalLabel<%=i%>" class="modal-title">修改场次</h4>
+        <td width="100px">
+            <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog<%=i%>"
+                    data-width="large"
+                    data-backdrop="static" class="sui-btn btn-bordered btn-large btn-success"><i
+                    class="sui-icon icon-pencil"></i>修改
+            </button>
+            <div id="J_addsuppliersDialog<%=i%>" tabindex="-1" role="dialog" class="sui-modal hide fade"
+                 data-addsupplierurl="http://" data-getsuppliersurl="http://xxx">
+                <form name="updateForm<%=i%>" id="updateForm<%=i%>">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
+                                </button>
+                                <h4 id="myModalLabel<%=i%>" class="modal-title">修改场次</h4>
+                            </div>
+                            <div class="modal-body sui-form form-horizontal">
+                                <div class="sui-msg msg-block msg-default msg-tips">
+                                    <div class="msg-con">以下为需要修改的场次信息</div>
+                                    <s class="msg-icon"></s>
                                 </div>
-                                <div class="modal-body sui-form form-horizontal">
-                                    <div class="sui-msg msg-block msg-default msg-tips">
-                                        <div class="msg-con">以下为需要修改的场次信息</div>
-                                        <s class="msg-icon"></s>
-                                    </div>
-                                    <table class="sui-table table-bordered-simple">
-                                        <thead>
-                                        <tr>
-                                            <th>电影ID</th>
-                                            <th>放映厅</th>
-                                            <th>放映时间</th>
-                                            <th>放映时长</th>
-                                            <th>票价（元）</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td align="left"><p align="left"><%=temp.getFilmId()%>
-                                            </p></td>
-                                            <td><input type="text" name="officeId" id="officeId_qc"
-                                                       value=<%=temp.getOfficeId()%> class="input-medium"></td>
-                                            <td><input type="text" name="beginTime" id="beginTime_qc"
-                                                       value=<%=temp.getBeginTime()%> class="input-medium"></td>
-                                            <td><input type="text" name="duration" id="duration_qc"
-                                                       value=<%=temp.getDuration()%> class="input-medium"></td>
-                                            <td><input type="text" name="price" id="price_qc"
-                                                       value=<%=temp.getPrice()%> class="input-medium"></td>
-                                            <td data-supplierid="111">
-                                                <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
-                                                >修改
-                                                </button>
-                                            </td>
-
-                                            <%--                                            <td align="left"><p align="left"><%=temp.getUsername()%>--%>
-                                            <%--                                            </p></td>--%>
-                                            <%--                                            <td><input type="text" name="city" id="city_qc"--%>
-                                            <%--                                                       value=<%=temp.getCity()%> class="input-medium"></td>--%>
-                                            <%--                                            <td><input type="text" name="address" id="address_qc"--%>
-                                            <%--                                                       value=<%=temp.getAddress()%> class="input-large"></td>--%>
-                                            <%--                                            <td data-supplierid="111">--%>
-                                            <%--                                                <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"--%>
-                                            <%--                                                        onclick="doUpdate(<%=i%>, <%=temp.getId()%>)">修改--%>
-                                            <%--                                                </button>--%>
-                                            <%--                                            </td>--%>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="sui-table table-bordered-simple">
+                                    <thead>
+                                    <tr>
+                                        <th>电影ID</th>
+                                        <th>放映厅</th>
+                                        <th>放映时长</th>
+                                        <th>放映时间</th>
+                                        <th>票价（元）</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <input type="hidden" name="id" value="<%=temp.getId()%>"/>
+                                        <td align="left"><p align="left"><%=temp.getFilmId()%>
+                                        </p></td>
+                                        <td align="left"><p align="left"><%=temp.getOfficeId()%>
+                                        </p></td>
+                                        <td align="left"><p align="left"><%=temp.getDuration()%>
+                                        </p></td>
+                                        <td><input type="text" name="beginTime" id="beginTime_qc"
+                                                   value=<%=temp.getBeginTime()%> class="input-medium"></td>
+                                        <td><input type="text" name="price" id="price_qc"
+                                                   value=<%=temp.getPrice()%> class="input-medium"></td>
+                                        <td data-supplierid="111">
+                                            <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
+                                                    onclick="doUpdate(<%=i%>)">修改
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </td>
-        </form>
+                    </div>
+                </form>
+            </div>
+        </td>
         <form class="deleteForm">
             <td width="100px">
                 <button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger"
-                        type="button">删除
+                        onclick="doDelete(<%=list.get(i).getId()%>)" type="button">删除
                 </button>
             </td>
         </form>
         <td width="200px"></td>
     </tr>
     </tbody>
-
-
-    <%--    <tbody>--%>
-
-    <%--    <tr>--%>
-    <%--        &lt;%&ndash;<td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>&ndash;%&gt;--%>
-    <%--        &lt;%&ndash;<td> <p> <%=list.get(i).getId()%> </p> </td>&ndash;%&gt;--%>
-    <%--        &lt;%&ndash;<td> <p> <%=list.get(i).getUsername()%> </p> </td>&ndash;%&gt;--%>
-    <%--        <td width="300px"></td>--%>
-    <%--        <td width="200px"><p class="sui-text-xlarge"><%=temp.getUsername()%>--%>
-    <%--        </p></td>--%>
-    <%--        <form class="deleteForm">--%>
-    <%--            <td width="100px">--%>
-    <%--                <button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger"--%>
-    <%--                        onclick="doDelete(<%=list.get(i).getId()%>)" type="button">删除--%>
-    <%--                </button>--%>
-    <%--            </td>--%>
-    <%--        </form>--%>
-    <%--        <td width="200px"></td>--%>
-    <%--    </tr>--%>
-    <%--    </tbody>--%>
     <%}%>
 </table>
 </body>
@@ -224,7 +192,7 @@
     window.onload = function () {
         $.ajax({
             type: "GET",
-            url: '<%=basePath%>/api/filmshow',
+            url: '<%=basePath%>/api/filmshow?cinemaId=' + '<%=((Cinema)session.getAttribute("currentUser")).getId()%>',
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
@@ -247,7 +215,32 @@
                 if (res == "SUCCESS")
                     alert("删除成功！")
                 else if (res == "NOT_FOUND")
-                    alert("无该用户！")
+                    alert("无该场次！")
+                else if (res == "DB_ERROR")
+                    alert("数据库出错！")
+                location.replace("queryFilmShow.jsp");
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+
+    function doUpdate(i) {
+        var formString = "#updateForm" + i.toString()
+        var params = $(formString).serialize();
+        console.log("form:" + formString);
+        console.log("test:" + params.toString());
+        $.ajax({
+            type: "PUT",
+            url: '<%=basePath%>/api/filmshow?' + params,
+            success: function (res) {
+                if (res == "SUCCESS")
+                    alert("修改成功！")
+                else if (res == "FAIL")
+                    alert("修改失败！")
+                else if (res == "NOT_FOUND")
+                    alert("未知场次！")
                 else if (res == "DB_ERROR")
                     alert("数据库出错！")
                 location.replace("queryFilmShow.jsp");
