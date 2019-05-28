@@ -4,6 +4,7 @@
 <%@ page import="filmsystem.Model.Cinema" %>
 <%@ page import="filmsystem.Model.FilmShow" %>
 <%@ page import="filmsystem.Model.FilmOffice" %>
+<%@ page import="filmsystem.Tools.PrintTimestamp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -106,7 +107,7 @@
     <div class="layui-row">
         <div class="layui-col-md4">
             <div class="grid-demo grid-demo-bg1">
-                <img src="/FilmSystem/img/2.png"width=220px height=600px style="margin-left:180px">
+                <img src="/FilmSystem/img/<%=cinema.getImg()%>.png"width=220px height=600px style="margin-left:180px">
             </div>
         </div>
         <div class="layui-col-md4">
@@ -198,7 +199,7 @@
     %>
     <tr style="margin-left:30px" height="50">
         <td width="140px"></td>
-        <td width="180px"><%=showTemp.getBeginTime()%></td>
+        <td width="180px"><%=PrintTimestamp.printToSecond(showTemp.getBeginTime())%></td>
         <td width="180px"><%=officeTemp.getOfficeId()%> 号放映厅</td>
         <td width="180px"><%=showTemp.getPrice()%></td>
         <td width="180px"><button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:6px" onclick="doSelect(<%=((FilmShow)showMapList.get(i).get("filmShow")).getId()%>)">选 座</button></td>

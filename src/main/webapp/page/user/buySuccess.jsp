@@ -94,7 +94,7 @@
 <br>
 <h1 class="sui-text-xlarge" align="center" >二维码</h1>
 <br>
-<img src="/FilmSystem/img/2.png"width=220px height=600px style="margin-left:580px"/>
+<img src="/FilmSystem/img/QR.png"width=220px height=600px style="margin-left:580px"/>
 
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->

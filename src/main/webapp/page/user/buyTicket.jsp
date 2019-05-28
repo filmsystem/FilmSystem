@@ -1,6 +1,6 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="filmsystem.Model.*" %>
+<%@ page import="filmsystem.Tools.PrintTimestamp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -42,6 +42,18 @@
     FilmShow filmShow = (FilmShow) bookingRecordMap.get("filmShow");
     Cinema cinema = (Cinema) bookingRecordMap.get("cinema");
     BookingRecord record = (BookingRecord) bookingRecordMap.get("bookingRecord");
+
+    if(film == null)
+        film = new Film();
+
+    if(filmShow == null)
+        filmShow = new FilmShow();
+
+    if(cinema == null)
+        cinema = new Cinema();
+
+    if(record == null)
+        record = new BookingRecord();
 %>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
@@ -96,13 +108,6 @@
         <label>影院取票观影</label>
     </div>
 </div>
-
-<%!
-    ArrayList<Administrator> list;
-%>
-<%
-    list = (ArrayList<Administrator>) session.getAttribute("administratorList");
-%>
 <%--<% if(list != null){%>--%>
 
 <div align="center" >
@@ -134,7 +139,7 @@
     <tr>
         <td ></td>
         <td ><span class="sui-text-xlarge"><%=film.getName()%></span></td>
-        <td ><span class="sui-text-xlarge"><%=filmShow.getBeginTime()%></span></td>
+        <td ><span class="sui-text-xlarge"><%=PrintTimestamp.printToSecond(filmShow.getBeginTime())%></span></td>
         <td ><span class="sui-text-xlarge"><%=cinema.getUsername()%></span></td>
         <td ><span class="sui-text-xlarge"><%=record.getRowNum()%> 排 <%=record.getCol()%> 座</span></td>
 
@@ -152,7 +157,7 @@
     window.onload = function () {
         $.ajax({
             type: "GET",
-            url: '<%=basePath%>/api/bookingRecord/' + <%=currentOrderId%>,
+            url: '<%=basePath%>/api/bookingrecord/' + <%=currentOrderId%>,
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")

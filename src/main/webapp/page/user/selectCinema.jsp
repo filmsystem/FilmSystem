@@ -35,20 +35,20 @@
     ArrayList<Cinema> cinemaList = new ArrayList<>();
 %>
 <%
-//    film = (Film) session.getAttribute("filmFound");
+    film = (Film) session.getAttribute("filmFound");
     cinemaList = (ArrayList<Cinema>)session.getAttribute("cinemaList");
     if(cinemaList == null)
         cinemaList = new ArrayList<>();
 
     /**** test data ****/
-    film.setId(26662282);
-    film.setName("复仇者联盟4");
-    film.setCasts("");
-    film.setDirectors("");
-    film.setCountries("中美合拍");
-    film.setType("");
-    film.setYear(2019);
-    film.setSummary("无可奉告");
+//    film.setId(26662282);
+//    film.setName("复仇者联盟4");
+//    film.setCasts("");
+//    film.setDirectors("");
+//    film.setCountries("中美合拍");
+//    film.setType("");
+//    film.setYear(2019);
+//    film.setSummary("无可奉告");
 
 //    Cinema cinema = new Cinema();
 //    cinema.setUsername("bilibili");
@@ -168,7 +168,7 @@
                 <td><p style="color:RGB(80,56,88)">导演</p></td>
             </tr>
             <tr>
-                <td><button class="layui-btn layui-btn-danger" style="width:180px">购  买</button>
+                <%--<td><button class="layui-btn layui-btn-danger" style="width:180px">购  买</button>--%>
         </div>
     </div>
 

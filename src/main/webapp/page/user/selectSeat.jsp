@@ -206,21 +206,28 @@
 </html>
 <script type="text/javascript">
     window.onload = function () {
-        $.ajax({
-            type: "GET",
-            url: '<%=basePath%>/api/filmshow/' + <%=selectedShow.getId()%>,
-            success: function (res) {
-                if (res != "SUCCESS")
-                    alert("数据获取出错！")
-                if(location.href.indexOf("#reloaded")==-1){
-                    location.href=location.href+"#reloaded";
-                    location.reload();
+        if((<%=session.getAttribute("currentUser") == null ? "0" : "1"%>) == "0"){
+            alert("请先登录！")
+            location.replace("<%=basePath%>/firstPage.jsp")
+        }
+        else{
+            $.ajax({
+                type: "GET",
+                url: '<%=basePath%>/api/filmshow/' + <%=selectedShow.getId()%>,
+                success: function (res) {
+                    if (res != "SUCCESS")
+                        alert("数据获取出错！")
+                    if(location.href.indexOf("#reloaded")==-1){
+                        location.href=location.href+"#reloaded";
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    alert("操作失败！")
                 }
-            },
-            error: function () {
-                alert("操作失败！")
-            }
-        })
+            })
+        }
+
     };
     function doSelect(i,j) {
         $.ajax({

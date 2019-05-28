@@ -75,7 +75,7 @@ public class FilmCommentController {
                 mapList.add(filmCommentService.getRelatedInfo(list.get(i)));
             }
             session.setAttribute("filmCommentList", list);
-            session.setAttribute("bookingRecordMapList", mapList);
+            session.setAttribute("filmCommentMapList", mapList);
             return "SUCCESS";
         }
         catch(Exception e){

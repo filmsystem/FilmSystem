@@ -1,5 +1,6 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="filmsystem.Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -27,7 +28,22 @@
 </head>
 
 <body>
+<%!
+    Film film;
+    ArrayList<HashMap<String, Object>> commentMapList = new ArrayList<>();
+%>
+<%
+    int filmId = Integer.parseInt(request.getParameter("id"));
+    film = (Film) session.getAttribute("filmFound");
+    commentMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmCommentMapList");
 
+    if(film == null)
+        film = new Film();
+
+    if(commentMapList == null)
+        commentMapList = new ArrayList<>();
+
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -51,7 +67,7 @@
 </div>
 <div style="padding: 20px; background-color: RGB(80,56,88);">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend style="color:#ffffff;margin-left:160px">反贪风暴</legend>
+        <legend style="color:#ffffff;margin-left:160px"><%=film.getName()%></legend>
     </fieldset>
     <div class="layui-row">
         <div class="layui-col-md4">
@@ -64,50 +80,51 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">导演: <%=film.getDirectors()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">主演：<%=film.getCasts()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">国家：<%=film.getCountries()%></p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">类型: <%=film.getType()%></p></td>
                     </tr>
-                    <tr>
-                        <td><p style="color:#ffffff">导演</p></td>
-                    </tr>
+                    <%--<tr>--%>
+                    <%--<td><p style="color:#ffffff; min-height: 30px;"><%=film.getSummary()%></p></td>--%>
+                    <%--</tr>--%>
 
                     <tr>
-                        <td><p style="color:RGB(80,56,88)">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;">评分：<%=film.getStar()%> / 5</p></td>
                     </tr>
                     <tr>
-                        <td><p style="color:RGB(80,56,88)">导演</p></td>
+                        <td><p style="color:#ffffff; min-height: 30px;"><%=film.getYear()%> 年上映</p></td>
                     </tr>
+                    <br/><br/>
 
-                    <tr>
-                        <td><button data-toggle="modal" data-target="#myModal" data-keyboard="false" class="layui-btn layui-btn-primary" style="width:180px">☆☆☆☆☆评分</button>
-                            <div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                                            <h4 id="myModalLabel" class="modal-title">写评论</h4>
-                                        </div>
-                                        <div id="test6" style="margin-left:150px"></div>
-                                        <div class="layui-input-block" style="margin-left:10px">
-                                            <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
-                                            <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td><button data-toggle="modal" data-target="#myModal" data-keyboard="false" class="layui-btn layui-btn-primary" style="width:180px">☆☆☆☆☆评分</button>--%>
+                            <%--<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">--%>
+                                <%--<div class="modal-dialog">--%>
+                                    <%--<div class="modal-content">--%>
+                                        <%--<div class="modal-header">--%>
+                                            <%--<button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>--%>
+                                            <%--<h4 id="myModalLabel" class="modal-title">写评论</h4>--%>
+                                        <%--</div>--%>
+                                        <%--<div id="test6" style="margin-left:150px"></div>--%>
+                                        <%--<div class="layui-input-block" style="margin-left:10px">--%>
+                                            <%--<textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="modal-footer">--%>
+                                            <%--<button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>--%>
+                                            <%--<button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
 
 <%--                    <tr>--%>
 <%--                        <td><p style="color:RGB(80,56,88)">导演</p></td>--%>
@@ -121,7 +138,7 @@
                 <td><p style="color:RGB(80,56,88)">导演</p></td>
             </tr>
             <tr>
-                <td><button class="layui-btn layui-btn-danger" style="width:180px">购  买</button></td>
+                <td><button id="buyBtn" class="layui-btn layui-btn-danger" style="width:180px">购  买</button></td>
             </tr>
         </div>
     </div>
@@ -136,8 +153,8 @@
 </div>
 <br>
 <div class="layui-row">
-    <div class="layui-col-md4 layui-col-md-offset1">
-        <div class="grid-demo grid-demo-bg1">balabala</div>
+    <div class="layui-col-md10 layui-col-md-offset1">
+        <div class="grid-demo grid-demo-bg1"> <%=film.getSummary()%> </div>
     </div>
 </div>
 <br><br>
@@ -145,26 +162,28 @@
     <div class="layui-col-md4 layui-col-md-offset1" >
         <div class="grid-demo grid-demo-bg1"><h2><span class="sui-text-danger">热门评论</span></h2></div>
     </div>
-    <div class="layui-col-md1 layui-col-md-offset3" >
+    <div class="layui-col-md1 layui-col-md-offset5" >
         <div class="grid-demo grid-demo-bg1"><button class="layui-btn layui-btn-danger layui-btn-radius" data-toggle="modal" data-target="#myModal2" data-keyboard="false">写评论</button></div>
-        <div id="myModal2" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                        <h4 id="myModalLabel2" class="modal-title">写评论</h4>
-                    </div>
-                    <div id="test7" style="margin-left:150px"></div>
-                    <div class="layui-input-block" style="margin-left:10px">
-                        <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
-                        <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
+        <form id="commentForm">
+            <div id="myModal2" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+                            <h4 id="myModalLabel2" class="modal-title">写评论</h4>
+                        </div>
+                        <div id="test7" style="margin-left:150px"></div>
+                        <div class="layui-input-block" style="margin-left:10px">
+                            <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="commentSubmitBtn" type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
+                            <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <br>
@@ -192,24 +211,33 @@
 <%--</table>--%>
 
 <%
-    for(int i=0;i<10;i++){
+    for(int i = 0; i < commentMapList.size(); i++){
+        HashMap<String,Object> map = commentMapList.get(i);
+        FilmComment comment = (FilmComment) map.get("filmComment");
+        Customer customer = (Customer) map.get("customer");
 %>
 <div class="layui-row layui-col-md-offset1">
 
-    <div class="layui-col-md1">
-        <div class="grid-demo grid-demo-bg1"><img src="/FilmSystem/img/2.png"width=60px height=60px></div>
+    <div class="layui-col-md1"  style="height:50px">
+        <div class="grid-demo grid-demo-bg1"><img src="/FilmSystem/img/<%=customer.getImg()%>.png"width=70px height=70px style="border-radius:50%"></div>
     </div>
     <div class="layui-col-md1">
-        <li><h3>balabalab</h3></li>
-        <li><p class="sui-text-large"><span class="sui-text-disabled">balabalab</span></p></li>
+        <li><h3><%=customer.getUsername()%></h3></li>
+        <li><p class="sui-text-large"><span class="sui-text-disabled">评分：<%=comment.getFilmStar()%></span></p></li>
     </div>
 </div>
 <br>
 <div class="layui-row">
-    <div class="layui-col-md6 layui-col-md-offset2" >
-        <div class="grid-demo grid-demo-bg1" >balabala</div>
+    <div class="layui-col-md9 layui-col-md-offset2" >
+        <div class="grid-demo grid-demo-bg1" ><p style="font-size:16px"> <%=comment.getComment()%></p></div>
     </div>
 </div>
+<br>
+<%--<div class="layui-row">--%>
+    <%--<div class="layui-col-md6 layui-col-md-offset2" >--%>
+        <%--<div class="grid-demo grid-demo-bg1" >balabala</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <br>
 <hr class="layui-bg-gray">
 <br>
@@ -331,6 +359,74 @@
         })
     });
 </script>
-
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/film/' + <%=filmId%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                // if(location.href.indexOf("#reloaded")==-1){
+                //     location.href=location.href+"#reloaded";
+                //     location.reload();
+                // }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmcomment?filmId=' + <%=filmId%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+    $(function () {
+        $("#buyBtn").on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: '<%=basePath%>/api/film_cinema/' + <%=filmId%>,
+                success: function (res) {
+                    if (res == "SUCCESS")
+                        location.replace("selectCinema.jsp")
+                    else if(res == "DB_ERROR")
+                        alert("数据获取出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        });
+    });
+    $(function () {
+        // TODO
+        $("#").on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: '<%=basePath%>/api/film_cinema/' + <%=filmId%>,
+                success: function (res) {
+                    if (res == "SUCCESS")
+                        location.replace("selectCinema.jsp")
+                    else if(res == "DB_ERROR")
+                        alert("数据获取出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        });
+    });
+</script>
 </body>
 </html>

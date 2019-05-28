@@ -111,6 +111,7 @@
     %>
     <%
       FilmServiceImpl filmService = new FilmServiceImpl();
+      list.clear();
       list.add(filmService.findFilmById(26835471));
       list.add(filmService.findFilmById(26891256));
       list.add(filmService.findFilmById(27074316));

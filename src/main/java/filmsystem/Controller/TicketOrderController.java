@@ -45,7 +45,7 @@ public class TicketOrderController {
         }
     }
 
-    @RequestMapping(value = "/ticket/payOrder/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/ticket/payOrder/{id}", method = RequestMethod.PUT)
     public String payOrder(@PathVariable Long id, Model model, HttpSession session){
         /**
          * @return: collect string or null
