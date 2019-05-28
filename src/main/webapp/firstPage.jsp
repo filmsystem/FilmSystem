@@ -1,5 +1,7 @@
 <%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.Film" %>
+<%@ page import="filmsystem.Service.Impi.FilmServiceImpl" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -118,11 +120,11 @@
                             <p class="sui-text-xlarge" id="myModalLabel2" class="modal-title" align="center">账号注册</p>
                         </div>
                         <br><br>
-                        <form class="sui-form form-horizontal" style="margin-left:48px">
+                        <form class="sui-form form-horizontal" style="margin-left:48px" id="registerForm">
                             <div class="control-group">
-                                <label for="inputNick" class="control-label">昵称：</label>
+                                <label for="inputNick" class="control-label">用户名：</label>
                                 <div class="controls">
-                                    <input type="text" id="inputNick" name="nick" placeholder=""
+                                    <input type="text" id="inputNick" name="name" placeholder=""
                                            data-rules="required|minlength=2|maxlength=6" data-error-msg="昵称必须是2-6位"
                                            data-empty-msg="亲，昵称别忘记填了">
                                 </div>
@@ -156,14 +158,14 @@
                                 <label for="mobile" class="control-label">手机号码：</label>
                                 <div class="controls">
                                     <input type="text" id="mobile" placeholder="" data-rules="required|mobile"
-                                           name="mobile">
+                                           name="phonenum">
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label for="mobile" class="control-label">城市：</label>
                                 <div class="controls">
-                                    <input id="autocomplete" type="text" name="country" placeholder=""
+                                    <input id="autocomplete" type="text" name="city" placeholder=""
                                            autocomplete="off">
                                 </div>
                             </div>
@@ -176,7 +178,8 @@
                 <div class="control-group">
                     <label class="control-label"></label>
                     <div class="controls">
-                        <button type="submit" class="sui-btn btn-primary" style="margin-left:180px">立即注册</button>
+                        <button type="submit" class="sui-btn btn-primary" style="margin-left:180px" id="registerBtn">立即注册</button>
+                        <%--<button type="reset" class="sui-btn btn-primary" style="margin-left:180px"> 重 置 </button>--%>
                     </div>
                     <br><br>
                 </div>
@@ -244,61 +247,42 @@
 <br>
 <h1><span class="sui-text-danger" style="margin-left:160px">正在热映</span></h1>
 <br>
-
 <%!
-    ArrayList<Administrator> list;
+    ArrayList<Film> list = new ArrayList<>();
 %>
 <%
-    list = (ArrayList<Administrator>) session.getAttribute("administratorList");
+    FilmServiceImpl filmService = new FilmServiceImpl();
+    list.add(filmService.findFilmById(26835471));
+    list.add(filmService.findFilmById(26891256));
+    list.add(filmService.findFilmById(27074316));
+    list.add(filmService.findFilmById(30464313));
+    list.add(filmService.findFilmById(33434703));
 %>
 <%--<% if(list != null){%>--%>
 <table class="sui-table table-nobordered">
 
     <tbody>
-    <%--<%--%>
-    <%--for(int i = 0; i < list.size(); i++){--%>
-    <%--%>--%>
-
     <%
-        for (int i = 0; i < 10; i++) {
+        for(int i = 0; i < list.size(); i+=5){
     %>
     <tr style="margin-left:30px">
         <td width="140px"></td>
+        <% for(int j = 0; j < 5; j++){ %>
         <form>
             <td width="180px">
-                <input name="" type="image" src="/FilmSystem/img/1.png" width="170px" height="240px" class="btn"/>
+                <a onclick="doAlert()"> <img src="<%=list.get(i + j).getImg()%>"/></a>
             </td>
         </form>
-        <%--        <td width="180px" height="5px"><img src="/FilmSystem/img/1.png" width="150px" height="200px" /></td>--%>
-        <form>
-            <td width="180px">
-                <input name="" type="image" src="/FilmSystem/img/1.png" width="170px" height="240px" class="btn"/>
-            </td>
-        </form>
-        <form>
-            <td width="180px">
-                <input name="" type="image" src="/FilmSystem/img/1.png" width="170px" height="240px" class="btn"/>
-            </td>
-        </form>
-        <form>
-            <td width="180px">
-                <input name="" type="image" src="/FilmSystem/img/1.png" width="170px" height="240px" class="btn"/>
-            </td>
-        </form>
-        <form>
-            <td width="180px">
-                <input name="" type="image" src="/FilmSystem/img/1.png" width="170px" height="240px" class="btn"/>
-            </td>
-        </form>
+        <%} %>
         <td></td>
     </tr>
-    <tr style="margin-left:20px;height:20px">
+    <tr style="margin-left:20px;height:20px" >
         <td></td>
-        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px">反恐风暴</p></td>
-        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px">反恐风暴</p></td>
-        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px">反恐风暴</p></td>
-        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px">反恐风暴</p></td>
-        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px">反恐风暴</p></td>
+
+        <% for(int j = 0; j < 5; j++){ %>
+        <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px"><%=list.get(i+j).getName()%></p></td>
+        <%} %>
+
         <td></td>
 
     </tr>
@@ -341,4 +325,42 @@
             })
         });
     });
+
+    $(function () {
+        $("#registerBtn").on('click', function () {
+            var gender = $('input:radio[name="gender"]:checked').val();
+            var params = $("#registerForm").serialize();
+            if( $('input:password[name="password"]').val() != $('input:password[name="repassword"]').val()){
+                alert("请输入一致的密码！")
+            }
+            else if(gender != 1 && gender != 2){
+                alert("请选择性别！")
+            }
+            else{
+                $.ajax({
+                    type: "POST",
+                    url: '<%=basePath%>/api/registerCustomer',
+                    // dataType: "json",
+                    data: params,
+                    success: function (res) {
+                        if (res == "SUCCESS")
+                            alert("注册成功！")
+                        else if (res == "EMPTY")
+                            alert("您有必填项未填写！")
+                        else if (res == "FAIL")
+                            alert("注册失败！")
+                        else if (res == "DB_ERROR")
+                            alert("数据库出错！")
+                    },
+                    error: function () {
+                        alert("操作失败！")
+                    }
+                })
+            }
+        });
+    });
+
+    function doAlert(){
+        alert("请先登录！")
+    }
 </script>

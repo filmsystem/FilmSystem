@@ -110,7 +110,6 @@
       ArrayList<Film> list = new ArrayList<>();
     %>
     <%
-//      list = (ArrayList<Administrator>) session.getAttribute("administratorList");
       FilmServiceImpl filmService = new FilmServiceImpl();
       list.add(filmService.findFilmById(26835471));
       list.add(filmService.findFilmById(26891256));

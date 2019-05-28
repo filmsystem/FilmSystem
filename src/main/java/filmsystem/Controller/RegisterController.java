@@ -20,15 +20,17 @@ public class RegisterController {
     public String registerCustomer(@RequestParam("name") String name,
                                    @RequestParam("password") String password,
                                    @RequestParam(value = "img", defaultValue = "") String img,
-                                   @RequestParam("gender") String gender,
+                                   @RequestParam("gender") Integer gender,
                                    @RequestParam("phonenum") String phonenum,
                                    @RequestParam("city") String city){
         try{
+            if(name.equals("") || password.equals("") || password.equals("") || city.equals(""))
+                return "EMPTY";
             Customer customer = new Customer();
             customer.setUsername(name);
             customer.setPassword(password);
             customer.setImg(img);
-            customer.setGender(gender);
+            customer.setGender(gender == 1 ? "男" : "女");
             customer.setPhonenum(phonenum);
             customer.setCity(city);
             return registerService.customerRegister(customer) ? "SUCCESS" : "FAIL";
