@@ -226,6 +226,8 @@
             success: function (res) {
                 if (res == "SUCCESS")
                     alert("修改成功！")
+                else if(res="EMPTY")
+                    alert("您有必填项未填写！")
                 else if (res == "FAIL")
                     alert("修改失败！")
                 else if (res == "NOT_FOUND")

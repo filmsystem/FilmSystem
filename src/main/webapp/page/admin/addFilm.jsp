@@ -147,6 +147,8 @@
                     alert("添加成功！")
                 else if (res == "FAIL")
                     alert("添加失败！")
+                else if(res="EMPTY")
+                    alert("您有必填项未填写！")
                 else if (res == "NOT_FOUND")
                     alert("未知用户！")
                 else if (res == "DB_ERROR")

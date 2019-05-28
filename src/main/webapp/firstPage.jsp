@@ -315,6 +315,8 @@
                         } else {
                             window.location.href = "<%=basePath%>/page/admin/adminInfo.jsp"
                         }
+                    } else if(res="EMPTY"){
+                        alert("您有必填项未填写！")
                     } else if (res == "FAIL")
                         alert("登录失败！")
                     else if (res == "DB_ERROR")

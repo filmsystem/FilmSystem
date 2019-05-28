@@ -194,6 +194,8 @@
                     console.log("trying……")
                     if (res == "SUCCESS")
                         alert("更新成功！")
+                    else if(res="EMPTY")
+                        alert("您有必填项未填写！")
                     else if (res == "FAIL")
                         alert("更新失败！")
                     else if (res == "DB_ERROR")
