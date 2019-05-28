@@ -1,5 +1,6 @@
 package filmsystem.Controller;
 
+import filmsystem.Service.Impi.StatisticsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class CinemaController {
     //public static Logger log = LoggerFactory.getLogger(CinemaController.class);
     @Autowired
     CinemaServiceImpl cinemaService;
+
+    @Autowired
+    StatisticsServiceImpl statisticsService;
 
 //    @RequestMapping(value = "/cinema", method = RequestMethod.POST)
 //    public String insertCustomer(@RequestParam("name") String name,
@@ -127,6 +131,19 @@ public class CinemaController {
         try{
             ArrayList<Cinema> list = cinemaService.findCinemaByFilmId(id);
             session.setAttribute("cinemaList", list);
+            return "SUCCESS";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/cinemaStatis/turnover/{id}", method = RequestMethod.GET)
+    public String countTurnoverByDayInAWeek(@PathVariable Integer id,
+                                    Model model, HttpSession session){
+        try{
+            session.setAttribute("turnoverStatistic",statisticsService.countTurnoverByDayInAWeek(id));
             return "SUCCESS";
         }
         catch(Exception e){
