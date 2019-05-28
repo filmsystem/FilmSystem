@@ -15,9 +15,9 @@
         <result property="col" column="col"/>
     </resultMap>
 
-    <insert id="insertRecord" parameterType="filmsystem.Model.BookingRecord" useGeneratedKeys="true" keyProperty="id">
-        insert into bookingrecord(userId, showId, createtime, paytime, collectstring, status, rowNum, col)
-        values(#{userId},#{showId},#{createTime},#{payTime},#{collectingString},#{status},#{rowNum},#{col});
+    <insert id="insertRecord" parameterType="filmsystem.Model.BookingRecord">
+        insert into bookingrecord(id,userId, showId, createtime, paytime, collectstring, status, rowNum, col)
+        values(#{id},#{userId},#{showId},#{createTime},#{payTime},#{collectingString},#{status},#{rowNum},#{col});
     </insert>
 
     <delete id="deleteRecord">

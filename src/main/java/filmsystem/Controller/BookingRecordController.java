@@ -72,7 +72,7 @@ public class BookingRecordController {
 //    }
 
     @RequestMapping(value = "/bookingrecord/{id}", method = RequestMethod.DELETE)
-    public String deleteBookingRecord(@PathVariable Integer id){
+    public String deleteBookingRecord(@PathVariable Long id){
         try{
             return bookingRecordService.deleteOrder(id) ? "SUCCESS" : "NOT_FOUND";
         }

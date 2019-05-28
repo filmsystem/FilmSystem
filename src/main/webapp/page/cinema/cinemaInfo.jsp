@@ -34,17 +34,38 @@
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
-            <li class="sui-nav"><a href="#">首页</a></li>
-            <li><a href="#">电影</a></li>
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">其他 <i
-                    class="caret"></i></a>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影厅管理
+                <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">关于</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">项目组成员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">版权</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmOffice.jsp">增加影厅</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmOffice.jsp">查询影厅</a></li>
                 </ul>
             </li>
-            <li></li>
+
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">场次管理
+                <i class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmShow.jsp">增加场次</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmShow.jsp">查询场次</a></li>
+                </ul>
+            </li>
+
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">电影管理
+                <i class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
+                </ul>
+            </li>
+
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">订单管理
+                <i class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查询订单</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <ul class="sui-nav pull-right">
             <li><a href="cinemaInfo.jsp">个人中心</a></li>

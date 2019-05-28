@@ -34,40 +34,43 @@
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影院管理
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影厅管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addCinema.jsp">增加影院</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryCinema.jsp">查询影院</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmOffice.jsp">增加影厅</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmOffice.jsp">查询影厅</a></li>
                 </ul>
             </li>
 
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影片管理
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">场次管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilm.jsp">增加影片</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilm.jsp">查询影片</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmShow.jsp">增加场次</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmShow.jsp">查询场次</a></li>
                 </ul>
             </li>
 
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">管理员 <i
-                    class="caret"></i></a>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">电影管理
+                <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addAdmin.jsp">增加管理员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryAdmin.jsp">查询管理员</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
+                </ul>
+            </li>
+
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">订单管理
+                <i class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查询订单</a>
+                    </li>
                 </ul>
             </li>
         </ul>
-
-
         <ul class="sui-nav pull-right">
-            <li><a href="adminInfo.jsp">个人中心</a></li>
+            <li><a href="cinemaInfo.jsp">个人中心</a></li>
             <li><a href="/FilmSystem/firstPage.jsp">退出登录</a></li>
         </ul>
-
-
     </div>
 </div>
 <blockquote class="layui-elem-quote"><h1>电影场次查询</h1></blockquote>
@@ -93,26 +96,27 @@
     </thead>
 
     <%
-        for(int i = 0; list != null && i < list.size(); i++){
+        for (int i = 0; list != null && i < list.size(); i++) {
             FilmShow temp = list.get(i);
     %>
     <tbody>
 
     <tr>
-            <td width="100px"></td>
-            <td width="100px"><p class="sui-text-xlarge"><%=temp.getFilmId()%>
-            </p></td>
-            <td width="100px"><p class="sui-text-xlarge"><%=temp.getOfficeId()%>
-            </p></td>
-            <td width="100px"><p class="sui-text-xlarge"><%=temp.getBeginTime()%>
-            </p></td>
-            <td width="100px"><p class="sui-text-xlarge"><%=temp.getDuration()%>
-            </p></td>
-            <td width="100px"><p class="sui-text-xlarge"><%=temp.getPrice()%>
-            </p></td>
-            <form class="updateForm">
+        <td width="100px"></td>
+        <td width="100px"><p class="sui-text-xlarge"><%=temp.getFilmId()%>
+        </p></td>
+        <td width="100px"><p class="sui-text-xlarge"><%=temp.getOfficeId()%>
+        </p></td>
+        <td width="100px"><p class="sui-text-xlarge"><%=temp.getBeginTime()%>
+        </p></td>
+        <td width="100px"><p class="sui-text-xlarge"><%=temp.getDuration()%>
+        </p></td>
+        <td width="100px"><p class="sui-text-xlarge"><%=temp.getPrice()%>
+        </p></td>
+        <form class="updateForm">
             <td width="100px">
-                <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog<%=i%>" data-width="large"
+                <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog<%=i%>"
+                        data-width="large"
                         data-backdrop="static" class="sui-btn btn-bordered btn-large btn-success"><i
                         class="sui-icon icon-pencil"></i>修改
                 </button>
@@ -156,21 +160,21 @@
                                                        value=<%=temp.getPrice()%> class="input-medium"></td>
                                             <td data-supplierid="111">
                                                 <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
-                                                        >修改
+                                                >修改
                                                 </button>
                                             </td>
 
-<%--                                            <td align="left"><p align="left"><%=temp.getUsername()%>--%>
-<%--                                            </p></td>--%>
-<%--                                            <td><input type="text" name="city" id="city_qc"--%>
-<%--                                                       value=<%=temp.getCity()%> class="input-medium"></td>--%>
-<%--                                            <td><input type="text" name="address" id="address_qc"--%>
-<%--                                                       value=<%=temp.getAddress()%> class="input-large"></td>--%>
-<%--                                            <td data-supplierid="111">--%>
-<%--                                                <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"--%>
-<%--                                                        onclick="doUpdate(<%=i%>, <%=temp.getId()%>)">修改--%>
-<%--                                                </button>--%>
-<%--                                            </td>--%>
+                                            <%--                                            <td align="left"><p align="left"><%=temp.getUsername()%>--%>
+                                            <%--                                            </p></td>--%>
+                                            <%--                                            <td><input type="text" name="city" id="city_qc"--%>
+                                            <%--                                                       value=<%=temp.getCity()%> class="input-medium"></td>--%>
+                                            <%--                                            <td><input type="text" name="address" id="address_qc"--%>
+                                            <%--                                                       value=<%=temp.getAddress()%> class="input-large"></td>--%>
+                                            <%--                                            <td data-supplierid="111">--%>
+                                            <%--                                                <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"--%>
+                                            <%--                                                        onclick="doUpdate(<%=i%>, <%=temp.getId()%>)">修改--%>
+                                            <%--                                                </button>--%>
+                                            <%--                                            </td>--%>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -180,38 +184,38 @@
                     </form>
                 </div>
             </td>
-            </form>
-            <form class="deleteForm">
+        </form>
+        <form class="deleteForm">
             <td width="100px">
                 <button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger"
-                         type="button">删除
+                        type="button">删除
                 </button>
             </td>
-            </form>
+        </form>
         <td width="200px"></td>
     </tr>
     </tbody>
 
 
-<%--    <tbody>--%>
+    <%--    <tbody>--%>
 
-<%--    <tr>--%>
-<%--        &lt;%&ndash;<td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>&ndash;%&gt;--%>
-<%--        &lt;%&ndash;<td> <p> <%=list.get(i).getId()%> </p> </td>&ndash;%&gt;--%>
-<%--        &lt;%&ndash;<td> <p> <%=list.get(i).getUsername()%> </p> </td>&ndash;%&gt;--%>
-<%--        <td width="300px"></td>--%>
-<%--        <td width="200px"><p class="sui-text-xlarge"><%=temp.getUsername()%>--%>
-<%--        </p></td>--%>
-<%--        <form class="deleteForm">--%>
-<%--            <td width="100px">--%>
-<%--                <button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger"--%>
-<%--                        onclick="doDelete(<%=list.get(i).getId()%>)" type="button">删除--%>
-<%--                </button>--%>
-<%--            </td>--%>
-<%--        </form>--%>
-<%--        <td width="200px"></td>--%>
-<%--    </tr>--%>
-<%--    </tbody>--%>
+    <%--    <tr>--%>
+    <%--        &lt;%&ndash;<td><input type="text" name="username"  value= "<%=list.get(i).getUsername()%>" /></td>&ndash;%&gt;--%>
+    <%--        &lt;%&ndash;<td> <p> <%=list.get(i).getId()%> </p> </td>&ndash;%&gt;--%>
+    <%--        &lt;%&ndash;<td> <p> <%=list.get(i).getUsername()%> </p> </td>&ndash;%&gt;--%>
+    <%--        <td width="300px"></td>--%>
+    <%--        <td width="200px"><p class="sui-text-xlarge"><%=temp.getUsername()%>--%>
+    <%--        </p></td>--%>
+    <%--        <form class="deleteForm">--%>
+    <%--            <td width="100px">--%>
+    <%--                <button id="deleteBtn<%=i%>" class="sui-btn btn-bordered btn-large btn-danger"--%>
+    <%--                        onclick="doDelete(<%=list.get(i).getId()%>)" type="button">删除--%>
+    <%--                </button>--%>
+    <%--            </td>--%>
+    <%--        </form>--%>
+    <%--        <td width="200px"></td>--%>
+    <%--    </tr>--%>
+    <%--    </tbody>--%>
     <%}%>
 </table>
 </body>
@@ -224,6 +228,10 @@
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
+                if (location.href.indexOf("#reloaded") == -1) {
+                    location.href = location.href + "#reloaded";
+                    location.reload();
+                }
             },
             error: function () {
                 alert("操作失败！")
@@ -242,13 +250,11 @@
                     alert("无该用户！")
                 else if (res == "DB_ERROR")
                     alert("数据库出错！")
-                location.reload();
+                location.replace("queryFilmShow.jsp");
             },
             error: function () {
                 alert("操作失败！")
             }
         })
-    };
+    }
 </script>
-</body>
-</html>
