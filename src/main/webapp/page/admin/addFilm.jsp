@@ -127,6 +127,10 @@
             success: function (res) {
                 if (res != "SUCCESS")
                     alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
             },
             error: function () {
                 alert("操作失败！")
@@ -149,6 +153,7 @@
                     alert("数据库出错！")
                 else if (res == "NETWORK_ERROR")
                     alert("网络出错！")
+                location.replace("addFilm.jsp");
             },
             error: function () {
                 alert("操作失败！")
