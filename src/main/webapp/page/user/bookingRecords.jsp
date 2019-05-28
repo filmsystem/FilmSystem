@@ -1,25 +1,42 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="filmsystem.Tools.PrintTimestamp" %>
+<%@ page import="filmsystem.Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%><html>
 <head>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <title>SHU-MOVIE</title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>SHU-MOVIE</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
 
-        <link href="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js" rel="stylesheet">
-        <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
-        <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
-        <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
-        <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
-    </head>
+    <link href="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+    <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
+    <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
+    <%
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+
+    %>
 </head>
+<%!
+    ArrayList<HashMap<String,Object>> bookingRecordMapList;
+
+%>
+<%
+    bookingRecordMapList = (ArrayList<HashMap<String,Object>>)session.getAttribute("bookingRecordMapList");
+
+    if(bookingRecordMapList == null)
+        bookingRecordMapList = new ArrayList<>();
+%>
 <body>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
@@ -45,15 +62,19 @@
 <br><br>
 <table class="layui-table" lay-even="" lay-skin="nob">
     <%
-        for(int i=0;i<8;i++){
+        for(int i = 0; i < bookingRecordMapList.size(); i++){
+            Cinema cinema = (Cinema)bookingRecordMapList.get(i).get("cinema");
+            FilmShow filmShow = (FilmShow)bookingRecordMapList.get(i).get("filmShow");
+            Film film = (Film)bookingRecordMapList.get(i).get("film");
+            BookingRecord bookingRecord = (BookingRecord)bookingRecordMapList.get(i).get("bookingRecord");
     %>
     <tbody>
     <tr>
         <td><img src="/FilmSystem/img/noseat.png"width=50px height=50px style="margin-left:50px"/></td>
         <td>
-            <li><span class="sui-text-xlarge">复仇者联盟（电影名字）</span></li>
-            <li><p class="sui-text-large"><span class="sui-text-disabled">2019-05-22 13:00（场次）</span></p></li>
-            <li><p class="sui-text-large"><span class="sui-text-disabled">万达影院（影院）</span></p></li>
+            <li><span class="sui-text-xlarge"><%=film.getName()%></span></li>
+            <li><p class="sui-text-large"><span class="sui-text-disabled"><%=PrintTimestamp.printToSecond(filmShow.getBeginTime())%></span></p></li>
+            <li><p class="sui-text-large"><span class="sui-text-disabled"><%=cinema.getUsername()%></span></p></li>
         </td>
         <td></td>
         <td text-align="right">
@@ -68,10 +89,10 @@
                         <br><br>
                         <div><h3 align="center">二维码</h3></div>
                         <br>
-                        <div align="center"><img src="/FilmSystem/img/2.jpg" width=170px height=170px /></div>
+                        <div align="center"><img src="/FilmSystem/img/QR.png" width=170px height=170px /></div>
                         <br>
                         <div class="sui-msg msg-large msg-block msg-success" align="center">
-                            <div class="msg-con">取票号:2374899227744</div>
+                            <div class="msg-con">取票号: <%=bookingRecord.getCollectingString() == null ? "" : bookingRecord.getCollectingString()%></div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-ok="modal" class="sui-btn btn-large btn-danger">确认</button>
@@ -114,6 +135,46 @@
     }
 %>
 </table>
+<script type="text/javascript">
+    window.onload = function () {
+        if((<%=session.getAttribute("currentUser") == null ? "0" : "1"%>) == "0"){
+            alert("请先登录！")
+            location.replace("<%=basePath%>/firstPage.jsp")
+        }
+        else{
+            $.ajax({
+                type: "GET",
+                url: '<%=basePath%>/api/bookingrecord?userId=' + <%=((Customer)session.getAttribute("currentUser")).getId()%>,
+                success: function (res) {
+                    if (res != "SUCCESS")
+                        alert("数据获取出错！")
+                    if(location.href.indexOf("#reloaded")==-1){
+                        location.href=location.href+"#reloaded";
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        }
+        <%--$.ajax({--%>
+            <%--type: "GET",--%>
+            <%--url: '<%=basePath%>/api/filmcomment?filmId=' + <%=filmId%>,--%>
+            <%--success: function (res) {--%>
+                <%--if (res != "SUCCESS")--%>
+                    <%--alert("数据获取出错！")--%>
+                <%--if(location.href.indexOf("#reloaded")==-1){--%>
+                    <%--location.href=location.href+"#reloaded";--%>
+                    <%--location.reload();--%>
+                <%--}--%>
+            <%--},--%>
+            <%--error: function () {--%>
+                <%--alert("操作失败！")--%>
+            <%--}--%>
+        <%--})--%>
+    };
+</script>
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>

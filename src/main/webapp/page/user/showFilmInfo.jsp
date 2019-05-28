@@ -31,17 +31,22 @@
 <%!
     Film film;
     ArrayList<HashMap<String, Object>> commentMapList = new ArrayList<>();
+    Customer currentUser;
 %>
 <%
     int filmId = Integer.parseInt(request.getParameter("id"));
     film = (Film) session.getAttribute("filmFound");
     commentMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmCommentMapList");
+    currentUser = (Customer) session.getAttribute("currentUser");
 
     if(film == null)
         film = new Film();
 
     if(commentMapList == null)
         commentMapList = new ArrayList<>();
+
+    if(currentUser == null)
+        currentUser = new Customer();
 
 %>
 <div class="sui-navbar navbar-inverse">
@@ -174,12 +179,14 @@
                         </div>
                         <div id="test7" style="margin-left:150px"></div>
                         <div class="layui-input-block" style="margin-left:10px">
-                            <textarea placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
+                            <textarea name="comment" placeholder="快来说说你的看法吧" class="layui-textarea"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button id="commentSubmitBtn" type="button" data-ok="modal" class="sui-btn btn-large btn-danger">发布</button>
                             <button type="button" data-dismiss="modal" class="sui-btn btn-large">取消</button>
                         </div>
+                        <input type="hidden" name="userId" value="<%=currentUser.getId()%>">
+                        <input type="hidden" name="filmId" value="<%=filmId%>">
                     </div>
                 </div>
             </div>
@@ -409,12 +416,12 @@
             })
         });
     });
-    $(function () {
-        // TODO
-        $("#").on('click', function () {
+    $(function () { //TODO: 提取评分
+        $("#commentSubmitBtn").on('click', function () {
+            var params = $('#commentForm').serialize();
             $.ajax({
-                type: "GET",
-                url: '<%=basePath%>/api/film_cinema/' + <%=filmId%>,
+                type: "POST",
+                url: '<%=basePath%>/api/filmcomment?' + params,
                 success: function (res) {
                     if (res == "SUCCESS")
                         location.replace("selectCinema.jsp")
