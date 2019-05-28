@@ -142,8 +142,8 @@
                                         <th>电影ID</th>
                                         <th>放映厅</th>
                                         <th>放映时长</th>
-                                        <th>放映时间</th>
                                         <th>票价（元）</th>
+                                        <th>放映时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -156,10 +156,10 @@
                                         </p></td>
                                         <td align="left"><p align="left"><%=temp.getDuration()%>
                                         </p></td>
+                                        <td align="left"><p align="left"><%=temp.getPrice()%>
+                                        </p></td>
                                         <td><input type="text" name="beginTime" id="beginTime_qc"
                                                    value=<%=temp.getBeginTime()%> class="input-medium"></td>
-                                        <td><input type="text" name="price" id="price_qc"
-                                                   value=<%=temp.getPrice()%> class="input-medium"></td>
                                         <td data-supplierid="111">
                                             <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
                                                     onclick="doUpdate(<%=i%>)">修改
