@@ -20,7 +20,7 @@ public class BookingRecordController {
     BookingRecordServiceImpl bookingRecordService;
 
     @RequestMapping(value = "/bookingrecord/{id}", method = RequestMethod.GET)
-    public String getBookingRecord(@PathVariable Integer id, Model model, HttpSession session){
+    public String getBookingRecord(@PathVariable Long id, Model model, HttpSession session){
         try{
             BookingRecord record = bookingRecordService.findOrderById(id);
             if(record != null){

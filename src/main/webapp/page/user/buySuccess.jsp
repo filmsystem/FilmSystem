@@ -81,11 +81,8 @@
     </div>
 </div>
 
-<%!
-    ArrayList<Administrator> list;
-%>
 <%
-    list = (ArrayList<Administrator>) session.getAttribute("administratorList");
+    String collectString = (String) session.getAttribute("collectString");
 %>
 <%--<% if(list != null){%>--%>
 <br><br>
@@ -93,24 +90,11 @@
 <br>
 <h1 class="sui-text-xlarge" align="center" >取票号</h1>
 <br>
-<h1 class="sui-text-xxlarge" align="center" >53554333222222</h1>
+<h1 class="sui-text-xxlarge" align="center" ><%=collectString%></h1>
 <br>
 <h1 class="sui-text-xlarge" align="center" >二维码</h1>
 <br>
 <img src="/FilmSystem/img/2.png"width=220px height=600px style="margin-left:580px"/>
-
-
-        <%--<%}--%>
-        <%--}--%>
-        <%--//  else{%>--%>
-        <%--//  <tr align="center">--%>
-        <%--//    <th> <p><%="数据库无记录！"%></p></th>--%>
-        <%--//  </tr>--%>
-
-        <%--<%}%>--%>
-
-
-
 
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->

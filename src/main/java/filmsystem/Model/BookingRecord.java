@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class BookingRecord implements Serializable {
-    private int id;
+    private long id;
     private int userId;
     private int showId;
     private Timestamp createTime;
@@ -14,11 +14,11 @@ public class BookingRecord implements Serializable {
     private int rowNum;
     private int col;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
