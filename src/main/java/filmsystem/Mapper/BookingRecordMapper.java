@@ -15,4 +15,5 @@ public interface BookingRecordMapper {
     ArrayList<BookingRecord> selectRecordByShowId(int showId);
     List<Map<String,Object>> countTypeByUserId(int userId);
     List<Map<String,Object>> countTimesByMonth(int userId);
+    List<Map<String,Object>> countTurnoverByDayInAWeek(int cinemaId);
 }

@@ -50,4 +50,12 @@
         select date_format(createtime,'%Y-%m') as month1,count(*) as count1 from bookingrecord where userId=#{userId} group by month1 order by month1 desc
     </select>
 
+    <select id="countTurnoverByDayInAWeek" resultType="java.util.HashMap">
+        select date_format(createtime,'%Y-%m-%d') as day1,sum(price) as turnover from
+            (select createtime,price from bookingrecord,filmshow
+            where bookingrecord.showId=filmshow.id and filmshow.cinemaId=#{cinemaId} and bookingrecord.status=3)as tb1
+        where DATE_SUB(CURRENT_TIMESTAMP,INTERVAL 7 DAY) <![CDATA[<=]]> createtime
+        group by day1 order by day1 asc
+    </select>
+
 </mapper>

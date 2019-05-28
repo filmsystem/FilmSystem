@@ -90,4 +90,22 @@ public class BookingRecordDAO {
         }
         return resultMap;
     }
+
+    public Map<String,Float> countTurnoverByDayInAWeek(int cinemaId){
+        List<Map<String, Object>> baseList = bookingRecordMapper.countTurnoverByDayInAWeek(cinemaId);
+        Map<String,Float> resultMap=new HashMap<String,Float>();
+        for (Map<String, Object> map : baseList) {
+            String day1=null;
+            float turnover=0;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if("day1".equals(entry.getKey())){
+                    day1=(String)entry.getValue();
+                }else if("turnover".equals(entry.getKey())){
+                    turnover = ((Number)entry.getValue()).floatValue();
+                }
+            }
+            resultMap.put(day1,turnover);
+        }
+        return resultMap;
+    }
 }

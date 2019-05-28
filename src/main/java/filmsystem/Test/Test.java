@@ -29,19 +29,19 @@ public class Test {
         //通过findAllStudent()方法查询数据库打印出数据的长度
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
-        /*BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
-        Map<String,Integer> resultMap=bookingRecordDAO.countTimesByMonth(1000);
-        for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
+        BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
+        Map<String,Float> resultMap=bookingRecordDAO.countTurnoverByDayInAWeek(20000000);
+        for(Map.Entry<String,Float> entry:resultMap.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
-        }*/
+        }
 //        StringBuilder buffer = new StringBuilder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 //        int seatNum = (3 - 1) * 10 + (3 - 1);
 //        System.out.println("test:"+buffer.substring(seatNum, seatNum+1));
 //        System.out.println(buffer);
 //        buffer.replace(seatNum, seatNum+1, "1");
 //        System.out.println(buffer);
-        for(int i = 0; i < 100000; i++){
+        /*for(int i = 0; i < 100000; i++){
             System.out.println(IDGenerator.createID());
-        }
+        }*/
     }
 }
