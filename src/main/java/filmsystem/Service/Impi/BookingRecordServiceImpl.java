@@ -27,11 +27,11 @@ public class BookingRecordServiceImpl implements IBookingRecordService{
         return bookingRecordDAO.selectRecordByShowId(showId);
     }
 
-    public BookingRecord findOrderById(int id){
+    public BookingRecord findOrderById(long id){
         return bookingRecordDAO.selectRecordById(id);
     }
 
-    public boolean deleteOrder(int id){
+    public boolean deleteOrder(long id){
         return bookingRecordDAO.deleteRecord(id);
     }
 

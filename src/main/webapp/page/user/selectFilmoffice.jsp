@@ -41,28 +41,29 @@
     showMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmShowMapList");
     if(showMapList == null)
         showMapList = new ArrayList<>();
-
+    cinema = (Cinema) showMapList.get(0).get("cinema");
+    film = (Film) showMapList.get(0).get("film");
     /**** test data ****/
-    film.setId(26662282);
-    film.setName("复仇者联盟4");
-    film.setCasts("");
-    film.setDirectors("");
-    film.setCountries("中美合拍");
-    film.setType("");
-    film.setYear(2019);
-    film.setSummary("无可奉告");
+//    film.setId(26662282);
+//    film.setName("复仇者联盟4");
+//    film.setCasts("");
+//    film.setDirectors("");
+//    film.setCountries("中美合拍");
+//    film.setType("");
+//    film.setYear(2019);
+//    film.setSummary("无可奉告");
 
-    Cinema cinema = new Cinema();
-    cinema.setUsername("bilibili");
-    cinema.setAddress("国正中心");
-    cinema.setId(200);
+//    Cinema cinema = new Cinema();
+//    cinema.setUsername("bilibili");
+//    cinema.setAddress("国正中心");
+//    cinema.setId(200);
 
 //    FilmShow filmShow = new FilmShow();
 //    filmShow.setId(5);
-    HashMap<String,Object> map = new HashMap<>();
-    map.put("film", film);
-//    map.put("filmShow", filmShow);
-    map.put("cinema", cinema);
+//    HashMap<String,Object> map = new HashMap<>();
+//    map.put("film", film);
+////    map.put("filmShow", filmShow);
+//    map.put("cinema", cinema);
 //    showMapList.add(map);
 //
 //    for(int i = 0; i < 5; i++){
@@ -159,8 +160,8 @@
 
 <div class="layui-row">
     <div class="layui-col-md4 layui-col-md-offset1" >
-        <div class="grid-demo grid-demo-bg1"><h2>反弹风暴</h2></div>
-        <div><p class="sui-text-large"><span class="sui-text-disabled">时长：   类型：    主演：  </span></p></div>
+        <div class="grid-demo grid-demo-bg1"><h2> <%=film.getName()%> </h2></div>
+        <div><p class="sui-text-large"><span class="sui-text-disabled">时长：<%=((FilmShow)showMapList.get(0).get("filmShow")).getDuration()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<%=film.getType()%></span></p></div>
     </div>
 </div>
 <br>

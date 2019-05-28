@@ -1,6 +1,6 @@
-<%@ page import="filmsystem.Model.FilmShow" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="filmsystem.Model.FilmOffice" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -27,7 +27,33 @@
     %>
 </head>
 <body>
+<%!
+    Film film = new Film();
+    Cinema cinema = new Cinema();
+    HashMap<String, Object> filmShowMap;
+    FilmShow selectedShow = new FilmShow();
+    FilmOffice filmOffice = new FilmOffice();
+%>
+<%
 
+    Customer currentUser = (Customer) session.getAttribute("currentUser");
+    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShowMap");
+    selectedShow = (FilmShow) filmShowMap.get("filmShow");
+    filmOffice = (FilmOffice) filmShowMap.get("office");
+    cinema = (Cinema) filmShowMap.get("cinema");
+    film = (Film) filmShowMap.get("film");
+
+    if(currentUser == null)
+        currentUser = new Customer();
+    //////test
+    currentUser.setId(1000);
+%>
+<%!
+
+%>
+<%
+
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -82,22 +108,7 @@
     </div>
 </div>
 <br><br>
-<%!
-    HashMap<String, Object> filmShowMap;
-    FilmShow selectedShow = new FilmShow();
-    FilmOffice filmOffice = new FilmOffice();
-%>
-<%
-    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShowMap");
-    selectedShow = (FilmShow) filmShowMap.get("filmShow");
-    filmOffice = (FilmOffice) filmShowMap.get("office");
-//    selectedShow.setSeat("000000000010000000000000010000000000000010000000000000010000000000000010000");
-//    filmOffice.setOfficeId(2);
-//    filmOffice.setRowNum(5);
-//    filmOffice.setCol(15);
-//    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShow");
 
-%>
 <%--<% if(list != null){%>--%>
 
 <div align="center">
@@ -152,7 +163,7 @@
                         <h3 class="modal-body">请确认您选择的座位</h3>
                         <h2 class="modal-body" ><span id="MyNum" class="sui-text-danger" style="margin-left:160px"><%=i%> 排 <%=j%> 座</span></h2>
                         <div class="modal-footer">
-                            <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large" onclick="">确定</button>
+                            <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large" onclick="doSelect(<%=i%>, <%=j%>)">确定</button>
                             <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
                         </div>
                     </div>
@@ -161,7 +172,7 @@
         </td>
         <%
         }
-            else{
+            else{   // 该座位已售出
         %>
         <td>
             <button class="sui-btn btn-danger">☆</button>
@@ -193,6 +204,40 @@
 </div>
 </body>
 </html>
-<script>
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmshow/' + <%=selectedShow.getId()%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+    function doSelect(i,j) {
+        $.ajax({
+            type: "POST",
+            url: '<%=basePath%>/api/ticket/createOrder?userId=' + <%=currentUser.getId()%> + "&showId=" + <%=selectedShow.getId()%> + "&row=" + i + "&col=" + j,
+            success: function (res) {
+                if (res == "SUCCESS")
+                    location.replace("buyTicket.jsp")
+                else if (res == "FAIL")
+                    alert("选座失败！")
+                else if (res == "DB_ERROR")
+                    alert("数据库出错！")
+            },
+            error: function () {
+                alert("操作失败！")
 
+            }
+        })
+    };
 </script>

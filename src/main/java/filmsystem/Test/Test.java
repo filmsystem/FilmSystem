@@ -8,6 +8,7 @@ import filmsystem.Model.Administrator;
 import filmsystem.DAO.AdministratorDAO;
 import filmsystem.Model.BookingRecord;
 import filmsystem.Model.FilmOffice;
+import filmsystem.Tools.IDGenerator;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;
@@ -33,12 +34,14 @@ public class Test {
         for(Map.Entry<String,Integer> entry:resultMap.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
         }*/
-        StringBuilder buffer = new StringBuilder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-        int seatNum = (3 - 1) * 10 + (3 - 1);
-        System.out.println("test:"+buffer.substring(seatNum, seatNum+1));
-        System.out.println(buffer);
-        buffer.replace(seatNum, seatNum+1, "1");
-        System.out.println(buffer);
-
+//        StringBuilder buffer = new StringBuilder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+//        int seatNum = (3 - 1) * 10 + (3 - 1);
+//        System.out.println("test:"+buffer.substring(seatNum, seatNum+1));
+//        System.out.println(buffer);
+//        buffer.replace(seatNum, seatNum+1, "1");
+//        System.out.println(buffer);
+        for(int i = 0; i < 100000; i++){
+            System.out.println(IDGenerator.createID());
+        }
     }
 }

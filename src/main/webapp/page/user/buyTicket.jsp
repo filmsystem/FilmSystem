@@ -1,5 +1,6 @@
-<%@ page import="filmsystem.Model.Administrator" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="filmsystem.Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -26,7 +27,22 @@
     %>
 </head>
 <body>
+<%!
+    long currentOrderId;
+    HashMap<String, Object> bookingRecordMap = new HashMap<>();
+%>
+<%
+    currentOrderId = (long)session.getAttribute("currentOrderId");
+    bookingRecordMap = (HashMap<String, Object>) session.getAttribute("bookingRecordMap");
 
+    if(bookingRecordMap == null)
+        bookingRecordMap = new HashMap<>();
+
+    Film film = (Film) bookingRecordMap.get("film");
+    FilmShow filmShow = (FilmShow) bookingRecordMap.get("filmShow");
+    Cinema cinema = (Cinema) bookingRecordMap.get("cinema");
+    BookingRecord record = (BookingRecord) bookingRecordMap.get("bookingRecord");
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -117,29 +133,63 @@
     <tbody>
     <tr>
         <td ></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
-        <td ><span class="sui-text-xlarge">影片</span></td>
+        <td ><span class="sui-text-xlarge"><%=film.getName()%></span></td>
+        <td ><span class="sui-text-xlarge"><%=filmShow.getBeginTime()%></span></td>
+        <td ><span class="sui-text-xlarge"><%=cinema.getUsername()%></span></td>
+        <td ><span class="sui-text-xlarge"><%=record.getRowNum()%> 排 <%=record.getCol()%> 座</span></td>
 
     </tr>
     </tbody>
 </table>
 <br>
-<span class="sui-text-xlarge" style="margin-left:1050px">实际支付：55元</span>
+<span class="sui-text-xlarge" style="margin-left:1050px">实际支付：<%=filmShow.getPrice()%>元</span>
 <br>
 <br>
-<button class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:1060px;text-align:center" width="260px"><h3>确 认 支 付</h3></button>
+<button id="payBtn" class="layui-btn layui-btn-danger layui-btn-radius" style="margin-left:1060px;text-align:center" width="260px"><h3>确 认 支 付</h3></button>
 <br><br><br><br>
 
-        <%--<%}--%>
-        <%--}--%>
-        <%--//  else{%>--%>
-        <%--//  <tr align="center">--%>
-        <%--//    <th> <p><%="数据库无记录！"%></p></th>--%>
-        <%--//  </tr>--%>
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/bookingRecord/' + <%=currentOrderId%>,
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if(location.href.indexOf("#reloaded")==-1){
+                    location.href=location.href+"#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
 
-        <%--<%}%>--%>
+    $(function () {
+        $("#payBtn").on('click', function () {
+            $.ajax({
+                type: "PUT",
+                url: '<%=basePath%>/api/ticket/payOrder/' + <%=currentOrderId%>,
+                success: function (res) {
+                    console.log("trying……")
+                    if (res == "SUCCESS")
+                        location.replace("buySuccess.jsp")
+                    else if (res == "FAIL")
+                        alert("支付失败！")
+                    else if (res == "NOT_FOUND")
+                        alert("未找到该订单！")
+                    else if (res == "DB_ERROR")
+                        alert("数据库出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        });
+    });
+</script>
 
 
 

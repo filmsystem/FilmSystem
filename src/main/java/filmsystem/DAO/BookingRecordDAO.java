@@ -31,13 +31,13 @@ public class BookingRecordDAO {
         return false;
     }
 
-    public boolean deleteRecord(int id){
+    public boolean deleteRecord(long id){
         if(bookingRecordMapper.deleteRecord(id)>0)
             return true;
         return false;
     }
 
-    public BookingRecord selectRecordById(int id){
+    public BookingRecord selectRecordById(long id){
         return bookingRecordMapper.selectRecordById(id);
     }
 

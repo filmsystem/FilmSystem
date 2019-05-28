@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface BookingRecordMapper {
     int insertRecord(BookingRecord bookingRecord);
-    int deleteRecord(int id);
+    int deleteRecord(long id);
     int updateRecord(BookingRecord bookingRecord);
-    BookingRecord selectRecordById(int id);
+    BookingRecord selectRecordById(long id);
     ArrayList<BookingRecord> selectRecordByUserId(int userId);
     ArrayList<BookingRecord> selectRecordByShowId(int showId);
     List<Map<String,Object>> countTypeByUserId(int userId);

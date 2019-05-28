@@ -10,9 +10,9 @@ public interface IBookingRecordService {
 
     ArrayList<BookingRecord> findOrderByShowId(int showId);
 
-    BookingRecord findOrderById(int id);
+    BookingRecord findOrderById(long id);
 
-    boolean deleteOrder(int id);
+    boolean deleteOrder(long id);
 
     boolean deleteOrder(BookingRecord record);
 
