@@ -73,11 +73,13 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
     public String updateCustomer(@RequestParam("id") Integer id,
-                                  @RequestParam("password") String password,
+                                  @RequestParam(value = "password", defaultValue = "") String password,
                                   @RequestParam(value = "img", defaultValue = "") String img,
                                   @RequestParam("phonenum") String phonenum,
                                   @RequestParam("city") String city){
         try{
+            if(id == 0 || phonenum.equals("") || city.equals(""))
+                return "EMPTY";
             Customer customer = customerService.findCustomerById(id);
             if(customer != null){
                 if(!password.equals(""))

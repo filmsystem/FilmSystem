@@ -88,6 +88,8 @@ public class CinemaController {
                                 @RequestParam("city") String city,
                                 @RequestParam("address") String address){
         try{
+            if(id == 0 || address.equals("") || city.equals(""))
+                return "EMPTY";
             Cinema cinema = cinemaService.findCinemaById(id);
             if(cinema != null){
                 if(!password.equals(""))

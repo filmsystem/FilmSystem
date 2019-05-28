@@ -24,7 +24,7 @@ public class RegisterController {
                                    @RequestParam("phonenum") String phonenum,
                                    @RequestParam("city") String city){
         try{
-            if(name.equals("") || password.equals("") || password.equals("") || city.equals(""))
+            if(name.equals("") || password.equals("") || city.equals(""))
                 return "EMPTY";
             Customer customer = new Customer();
             customer.setUsername(name);
@@ -49,6 +49,9 @@ public class RegisterController {
                                  @RequestParam("address") String address){
         // log.info("name = " + name + ", password = " + password + ", city = " + city + ", address = " + address);
         try{
+            if(name.equals("") || password.equals("") || city.equals("") || address.equals(""))
+                return "EMPTY";
+
             Cinema cinema = new Cinema();
             cinema.setUsername(name);
             cinema.setPassword(password);
@@ -69,6 +72,8 @@ public class RegisterController {
                                         @RequestParam("password") String password){
         // log.info("name = " + name + ", password = " + password;
         try{
+            if(name.equals("") || password.equals(""))
+                return "EMPTY";
             Administrator administrator = new Administrator();
             administrator.setUsername(name);
             administrator.setPassword(password);

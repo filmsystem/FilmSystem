@@ -25,6 +25,8 @@ public class FilmCommentController {
                                   @RequestParam("comment") String comment){
         // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
         try{
+            if(userId == 0 || filmId == 0 || filmStar == 0 || comment.equals(""))
+                return "EMPTY";
             FilmComment Comment = new FilmComment();
             Comment.setUserId(userId);
             Comment.setFilmId(filmId);
@@ -87,6 +89,8 @@ public class FilmCommentController {
                                      @RequestParam("filmStar") Integer filmStar,
                                      @RequestParam("comment") String comment){
         try{
+            if(id == 0 || filmStar == 0 || comment.equals(""))
+                return "EMPTY";
             FilmComment Comment = filmCommentService.findFilmCommentById(id);
             if(comment != null){
                 Comment.setFilmStar(filmStar);

@@ -25,6 +25,8 @@ public class FilmOfficeController {
                                  @RequestParam("col") Integer col){
         // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
         try{
+            if(cinemaId == 0 || officeId == 0 || rowNum == 0 || col == 0)
+                return "EMPTY";
             FilmOffice office = new FilmOffice();
             office.setCinemaId(cinemaId);
             office.setOfficeId(officeId);
@@ -91,6 +93,8 @@ public class FilmOfficeController {
                                     @RequestParam("row") Integer rowNum,
                                     @RequestParam("col") Integer col){
         try{
+            if(rowNum == 0 || col == 0)
+                return "EMPTY";
             FilmOffice office = filmOfficeService.findOfficeById(id);
             if(office != null){
                 office.setRowNum(rowNum);

@@ -29,6 +29,8 @@ public class FilmShowController {
                                @RequestParam("price") double price){
         // log.info("cinemaId = " + cinemaId + ", officeId = " + officeId + ", row = " + row + ", col = " + col);
         try{
+            if(filmId == 0 || cinemaId == 0 || officeId == 0 || beginTime.toString().equals("") || duration == 0 || price == 0)
+                return "EMPTY";
             FilmShow show = new FilmShow();
             show.setFilmId(filmId);
             show.setCinemaId(cinemaId);
@@ -101,12 +103,13 @@ public class FilmShowController {
 
     @RequestMapping(value = "/filmshow", method = RequestMethod.PUT)
     public String updateFilmShow(@RequestParam("id") Integer id,
-                                  @RequestParam(value = "beginTime") Timestamp beginTime,
-                                 @RequestParam(value = "price") Double price){
+                                  @RequestParam(value = "beginTime") Timestamp beginTime){
         try{
+            if(beginTime.toString().equals(""))
+                return "EMPTY";
             FilmShow show = filmShowService.findShowById(id);
             show.setBeginTime(beginTime);
-            show.setPrice(price);
+//            show.setPrice(price);
             return filmShowService.updateShow(show) ? "SUCCESS" : "FAIL";
         }
         catch(Exception e){

@@ -28,6 +28,8 @@ public class LoginController {
          * @param: username，password: user input; indntity: 1:customer, 2:cinema, 3:administrator
          * @return: result
          */
+        if(username.equals("") || password.equals(""))
+            return "EMPTY";
         switch(identity){
             case 1:     // customer
                 if(loginService.checkCustomer(username, password)){
