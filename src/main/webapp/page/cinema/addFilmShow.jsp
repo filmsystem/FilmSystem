@@ -52,27 +52,17 @@
                 </ul>
             </li>
 
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">电影管理
-                <i class="caret"></i></a>
-                <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
-                    </li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1"
-                                               href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
-                </ul>
-            </li>
-
             <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">订单管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查询订单</a>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="bookingCount.jsp">查询订单</a>
                     </li>
                 </ul>
             </li>
         </ul>
         <ul class="sui-nav pull-right">
             <li><a href="cinemaInfo.jsp">个人中心</a></li>
-            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
+            <li><a href="<%=basePath%>/logout.jsp">退出登录</a></li>
         </ul>
     </div>
 </div>
@@ -117,7 +107,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="beginTime" id="beginTime" required lay-verify="required" autocomplete="off"
+                    <input type="text" name="beginTime" id="beginTime" value="2019-05-30 13:00:00" required lay-verify="required" autocomplete="off"
                            class="layui-input" required="required">
                 </div>
             </div>
@@ -196,5 +186,36 @@
                 }
             })
         });
+    });
+</script>
+<script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['util', 'laydate', 'layer'], function(){
+        var util = layui.util2·
+    ,laydate = layui.laydate
+            ,layer = layui.layer;
+
+        //倒计时
+        var thisTimer, setCountdown = function(y, M, d, H, m, s){
+            var endTime = new Date(y, M||0, d||1, H||0, m||0, s||0) //结束日期
+                ,serverTime = new Date(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+            clearTimeout(thisTimer);
+            util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                lay('#test2').html(str);
+                thisTimer = timer;
+            });
+        };
+        setCountdown(2019,5,30);
+
+        laydate.render({
+            elem: '#test1'
+            ,type: 'datetime'
+            ,done: function(value, date){
+                setCountdown(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds);
+            }
+        });
+
     });
 </script>

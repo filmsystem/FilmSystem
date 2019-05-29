@@ -105,7 +105,7 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
         layui.use(['util', 'laydate', 'layer'], function(){
-            var util = layui.util2·
+            var util = layui.util2
                 ,laydate = layui.laydate
                 ,layer = layui.layer;
 
@@ -136,4 +136,5 @@
 
     <script src="../../cityJs/fixdiv.js"></script>
     <script src="../../cityJs/address.js"></script>
+
 </html>

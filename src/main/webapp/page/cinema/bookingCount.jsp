@@ -23,7 +23,11 @@
         <link rel="stylesheet" href="/FilmSystem/layui/css/layui.css">
         <link rel="stylesheet" href="../layui/css/modules/laydate/default/laydate.css" >
         <script src="/FilmSystem/incubator-echarts-4.2.1/dist/echarts.min.js"></script>
+        <%
+            String path = request.getContextPath();
+            String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 
+        %>
     </head>
 </head>
 <body>
@@ -31,34 +35,33 @@
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影院管理      <i class="caret"></i></a>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影厅管理
+                <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addCinema.jsp">增加影院</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryCinema.jsp">查询影院</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmOffice.jsp">增加影厅</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmOffice.jsp">查询影厅</a></li>
                 </ul>
             </li>
 
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影片管理      <i class="caret"></i></a>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">场次管理
+                <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilm.jsp">增加影片</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilm.jsp">查询影片</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilmShow.jsp">增加场次</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilmShow.jsp">查询场次</a></li>
                 </ul>
             </li>
 
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">管理员      <i class="caret"></i></a>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">订单管理
+                <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addAdmin.jsp">增加管理员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryAdmin.jsp">查询管理员</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="bookingCount.jsp">查询订单</a>
+                    </li>
                 </ul>
             </li>
         </ul>
-
-
         <ul class="sui-nav pull-right">
-            <li><a href="adminInfo.jsp">个人中心</a></li>
-            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
+            <li><a href="cinemaInfo.jsp">个人中心</a></li>
+            <li><a href="<%=basePath%>/logout.jsp">退出登录</a></li>
         </ul>
     </div>
 </div>

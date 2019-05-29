@@ -61,7 +61,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="recordsCount.jsp">我的数据</a></li>
                 </ul>
             </li>
-            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
+            <li><a href="<%=basePath%>/logout.jsp">退出登录</a></li>
         </ul>
     </div></div>
 <br><br>
@@ -154,7 +154,7 @@
                             <tbody>
                             <tr>
                                 <input type="hidden" name="id" value="<%=customer.getId()%>">
-                                <td><input type="text" name="password" id="password"
+                                <td><input type="password" name="password" id="password"
                                            value="<%=customer.getPassword()%>" class="input-medium"></td>
                                 <td><input type="text" name="phonenum" id="phonenum"
                                            value="<%=customer.getPhonenum()%>" class="input-large"></td>

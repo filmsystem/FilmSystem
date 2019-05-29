@@ -62,27 +62,24 @@
 
         <ul class="sui-nav pull-right">
             <li><a href="adminInfo.jsp">个人中心</a></li>
-            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
+            <li><a href="<%=basePath%>/logout.jsp">退出登录</a></li>
         </ul>
 
 
     </div>
 </div>
-<%
-    Random a = new Random();
-    int n = a.nextInt(15) + 10;
-%>
+
 <%
     Administrator admin = (Administrator) session.getAttribute("currentUser");
 %>
 <blockquote class="layui-elem-quote"><h1>我的信息</h1></blockquote>
-    <img src="/FilmSystem/img/<%=n%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
+    <img src="/FilmSystem/img/<%=admin.getImg()%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
     <br><br>
     <table class="layui-table" lay-even="" lay-skin="nob">
         <tbody>
         <tr>
             <td width="300px" align="right"></td>
-            <td width="100px" align="right">
+            <td width="350px" align="right">
                 <h4><strong>管理员</strong></h4>
             </td>
             <td width="300px" align="left">
@@ -122,7 +119,7 @@
                             <tbody>
                             <tr>
                                 <input type="hidden" name="id" value="<%=admin.getId()%>"/>
-                                <td><input type="text" name="password" id="password_qc"
+                                <td><input type="password" name="password" id="password_qc"
                                            value="<%=admin.getPassword()%>" class="input-medium"/></td>
                                 <td data-supplierid="111">
                                     <button id="updateBtn" class="sui-btn btn-bordered" type="button">修改

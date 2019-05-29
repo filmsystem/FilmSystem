@@ -50,19 +50,10 @@
                 </ul>
             </li>
 
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">电影管理
-                <i class="caret"></i></a>
-                <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
-                    </li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
-                </ul>
-            </li>
-
             <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">订单管理
                 <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">查询订单</a>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="bookingCount.jsp">查询订单</a>
                     </li>
                 </ul>
             </li>
@@ -73,21 +64,18 @@
         </ul>
     </div>
 </div>
-<%
-    Random a = new Random();
-    int n = a.nextInt(15) + 10;
-%>
+
 <%
     Cinema cinema = (Cinema) session.getAttribute("currentUser");
 %>
 <blockquote class="layui-elem-quote"><h1>我的信息</h1></blockquote>
-    <img src="/FilmSystem/img/<%=n%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
+    <img src="/FilmSystem/img/<%=cinema.getImg()%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
     <br><br>
     <table class="layui-table" lay-even="" lay-skin="nob">
         <tbody>
         <tr>
             <td width="300px" align="right"></td>
-            <td width="100px" align="right">
+            <td width="60px" align="right">
                 <h4><strong>影院名称</strong></h4>
             </td>
             <td width="300px" align="left">
@@ -115,7 +103,7 @@
             <td width="300px" align="left">
                 <h4><%=cinema.getAddress()%>
                 </h4>
-            <td width="400px"></td>
+            <td width="550px"></td>
             </td>
         </tr>
         </tbody>
@@ -154,7 +142,7 @@
                                 <td align="left"><p align="left" class="sui-text-large">1
                                 </p></td>
                                 <input type="hidden" name="id" value="<%=cinema.getId()%>"/>
-                                <td><input type="text" name="password" id="cityd_qsc"
+                                <td><input type="password" name="password" id="cityd_qsc"
                                            value="<%=cinema.getPassword()%>" class="input-medium"/></td>
                                 <td><input type="text" name="city" id="citddy_qsc"
                                            value="<%=cinema.getCity()%>" class="input-medium"/></td>
