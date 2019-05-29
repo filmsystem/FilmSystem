@@ -197,22 +197,22 @@
         <li data-target="#myCarousel2" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-        <div class="active item"><img src="/FilmSystem/img/2.png" width="850" height="120">
+        <div class="active item"><img src="/FilmSystem/img/1.png" width="650" height="100">
             <div class="carousel-caption">
 
-                <p>内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                <p>大侦探皮卡丘 (2019)</p>
             </div>
         </div>
-        <div class="item"><img src="/FilmSystem/img/2.png" width="850" height="120">
+        <div class="item"><img src="/FilmSystem/img/2.png" width="650" height="100">
             <div class="carousel-caption">
 
-                <p>内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                <p>企鹅公路 (2019)</p>
             </div>
         </div>
-        <div class="item"><img src="/FilmSystem/img/2.png" width="850" height="120">
+        <div class="item"><img src="/FilmSystem/img/3.png" width="650" height="100">
             <div class="carousel-caption">
 
-                <p>内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                <p>一条狗的使命2 (2019)</p>
             </div>
         </div>
     </div>
