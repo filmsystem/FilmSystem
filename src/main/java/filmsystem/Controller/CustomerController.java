@@ -1,5 +1,6 @@
 package filmsystem.Controller;
 
+import filmsystem.Service.Impi.StatisticsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import filmsystem.Model.Customer;
 import filmsystem.Service.Impi.CustomerServiceImpl;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -14,6 +16,9 @@ public class CustomerController {
     //public static Logger log = LoggerFactory.getLogger(CustomerController.class);
     @Autowired
     CustomerServiceImpl customerService;
+
+    @Autowired
+    StatisticsServiceImpl statisticsService;
 
 //    @RequestMapping(value = "/customer", method = RequestMethod.POST)
 //    public String insertCustomer(@RequestParam("name") String name,
@@ -103,6 +108,32 @@ public class CustomerController {
     public String deleteCustomer(@PathVariable Integer id){
         try{
             return customerService.deleteCustomer(id) ? "SUCCESS" : "NOT_FOUND";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/customerStatis/type/{id}", method = RequestMethod.GET)
+    public String countTypeByUserId(@PathVariable Integer id,
+                                    Model model, HttpSession session){
+        try{
+            session.setAttribute("typeStatistic",statisticsService.countTypeByUserId(id));
+            return "SUCCESS";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
+
+    @RequestMapping(value = "/customerStatis/time/{id}", method = RequestMethod.GET)
+    public String countTimesByMonth(@PathVariable Integer id,
+                                    Model model, HttpSession session){
+        try{
+            session.setAttribute("timeStatistic",statisticsService.countTimesByMonth(id));
+            return "SUCCESS";
         }
         catch(Exception e){
             e.printStackTrace();
