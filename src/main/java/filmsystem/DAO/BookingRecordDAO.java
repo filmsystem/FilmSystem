@@ -77,6 +77,34 @@ public class BookingRecordDAO {
         return resultMap;
     }
 
+    public Map<String, ArrayList<Float>> countTimesByFilm2(int cinemaId){
+        List<Map<String, Object>> baseList = bookingRecordMapper.countTimesByFilm2(cinemaId);
+        Map<String, ArrayList<Float>> resultMap = new HashMap<String, ArrayList<Float>>();
+        for (Map<String, Object> map : baseList) {
+            String name = null;
+            float count1 = 0;
+            float star=0;
+            ArrayList<Float> al=new ArrayList<Float>();
+            int t=0;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if ("name".equals(entry.getKey())) {
+                    name = (String) entry.getValue();
+                } else if ("count1".equals(entry.getKey())) {
+                    count1 = ((Number)entry.getValue()).intValue();
+                } else if ("star".equals(entry.getKey())) {
+                    star = ((Number)entry.getValue()).floatValue();
+                }
+                t++;
+                if(t>=5)//前5名
+                    break;
+            }
+            al.add(count1);
+            al.add(star);
+            resultMap.put(name, al);
+        }
+        return resultMap;
+    }
+
     public Map<String,Integer> countTimesByMonth(int userId){
         List<Map<String, Object>> baseList = bookingRecordMapper.countTimesByMonth(userId);
         Map<String,Integer> resultMap=new HashMap<String, Integer>();

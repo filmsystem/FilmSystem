@@ -30,9 +30,11 @@ public class Test {
         //System.out.println("获得管理员用户名："+administratorMapper.selectAdminById(1).getImg());
 
         BookingRecordDAO bookingRecordDAO=new BookingRecordDAO();
-        Map<String,Float> resultMap=bookingRecordDAO.countTurnoverByDayInAWeek(20000000);
-        for(Map.Entry<String,Float> entry:resultMap.entrySet()){
-            System.out.println(entry.getKey()+":"+entry.getValue());
+        Map<String,ArrayList<Float>> resultMap=bookingRecordDAO.countTimesByFilm2(20000000);
+        for(Map.Entry<String,ArrayList<Float>> entry:resultMap.entrySet()){
+            System.out.print(entry.getKey()+":");
+            ArrayList<Float> al=entry.getValue();
+            System.out.print(al.get(0)+","+al.get(1)+"\n");
         }
 //        StringBuilder buffer = new StringBuilder("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 //        int seatNum = (3 - 1) * 10 + (3 - 1);
