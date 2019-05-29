@@ -42,8 +42,11 @@
         update bookingrecord set userId=#{userId},showId=#{showId},createtime=#{createTime},paytime=#{payTime},collectstring=#{collectingString},status=#{status},rowNum=#{rowNum},col=#{col} where id=#{id}
     </update>
 
-    <select id="countTypeByUserId" resultType="java.util.HashMap">
-        select type,count(*)as count1 from bookingrecord where userId=#{userId} group by type order by count1 desc
+    <select id="countTimesByFilm" resultType="java.util.HashMap">
+        select name,count(film.name) as count1 from
+            (select cinemaId,filmId from movie.bookingrecord,movie.filmshow
+            where bookingrecord.showId=filmshow.id and filmshow.cinemaId=#{cinemaId} and bookingrecord.status=3)as tb1,film
+        where tb1.filmId=film.id group by film.name order by count1 desc
     </select>
 
     <select id="countTimesByMonth" resultType="java.util.HashMap">

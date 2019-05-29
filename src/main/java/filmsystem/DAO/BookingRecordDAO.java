@@ -55,20 +55,24 @@ public class BookingRecordDAO {
         return false;
     }
 
-    public Map<String, Integer> countTypeByUserId(int userId){
-        List<Map<String, Object>> baseList = bookingRecordMapper.countTypeByUserId(userId);
+    public Map<String, Integer> countTimesByFilm(int cinemaId){
+        List<Map<String, Object>> baseList = bookingRecordMapper.countTimesByFilm(cinemaId);
         Map<String, Integer> resultMap = new HashMap<String, Integer>();
         for (Map<String, Object> map : baseList) {
-            String type = null;
+            String name = null;
             int count1 = 0;
+            int t=0;
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                if ("type".equals(entry.getKey())) {
-                    type = (String) entry.getValue();
+                if ("name".equals(entry.getKey())) {
+                    name = (String) entry.getValue();
                 } else if ("count1".equals(entry.getKey())) {
                     count1 = ((Number)entry.getValue()).intValue();
                 }
+                t++;
+                if(t>=5)//前5名
+                    break;
             }
-            resultMap.put(type, count1);
+            resultMap.put(name, count1);
         }
         return resultMap;
     }

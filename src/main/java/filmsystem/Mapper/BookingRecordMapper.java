@@ -13,7 +13,7 @@ public interface BookingRecordMapper {
     BookingRecord selectRecordById(long id);
     ArrayList<BookingRecord> selectRecordByUserId(int userId);
     ArrayList<BookingRecord> selectRecordByShowId(int showId);
-    List<Map<String,Object>> countTypeByUserId(int userId);
+    List<Map<String,Object>> countTimesByFilm(int cinemaId);
     List<Map<String,Object>> countTimesByMonth(int userId);
     List<Map<String,Object>> countTurnoverByDayInAWeek(int cinemaId);
 }
