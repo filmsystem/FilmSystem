@@ -32,11 +32,7 @@
 <%!
     ArrayList<FilmOffice> list;
 %>
-<%
-    list = (ArrayList<FilmOffice>) session.getAttribute("filmOfficeList");
 
-    if (list != null) {
-%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -83,6 +79,11 @@
 
 <blockquote class="layui-elem-quote"><h1>添加放映场次</h1></blockquote>
 <br><br>
+<%
+    list = (ArrayList<FilmOffice>) session.getAttribute("filmOfficeList");
+
+    if (list != null && list.size() != 0) {
+%>
 <div align="center">
     <form id="registerForm" class="layui-form">
         <div style="width:30%" align="center">
@@ -96,9 +97,9 @@
             <br><br>
             <input type="hidden" name="cinemaId" value="<%=((Cinema)session.getAttribute("currentUser")).getId()%>"/>
             <div class="layui-form-item">
-               <label class="layui-form-label">影厅编号</label>
-                        <!--<input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
-                           class="layui-input" required="required" value="<%=(list.get(0)).getId()%>">-->
+                <label class="layui-form-label">影厅编号</label>
+                <!--<input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
+                   class="layui-input" required="required" value="">-->
                 <div class="layui-input-block">
                     <select name="officeId" id="officeId" class="layui-select">
                         <%
@@ -147,8 +148,10 @@
     </form>
 </div>
 <%
-    }
+} else {
 %>
+<h1>您还没有影厅，请先添加影厅！</h1>
+<%}%>
 </body>
 </html>
 <script type="text/javascript">

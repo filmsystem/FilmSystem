@@ -69,15 +69,11 @@
 
 <%--页面--%>
 <%
-    Random a = new Random();
-    int n = a.nextInt(15) + 10;
-%>
-<%
     Customer customer = (Customer) session.getAttribute("currentUser");
 %>
 <blockquote class="layui-elem-quote"><h1>我的信息</h1></blockquote>
 
-    <img src="/FilmSystem/img/<%=n%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
+    <img src="/FilmSystem/img/<%=customer.getImg()%>.png" width=100px height=100px style="margin-left:630px;border-radius:50%">
     <br><br>
     <table class="layui-table" lay-even="" lay-skin="nob">
         <tbody>
