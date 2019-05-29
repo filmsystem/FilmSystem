@@ -64,7 +64,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">我的数据</a></li>
                 </ul>
             </li>
-            <li><a href="#">退出登录</a></li>
+            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
         </ul>
     </div></div>
 <br><br>

@@ -58,7 +58,7 @@
 
         <ul class="sui-nav pull-right">
             <li><a href="adminInfo.jsp">个人中心</a></li>
-            <li><a href="/FilmSystem/firstPage.jsp">退出登录</a></li>
+            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
         </ul>
 
 
