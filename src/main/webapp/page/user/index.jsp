@@ -147,10 +147,13 @@
       %>
       <tr style="margin-left:30px">
         <td width="140px"></td>
-        <% for(int j = 0; j < 5; j++){ %>
+        <%
+          for(int j = 0; j < 5; j++){
+            Film film = list.get(i * 5 + j);
+        %>
           <form>
           <td width="180px">
-            <a href="showFilmInfo.jsp?id=<%=list.get(i+j).getId()%>"> <img src="<%=list.get(i + j).getImg()%>"/></a>
+            <a href="showFilmInfo.jsp?id=<%=film.getId()%>"> <img src="/FilmSystem/img/<%=film.getImg()%>.png"/></a>
           </td>
           </form>
         <%} %>

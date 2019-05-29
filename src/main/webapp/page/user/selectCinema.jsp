@@ -118,7 +118,7 @@
     <div class="layui-row">
         <div class="layui-col-md4">
             <div class="grid-demo grid-demo-bg1">
-                <img src="/FilmSystem/img/2.png"width=220px height=600px style="margin-left:180px">
+                <img src="/FilmSystem/img/<%=film.getImg()%>.png"width=220px height=600px style="margin-left:180px">
             </div>
         </div>
         <div class="layui-col-md4">
