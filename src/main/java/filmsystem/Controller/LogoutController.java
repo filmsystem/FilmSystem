@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-
-@RestController
-@RequestMapping("/api")
-public class LogoutController {
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String getFilm(Model model, HttpSession session){
-        session.removeAttribute("currentUser");
-        return "SUCCESS";
-    }
-}
+//
+//@RestController
+//@RequestMapping("/api")
+//public class LogoutController {
+//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+//    public String getFilm(Model model, HttpSession session){
+//        session.removeAttribute("currentUser");
+//        return "SUCCESS";
+//    }
+//}
