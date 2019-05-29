@@ -1,3 +1,7 @@
+<%@ page import="filmsystem.Model.Cinema" %>
+<%@ page import="filmsystem.Model.BookingRecord" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="filmsystem.DAO.BookingRecordDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -63,12 +67,36 @@
 <br><br>
 <div id="chart" style="width:800px;height:400px;margin-left:23%"></div>
 </body>
-
+<%
+    Cinema cinema=(Cinema)session.getAttribute("currentUser");
+    BookingRecordDAO brd=new BookingRecordDAO();
+    Map<String,Float> resultMap=brd.countTurnoverByDayInAWeek(cinema.getId());
+    int size = resultMap.size();
+    String[] day1 = new String[size];
+    Float[] turnover = new Float[size];
+    int t = 0;
+    for (Map.Entry<String, Float> entry : resultMap.entrySet()) {
+        day1[t] = entry.getKey();
+        turnover[t] = entry.getValue();
+        t++;
+    }
+%>
 <script type="text/javascript">
     // 初始化图表标签
+    var day1=new Array();
+    <%   for(int i=0;i <day1.length;i++){   %>
+    day1[ <%=i%> ]= " <%=day1[i]%> ";
+    <%   }   %>
+
+    var turnover=new Array();
+    <%   for(int i=0;i <turnover.length;i++){   %>
+    turnover[ <%=i%> ]= " <%=turnover[i]%> ";
+    <%   }   %>
+
+
     var myChart = echarts.init(document.getElementById('chart'));
-    var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-    var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+    var dataAxis = day1//['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
+    var data = turnover//[220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
     var yMax = 500;
     var dataShadow = [];
 
