@@ -68,7 +68,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="recordsCount.jsp">我的数据</a></li>
                 </ul>
             </li>
-            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
+            <li><a href="<%=basePath%>/logout.jsp">退出登录</a></li>
         </ul>
     </div>
 </div>
@@ -80,21 +80,21 @@
 <blockquote class="layui-elem-quote"><h1>我的数据</h1></blockquote>
 <br>
 <div class="layui-row">
-    <div class="layui-col-md2 layui-col-md-offset2">
+    <div class="layui-col-md2 layui-col-md-offset5">
         <div class="grid-demo grid-demo-bg1"><h1><span class="sui-text-danger">每月购票统计</span></h1></div>
     </div>
-    <div class="layui-col-md2 layui-col-md-offset4">
-        <div class="grid-demo grid-demo-bg1"><h1><span class="sui-text-danger">爱看电影类型统计</span></h1></div>
-    </div>
+    <%--<div class="layui-col-md2 layui-col-md-offset4">--%>
+        <%--<div class="grid-demo grid-demo-bg1"><h1><span class="sui-text-danger">爱看电影类型统计</span></h1></div>--%>
+    <%--</div>--%>
 </div>
 <br><br>
 <div class="layui-row">
-    <div class="layui-col-md4">
-        <div id="chart" style="width:650px;height:400px;"></div>
+    <div class="layui-col-md5 layui-col-md-offset2">
+        <div id="chart" style="width:900px;height:400px;"></div>
     </div>
-    <div class="layui-col-md4 layui-col-md-offset2">
-        <div id="chart2" style="width:650px;height:400px;"></div>
-    </div>
+    <%--<div class="layui-col-md4 layui-col-md-offset2">--%>
+        <%--<div id="chart2" style="width:650px;height:400px;"></div>--%>
+    <%--</div>--%>
 </div>
 </body>
 <%

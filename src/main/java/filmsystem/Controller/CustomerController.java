@@ -115,11 +115,11 @@ public class CustomerController {
         }
     }
 
-    @RequestMapping(value = "/customerStatis/type/{id}", method = RequestMethod.GET)
-    public String countTimesByFilm(@PathVariable Integer cinemaId,
+    @RequestMapping(value = "/customerStatis/film/{id}", method = RequestMethod.GET)
+    public String countTimesByFilm(@PathVariable Integer id,
                                     Model model, HttpSession session){
         try{
-            session.setAttribute("typeStatistic",statisticsService.countTimesByFilm(cinemaId));
+            session.setAttribute("typeStatistic",statisticsService.countTimesByFilm(id));
             return "SUCCESS";
         }
         catch(Exception e){
