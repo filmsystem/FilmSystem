@@ -271,7 +271,7 @@
         <% for(int j = 0; j < 5; j++){ %>
         <form>
             <td width="180px">
-                <a onclick="doAlert()"> <img src="<%=list.get(i + j).getImg()%>"/></a>
+                <a onclick="doAlert()"> <img src="/FilmSystem/img/<%=list.get(i + j).getImg()%>.png"/></a>
             </td>
         </form>
         <%} %>

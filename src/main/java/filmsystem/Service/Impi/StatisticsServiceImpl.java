@@ -11,8 +11,8 @@ public class StatisticsServiceImpl implements IStatisticsService {
     private BookingRecordDAO bookingRecordDAO = new BookingRecordDAO();
 
     @Override
-    public HashMap<String, Integer> countTypeByUserId(int userId) {
-        return (HashMap<String, Integer>)bookingRecordDAO.countTypeByUserId(userId);
+    public HashMap<String, Integer> countTimesByFilm(int cinemaId) {
+        return (HashMap<String, Integer>)bookingRecordDAO.countTimesByFilm(cinemaId);
     }
 
     @Override
