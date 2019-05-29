@@ -56,27 +56,18 @@
         record = new BookingRecord();
 %>
 <div class="sui-navbar navbar-inverse">
-    <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
-        <ul class="sui-nav">
-            <li class="sui-nav"><a href="#">首页</a></li>
-            <li><a href="#">电影</a></li>
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">其他      <i class="caret"></i></a>
+    <div class="navbar-inner"><a href="javascript:void(0);" class="sui-brand">SHU-MOVIE</a>
+        <ul class="sui-nav pull-right">
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">个人中心      <i class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">关于</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">项目组成员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">版权</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">我的</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">我的数据</a></li>
                 </ul>
             </li>
-            <li></li>
-        </ul>
-        <ul class="sui-nav pull-right">
-            <li><a href="#">个人中心</a></li>
-            <li><a href="#">退出登录</a></li>
+            <li><a href="../../firstPage.jsp">退出登录</a></li>
         </ul>
     </div></div>
-
-
-
+<br><br>
 
 <br><br>
 <div class="sui-steps-round">

@@ -25,40 +25,44 @@
 </head>
 <body>
 
+<%--菜单栏--%>
 <div class="sui-navbar navbar-inverse">
-    <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
-        <ul class="sui-nav">
+    <div class="navbar-inner"><a href="index.jsp" class="sui-brand">SHU-MOVIE</a>
+        <%--<ul class="sui-nav">--%>
+        <%--<li class="sui-nav"><a href="index.jsp">首页</a></li>--%>
+        <%--</ul>--%>
+        <form class="sui-form sui-form pull-left" id="searchFilm" action="searchFilm.jsp">
+            <div class="layui-input-inline">
+                <select name="type">
+                    <option value="name">电影</option>
+                    <option value="cast">主演</option>
+                    <option value="director">导演</option>
+                    <option value="year">上映年份</option>
+                    <option value="country">国家</option>
+                    <option value="type">类型</option>
+                </select>
+            </div>
+            <!--
+                       自动补全 -->
+            条件
+            <input type="text" name="info" id="auto-init-1" value="" data-toggle="autocomplete" data-lookup="[&quot;复仇者联盟4&quot;, &quot;复仇者联盟3&quot;, &quot;复仇者联盟2&quot;, &quot;复仇者联盟1&quot;, &quot;edfa&quot;, &quot;wdasda&quot;, &quot;tueiyhgk&quot;, &quot;vjflcjx&quot;]" class="input-large"placeholder="找电影">
 
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影院管理      <i class="caret"></i></a>
-                <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addCinema.jsp">增加影院</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryCinema.jsp">查询影院</a></li>
-                </ul>
-            </li>
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">影片管理      <i class="caret"></i></a>
-                <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addFilm.jsp">增加影片</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryFilm.jsp">查询影片</a></li>
-                </ul>
-            </li>
-
-
-            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">管理员      <i class="caret"></i></a>
-                <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="addAdmin.jsp">增加管理员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="queryAdmin.jsp">查询管理员</a></li>
-                </ul>
-            </li>
-        </ul>
-
-
+            <input type="image" src="/FilmSystem/img/search.png" width=22px height=22px class="btn" />
+        </form>
         <ul class="sui-nav pull-right">
-            <li><a href="adminInfo.jsp">个人中心</a></li>
-            <li><a href="/FilmSystem/firstPage.jsp">退出登录</a></li>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">个人中心      <i class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="userInfo.jsp">我的</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="recordsCount.jsp">我的数据</a></li>
+                </ul>
+            </li>
+            <li><a href="../../firstPage.jsp">退出登录</a></li>
         </ul>
-    </div>
-</div>
+    </div></div>
+<br><br>
+<%--</div>--%>
+
+<%--页面--%>
 
 <blockquote class="layui-elem-quote"><h1>我的数据</h1></blockquote>
 <br>

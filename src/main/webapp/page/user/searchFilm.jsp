@@ -27,53 +27,58 @@
 
 	<body>
 
+    <%--菜单栏--%>
     <div class="sui-navbar navbar-inverse">
-      <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
-        <ul class="sui-nav">
-          <li class="sui-nav"><a href="#">首页</a></li>
-          <li><a href="#">电影</a></li>
-          <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">其他      <i class="caret"></i></a>
-            <ul role="menu" class="sui-dropdown-menu">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">关于</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">项目组成员</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">版权</a></li>
+        <div class="navbar-inner"><a href="index.jsp" class="sui-brand">SHU-MOVIE</a>
+            <%--<ul class="sui-nav">--%>
+            <%--<li class="sui-nav"><a href="index.jsp">首页</a></li>--%>
+            <%--</ul>--%>
+            <form class="sui-form sui-form pull-left" id="searchFilm" action="searchFilm.jsp">
+                <div class="layui-input-inline">
+                    <select name="type">
+                        <option value="name">电影</option>
+                        <option value="cast">主演</option>
+                        <option value="director">导演</option>
+                        <option value="year">上映年份</option>
+                        <option value="country">国家</option>
+                        <option value="type">类型</option>
+                    </select>
+                </div>
+                <!--
+                           自动补全 -->
+                条件
+                <input type="text" name="info" id="auto-init-1" value="" data-toggle="autocomplete" data-lookup="[&quot;复仇者联盟4&quot;, &quot;复仇者联盟3&quot;, &quot;复仇者联盟2&quot;, &quot;复仇者联盟1&quot;, &quot;edfa&quot;, &quot;wdasda&quot;, &quot;tueiyhgk&quot;, &quot;vjflcjx&quot;]" class="input-large"placeholder="找电影">
+
+                <input type="image" src="/FilmSystem/img/search.png" width=22px height=22px class="btn" />
+            </form>
+            <ul class="sui-nav pull-right">
+                <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">个人中心      <i class="caret"></i></a>
+                    <ul role="menu" class="sui-dropdown-menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="userInfo.jsp">我的</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="recordsCount.jsp">我的数据</a></li>
+                    </ul>
+                </li>
+                <li><a href="../../firstPage.jsp">退出登录</a></li>
             </ul>
-          </li>
-          <li></li>
-        </ul>
-          <form class="sui-form sui-form pull-left" id="searchFilm">
-              <div class="layui-input-inline">
-                  <select name="type">
-                      <option value="name">电影</option>
-                      <option value="cast">主演</option>
-                      <option value="director">导演</option>
-                      <option value="year">上映年份</option>
-                      <option value="country">国家</option>
-                      <option value="type">类型</option>
-                  </select>
-              </div>
-              <!--
-                         自动补全 -->
-              条件
-              <input type="text" id="auto-init-1" value="" data-toggle="autocomplete" data-lookup="[&quot;复仇者联盟4&quot;, &quot;复仇者联盟3&quot;, &quot;复仇者联盟2&quot;, &quot;复仇者联盟1&quot;, &quot;edfa&quot;, &quot;wdasda&quot;, &quot;tueiyhgk&quot;, &quot;vjflcjx&quot;]" class="input-large"placeholder="找电影">
+        </div></div>
+    <br><br>
+    <%--</div>--%>
 
-              <a href="#"><img src="/FilmSystem/img/search.png" width=22px height=22px  /></a>
-          </form>
-        <ul class="sui-nav pull-right">
-          <li><a href="#">个人中心</a></li>
-          <li><a href="#">退出登录</a></li>
-        </ul>
-      </div></div>
-        <br><br>
-    </div>
+    <%--页面--%>
 
 
-    <%!
-      ArrayList<Film> list;
-    %>
-    <%
-      list = (ArrayList<Film>) session.getAttribute("filmList");
-    %>
+<%!
+    String type;
+    String info;
+    ArrayList<Film> list;
+%>
+<%
+    type = request.getParameter("type");
+    info = request.getParameter("info");
+    list = (ArrayList<Film>) session.getAttribute("filmList");
+    if(list == null)
+        list = new ArrayList<>();
+%>
     <%--<% if(list != null){%>--%>
     <table class="sui-table table-nobordered">
 
@@ -83,15 +88,17 @@
       <%--%>--%>
 
       <%
-          for (int i = 0; list != null && i < list.size()/2; i=i+2) {
+          for (int i = 0; list != null && i < list.size(); i += 2) {
               Film temp = list.get(i);
-              Film temp2 = list.get(i++);
+              Film temp2 = null;
+              if((i + 1) < list.size())
+                temp2 = list.get(i+1);
       %>
       <tr style="margin-left:30px">
         <td width="280px"></td>
-        <form>
+        <form action="showFilmInfo.jsp">
         <td width="180px">
-            <input name="" type="image" src="URI.create(<%=temp.getImg()%>)" width="170px" height="240px" class="btn" />
+            <input type="image" src="/FilmSystem/img/<%=temp.getImg()%>.png" width="170px" height="240px" class="btn" />
         </td>
             <td width="280px">
                 <li><h1 style="color:#000000;margin-top:1px" align="left"><%=temp.getName()%></h1></li>
@@ -103,11 +110,13 @@
                 <li><h4 style="color:#000000;margin-top:1px" align="left">类型：<%=temp.getType()%></h4></li>
                 <li><h4 style="color:#888888;margin-top:1px" align="left"><%=temp.getYear()%>上映</h4></li>
             </td>
+            <input type="hidden" value="<%=temp.getId()%>" name="id"/>
         </form>
 <%--        <td width="180px" height="5px"><img src="/FilmSystem/img/1.png" width="150px" height="200px" /></td>--%>
-        <form>
+          <%if(temp2 != null){%>
+        <form action="showFilmInfo.jsp">
           <td width="180px">
-            <input name="" type="image" src="URI.create(<%=temp2.getImg()%>)" width="170px" height="240px" class="btn" />
+            <input type="image" src="/FilmSystem/img/<%=temp.getImg()%>.png" width="170px" height="240px" class="btn" />
           </td>
             <td width="150px">
                 <li><h1 style="color:#000000;margin-top:1px" align="left"><%=temp2.getName()%></h1></li>
@@ -119,8 +128,9 @@
                 <li><h4 style="color:#000000;margin-top:1px" align="left">类型：<%=temp2.getType()%></h4></li>
                 <li><h4 style="color:#888888;margin-top:1px" align="left"><%=temp2.getYear()%>上映</h4></li>
             </td>
+            <input type="hidden" value="<%=temp2.getId()%>" name="id"/>
         </form>
-
+        <%}%>
         <td width="280px"></td>
       </tr>
       <tr style="margin-left:20px;height:20px">
@@ -147,27 +157,27 @@
 
 	</body>
     <script type="text/javascript">
-        $(function () {
-            $("#submitBtn").on('click', function () {
-                var params = $("#searchFilm").serialize();
-                $.ajax({
-                    type: "GET",
-                    url: '<%=basePath%>/api/film',
-                    // dataType: "json",
-                    data: params,
-                    success: function (res) {
-                        if (res == "SUCCESS")
-                            alert("插入成功！")
-                        else if (res == "FAIL")
-                            alert("插入失败！")
-                        else if (res == "DB_ERROR")
-                            alert("数据库出错！")
-                    },
-                    error: function () {
-                        alert("操作失败！")
+        window.onload = function () {
+            $.ajax({
+                type: "GET",
+                url: '<%=basePath%>/api/film?type=' + '<%=type%>' + "&info=" + '<%=info%>',
+                success: function (res) {
+                    if (res == "SUCCESS"){
+                        if(location.href.indexOf("#reloaded")==-1){
+                            location.href=location.href+"#reloaded";
+                            location.reload();
+                        }
+                        console.log("success")
                     }
-                })
-            });
-        });
+                    else if(res == "EMPTY")
+                        alert("请输入查询内容！")
+                    else
+                        alert("数据获取出错！")
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        };
     </script>
 </html>

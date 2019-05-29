@@ -66,27 +66,32 @@ public class FilmController {
 
     @RequestMapping(value = "/film", method = RequestMethod.GET)
     public String getFilm(@RequestParam(value = "type") String type,
-                          @RequestParam(value = "info") Object info,
+                          @RequestParam(value = "info") String info,
                           Model model, HttpSession session){
         try{
             ArrayList<Film> list;
+            if(type == null || info == null || type.equals("") || info.equals("") || type.equals("null") || info.equals("null")){
+                session.removeAttribute("filmList");
+                return "EMPTY";
+            }
+
             if(type.equals("name")){
-                list = filmService.findFilmByName((String)info);
+                list = filmService.findFilmByName(info);
             }
             else if(type.equals("cast")){
-                list = filmService.findFilmByCast((String)info);
+                list = filmService.findFilmByCast(info);
             }
             else if(type.equals("director")){
-                list = filmService.findFilmByDirector((String)info);
+                list = filmService.findFilmByDirector(info);
             }
             else if(type.equals("year")){
-                list = filmService.findFilmByYear(Integer.parseInt((String)info));
+                list = filmService.findFilmByYear(Integer.parseInt(info));
             }
             else if(type.equals("country")){
-                list = filmService.findFilmByCountry((String)info);
+                list = filmService.findFilmByCountry(info);
             }
             else if(type.equals("type")){
-                list = filmService.findFilmByType((String)info);
+                list = filmService.findFilmByType(info);
             }
             else{
                 list = null;
@@ -95,6 +100,7 @@ public class FilmController {
                 session.setAttribute("filmList", list);
                 return "SUCCESS";
             }
+            session.removeAttribute("filmList");
             return "FAIL";
         }
         catch(Exception e){
