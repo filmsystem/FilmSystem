@@ -1,4 +1,7 @@
 <%@ page import="filmsystem.Model.Cinema" %>
+<%@ page import="filmsystem.Model.FilmShow" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="filmsystem.Model.FilmOffice" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,7 +29,14 @@
     %>
 </head>
 <body>
+<%!
+    ArrayList<FilmOffice> list;
+%>
+<%
+    list = (ArrayList<FilmOffice>) session.getAttribute("filmOfficeList");
 
+    if (list != null) {
+%>
 <div class="sui-navbar navbar-inverse">
     <div class="navbar-inner"><a href="#" class="sui-brand">SHU-MOVIE</a>
         <ul class="sui-nav">
@@ -51,7 +61,8 @@
                 <ul role="menu" class="sui-dropdown-menu">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/addFilm.jsp">增加电影</a>
                     </li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               href="/FilmSystem/page/admin/queryFilm.jsp">查询电影</a></li>
                 </ul>
             </li>
 
@@ -85,10 +96,20 @@
             <br><br>
             <input type="hidden" name="cinemaId" value="<%=((Cinema)session.getAttribute("currentUser")).getId()%>"/>
             <div class="layui-form-item">
-                <label class="layui-form-label">影厅编号</label>
+               <label class="layui-form-label">影厅编号</label>
+                        <!--<input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
+                           class="layui-input" required="required" value="<%=(list.get(0)).getId()%>">-->
                 <div class="layui-input-block">
-                    <input type="text" name="officeId" id="officeId" required lay-verify="required" autocomplete="off"
-                           class="layui-input" required="required">
+                    <select name="officeId" id="officeId" class="layui-select">
+                        <%
+                            for (int i = 0; list != null && i < list.size(); i++) {
+                                FilmOffice temp = list.get(i);
+                        %>
+                        <option value="<%=temp.getId()%>">第<%=temp.getOfficeId()%>号影厅</option>
+                        <%
+                            }
+                        %>
+                    </select>
                 </div>
             </div>
             <br><br>
@@ -125,9 +146,30 @@
         </div>
     </form>
 </div>
+<%
+    }
+%>
 </body>
 </html>
 <script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: '<%=basePath%>/api/filmoffice?cinemaId=' + '<%=((Cinema)session.getAttribute("currentUser")).getId()%>',
+            success: function (res) {
+                if (res != "SUCCESS")
+                    alert("数据获取出错！")
+                if (location.href.indexOf("#reloaded") == -1) {
+                    location.href = location.href + "#reloaded";
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("操作失败！")
+            }
+        })
+    };
+
     $(function () {
         $("#submitBtn").on('click', function () {
             var params = $("#registerForm").serialize();
@@ -141,7 +183,7 @@
                         alert("插入成功！")
                     else if (res == "FAIL")
                         alert("插入失败！")
-                    else if(res="EMPTY")
+                    else if (res = "EMPTY")
                         alert("您有必填项未填写！")
                     else if (res == "DB_ERROR")
                         alert("数据库出错！")
