@@ -76,7 +76,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="recordsCount.jsp">我的数据</a></li>
                 </ul>
             </li>
-            <li><a href="../../firstPage.jsp">退出登录</a></li>
+            <li><a href="<%=basePath%>/api/logout">退出登录</a></li>
         </ul>
     </div></div>
 <br><br>
