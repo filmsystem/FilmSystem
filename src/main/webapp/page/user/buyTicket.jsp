@@ -102,7 +102,7 @@
 <%--<% if(list != null){%>--%>
 
 <div align="center" >
-    <div style="background-color: #FFCCFF;width:1150px" align="center" >
+    <div style="background-color: #93D1FF;width:1150px" align="center" >
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend style="color:#ffffff" style="margin-left: 250px;"><h1>倒计时</h1></legend>
         </fieldset>

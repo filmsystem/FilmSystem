@@ -36,14 +36,16 @@
 <%
 
     Customer currentUser = (Customer) session.getAttribute("currentUser");
-    filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShowMap");
-    selectedShow = (FilmShow) filmShowMap.get("filmShow");
-    filmOffice = (FilmOffice) filmShowMap.get("office");
-    cinema = (Cinema) filmShowMap.get("cinema");
-    film = (Film) filmShowMap.get("film");
-
     if(currentUser == null)
         currentUser = new Customer();
+    else{
+        filmShowMap = (HashMap<String, Object>)session.getAttribute("filmShowMap");
+        selectedShow = (FilmShow) filmShowMap.get("filmShow");
+        filmOffice = (FilmOffice) filmShowMap.get("office");
+        cinema = (Cinema) filmShowMap.get("cinema");
+        film = (Film) filmShowMap.get("film");
+
+
 %>
 <%--菜单栏--%>
 <div class="sui-navbar navbar-inverse">
@@ -198,6 +200,7 @@
         <%--<button class="sui-btn btn-block btn-xlarge btn-danger" align="center" ><h3>确  定  选  座</h3></button>--%>
         <br><br><br><br><br>
     </div>
+    <%}%>
 <%--<%}--%>
 <%--}--%>
 <%--//  else{%>--%>

@@ -116,7 +116,7 @@
           <%if(temp2 != null){%>
         <form action="showFilmInfo.jsp">
           <td width="180px">
-            <input type="image" src="/FilmSystem/img/<%=temp.getImg()%>.png" width="170px" height="240px" class="btn" />
+            <input type="image" src="/FilmSystem/img/<%=temp2.getImg()%>.png" width="170px" height="240px" class="btn" />
           </td>
             <td width="150px">
                 <li><h1 style="color:#000000;margin-top:1px" align="left"><%=temp2.getName()%></h1></li>

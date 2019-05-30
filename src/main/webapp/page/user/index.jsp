@@ -47,8 +47,8 @@
       </div>
       <!--
                  自动补全 -->
-      条件
-      <input type="text" name="info" id="auto-init-1" value="" data-toggle="autocomplete" data-lookup="[&quot;复仇者联盟4&quot;, &quot;复仇者联盟3&quot;, &quot;复仇者联盟2&quot;, &quot;复仇者联盟1&quot;, &quot;edfa&quot;, &quot;wdasda&quot;, &quot;tueiyhgk&quot;, &quot;vjflcjx&quot;]" class="input-large"placeholder="找电影">
+      <%--条件--%>
+      <input type="text" name="info" id="auto-init-1" value="" data-toggle="autocomplete" data-lookup="[&quot;大侦探皮卡丘&quot;, &quot;一条狗的使命2&quot;, &quot;复仇者联盟2&quot;, &quot;复仇者联盟1&quot;]" class="input-large"placeholder="找电影">
 
       <input type="image" src="/FilmSystem/img/search.png" width=22px height=22px class="btn" />
     </form>
@@ -159,7 +159,7 @@
         %>
           <form>
           <td width="180px">
-            <a href="showFilmInfo.jsp?id=<%=film.getId()%>"> <img src="/FilmSystem/img/<%=film.getImg()%>.png"/></a>
+            <a href="showFilmInfo.jsp?id=<%=film.getId()%>"> <img src="/FilmSystem/img/<%=film.getImg()%>.png" style="width:180px;height:270px"/></a>
           </td>
           </form>
         <%} %>

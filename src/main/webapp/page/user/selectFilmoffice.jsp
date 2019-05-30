@@ -42,8 +42,9 @@
     showMapList = (ArrayList<HashMap<String, Object>>)session.getAttribute("filmShowMapList");
     if(showMapList == null)
         showMapList = new ArrayList<>();
-    cinema = (Cinema) showMapList.get(0).get("cinema");
-    film = (Film) showMapList.get(0).get("film");
+    else{
+        cinema = (Cinema) showMapList.get(0).get("cinema");
+        film = (Film) showMapList.get(0).get("film");
     /**** test data ****/
 //    film.setId(26662282);
 //    film.setName("复仇者联盟4");
@@ -223,7 +224,8 @@
         <td></td>
     </tr>
 
-    <%}%>
+    <%}
+    }%>
     </tbody>
 </table>
 

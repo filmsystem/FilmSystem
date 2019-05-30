@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="filmsystem.Model.FilmShow" %>
 <%@ page import="filmsystem.Model.Cinema" %>
+<%@ page import="filmsystem.Tools.PrintTimestamp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
@@ -149,7 +150,7 @@
                                         <td align="left"><p align="left"><%=temp.getPrice()%>
                                         </p></td>
                                         <td><input type="text" name="beginTime" id="beginTime_qc"
-                                                   value=<%=temp.getBeginTime()%> class="input-medium"></td>
+                                                   value=<%=PrintTimestamp.printToSecond(temp.getBeginTime())%> class="input-medium"></td>
                                         <td data-supplierid="111">
                                             <button id="updateBtn<%=i%>" class="sui-btn btn-bordered" type="button"
                                                     onclick="doUpdate(<%=i%>)">修改

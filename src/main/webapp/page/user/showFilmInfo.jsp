@@ -116,9 +116,9 @@
                     <%--<td><p style="color:#ffffff; min-height: 30px;"><%=film.getSummary()%></p></td>--%>
                     <%--</tr>--%>
 
-                    <tr>
-                        <td><p style="color:#ffffff; min-height: 30px;">评分：<%=film.getStar()%> / 5</p></td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td><p style="color:#ffffff; min-height: 30px;">评分：<%=film.getStar()%> / 5</p></td>--%>
+                    <%--</tr>--%>
                     <tr>
                         <td><p style="color:#ffffff; min-height: 30px;"><%=film.getYear()%> 年上映</p></td>
                     </tr>
@@ -443,7 +443,7 @@
                 success: function (res) {
                     if (res == "SUCCESS"){
                         alert("评论成功！")
-                        location.reload()
+                        location.replace("showFilmInfo.jsp?id=<%=filmId%>")
                     }
 
                     else if(res == "DB_ERROR")

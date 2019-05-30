@@ -36,9 +36,7 @@
             <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">其他 <i
                     class="caret"></i></a>
                 <ul role="menu" class="sui-dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">关于</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">项目组成员</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">版权</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="aboutUs.jsp">项目组成员</a></li>
                 </ul>
             </li>
             <li></li>
@@ -276,7 +274,7 @@
         <% for(int j = 0; j < 5 && (i + j) < list.size(); j++){ %>
         <form>
             <td width="180px" height="300px">
-                <a onclick="doAlert()"> <img src="/FilmSystem/img/<%=list.get(i + j).getImg() + ".png"%>"/></a>
+                <a onclick="doAlert()"> <img src="/FilmSystem/img/<%=list.get(i + j).getImg() + ".png"%>" style="width:180px;height:270px"/></a>
             </td>
         </form>
         <%} %>
