@@ -3,6 +3,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="filmsystem.Model.Customer" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.TreeMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -100,8 +101,8 @@
 <%
     Customer customer = (Customer) session.getAttribute("currentUser");
     BookingRecordDAO brd = new BookingRecordDAO();
-    Map<String, Integer> resultMap1 = brd.countTimesByMonth(customer.getId());
-    //Map<String, Integer> resultMap2 = brd.countTypeByUserId(customer.getId());
+    Map<String, Integer> tMap = brd.countTimesByMonth(customer.getId());
+    Map<String, Integer> resultMap1 = new TreeMap<String, Integer>(tMap);
     int size = resultMap1.size();
     String[] month1 = new String[size];
     Integer[] count1 = new Integer[size];

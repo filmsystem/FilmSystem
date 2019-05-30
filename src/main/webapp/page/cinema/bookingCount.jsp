@@ -3,6 +3,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="filmsystem.DAO.BookingRecordDAO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.TreeMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -91,7 +92,8 @@
 <%
     Cinema cinema=(Cinema)session.getAttribute("currentUser");
     BookingRecordDAO brd=new BookingRecordDAO();
-    Map<String,Float> resultMap=brd.countTurnoverByDayInAWeek(cinema.getId());
+    Map<String,Float> tMap=brd.countTurnoverByDayInAWeek(cinema.getId());
+    Map<String, Float> resultMap = new TreeMap<String, Float>(tMap);
     int size = resultMap.size();
     String[] day1 = new String[size];
     Float[] turnover = new Float[size];
