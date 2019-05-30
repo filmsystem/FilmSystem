@@ -2,6 +2,7 @@
 <%@ page import="filmsystem.Model.BookingRecord" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="filmsystem.DAO.BookingRecordDAO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -216,23 +217,44 @@
 
     myChart.setOption(option);
 </script>
+<%
+    Map<String, ArrayList<Float>> resultMap2 = brd.countTimesByFilm2(cinema.getId());
+    size = Math.min(resultMap2.size(), 10);
+    ArrayList<String> filmArray = new ArrayList<>();
+    ArrayList<Integer> timeArray = new ArrayList<>();
+    ArrayList<Double> statArray = new ArrayList<>();
+    for (Map.Entry<String, ArrayList<Float>> entry : resultMap2.entrySet()) {
+        filmArray.add(entry.getKey());
+        timeArray.add(Math.round(entry.getValue().get(0)));
+        statArray.add(Double.parseDouble(entry.getValue().get(1).toString()));
+    }
+%>
 <script type="text/javascript">
     var myChart2 = echarts.init(document.getElementById('chart2'));
+    var chart2Data = [['score', 'amount','name']];
+    <%for(int i = 0; i < size; i++){%>
+        var temp = new Array()
+        temp.push(<%=statArray.get(i)%>)  //star
+        temp.push(<%=timeArray.get(i)%>)
+        temp.push('<%=filmArray.get(i)%>')
 
+        chart2Data.push(temp)
+    <%}%>
     var option2 = {
         dataset: {
-            source: [
-                ['score', 'amount', 'product'],
-                [89.3, 58212, 'Matcha Latte'],
-                [57.1, 78254, 'Milk Tea'],
-                [74.4, 41032, 'Cheese Cocoa'],
-                [50.1, 12755, 'Cheese Brownie'],
-                [89.7, 20145, 'Matcha Cocoa'],
-                [68.1, 79146, 'Tea'],
-                [19.6, 91852, 'Orange Juice'],
-                [10.6, 101852, 'Lemon Juice'],
-                [32.7, 20112, 'Walnut Brownie']
-            ]
+            // source: [
+            //     ,
+            //     [89.3, 58212, 'Matcha Latte'],
+            //     [57.1, 78254, 'Milk Tea'],
+            //     [74.4, 41032, 'Cheese Cocoa'],
+            //     [50.1, 12755, 'Cheese Brownie'],
+            //     [89.7, 20145, 'Matcha Cocoa'],
+            //     [68.1, 79146, 'Tea'],
+            //     [19.6, 91852, 'Orange Juice'],
+            //     [10.6, 101852, 'Lemon Juice'],
+            //     [32.7, 20112, 'Walnut Brownie']
+            // ]
+            source: chart2Data
         },
         grid: {containLabel: true},
         xAxis: {name: 'amount'},
@@ -240,9 +262,9 @@
         visualMap: {
             orient: 'horizontal',
             left: 'center',
-            min: 10,
-            max: 100,
-            text: ['High Score', 'Low Score'],
+            min: 0,
+            max: 5,
+            text: ['5.0', '0.0'],
             // Map the score column to color
             dimension: 0,
             inRange: {
@@ -255,8 +277,8 @@
                 encode: {
                     // Map the "amount" column to X axis.
                     x: 'amount',
-                    // Map the "product" column to Y axis
-                    y: 'product'
+                    // Map the "film" column to Y axis
+                    y: 'name'
                 }
             }
         ]

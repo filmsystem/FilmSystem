@@ -274,6 +274,7 @@
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
+    var star = 4;
     layui.use(['rate'], function(){
         var rate = layui.rate;
         //基础效果
@@ -335,6 +336,7 @@
             ,text: true
             ,setText: function(value){
                 this.span.text(value+'分');
+                star = value;
             }
         });
         rate.render({
@@ -432,15 +434,18 @@
             })
         });
     });
-    $(function () { //TODO: 提取评分
+    $(function () {
         $("#commentSubmitBtn").on('click', function () {
             var params = $('#commentForm').serialize();
             $.ajax({
                 type: "POST",
-                url: '<%=basePath%>/api/filmcomment?' + params,
+                url: '<%=basePath%>/api/filmcomment?' + params + "&filmStar=" + star,
                 success: function (res) {
-                    if (res == "SUCCESS")
-                        location.replace("selectCinema.jsp")
+                    if (res == "SUCCESS"){
+                        alert("评论成功！")
+                        location.reload()
+                    }
+
                     else if(res == "DB_ERROR")
                         alert("数据获取出错！")
                 },

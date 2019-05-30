@@ -138,19 +138,24 @@
       list.add(filmService.findFilmById(27074316));
       list.add(filmService.findFilmById(30464313));
       list.add(filmService.findFilmById(33434703));
+      list.add(filmService.findFilmById(26731376));
+      list.add(filmService.findFilmById(26879542));
+      list.add(filmService.findFilmById(27042544));
+      list.add(filmService.findFilmById(30158971));
+      list.add(filmService.findFilmById(30467175));
     %>
     <%--<% if(list != null){%>--%>
     <table class="sui-table table-nobordered">
 
       <tbody>
       <%
-        for(int i = 0; i < list.size(); i+=5){
+        for(int i = 0; i < list.size(); i += 5){
       %>
       <tr style="margin-left:30px">
         <td width="140px"></td>
         <%
-          for(int j = 0; j < 5; j++){
-            Film film = list.get(i * 5 + j);
+          for(int j = 0; j < 5 && (i + j ) < list.size(); j++){
+            Film film = list.get(i + j);
         %>
           <form>
           <td width="180px">
@@ -163,8 +168,8 @@
       <tr style="margin-left:20px;height:20px" >
         <td></td>
 
-        <% for(int j = 0; j < 5; j++){ %>
-          <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px"><%=list.get(i+j).getName()%></p></td>
+        <% for(int j = 0; j < 5 && (i + j ) < list.size(); j++){ %>
+          <td><p class="sui-text-large" style="margin-top:1px;margin-left:60px"><%=list.get(i + j).getName()%></p></td>
         <%} %>
 
         <td></td>

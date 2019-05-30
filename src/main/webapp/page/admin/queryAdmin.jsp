@@ -76,9 +76,14 @@
 <blockquote class="layui-elem-quote"><h1>管理员查询</h1></blockquote>
 <%!
     ArrayList<Administrator> list;
+    Administrator administrator;
 %>
 <%
     list = (ArrayList<Administrator>) session.getAttribute("administratorList");
+    administrator = (Administrator) session.getAttribute("currentUser");
+
+    if(administrator == null)
+        administrator = new Administrator();
 %>
 <%--<% if(list != null){%>--%>
 <table class="layui-table" lay-even="" lay-skin="nob">
@@ -143,21 +148,26 @@
     };
 
     function doDelete(id) {
-        $.ajax({
-            type: "DELETE",
-            url: '<%=basePath%>/api/administrator/' + id,
-            success: function (res) {
-                if (res == "SUCCESS")
-                    alert("删除成功！")
-                else if (res == "NOT_FOUND")
-                    alert("无该用户！")
-                else if (res == "DB_ERROR")
-                    alert("数据库出错！")
-                location.replace("queryAdmin.jsp");
-            },
-            error: function () {
-                alert("操作失败！")
-            }
-        })
+        if('<%=administrator%>' == id){
+            alert("自己不能删自己！")
+        }
+        else{
+            $.ajax({
+                type: "DELETE",
+                url: '<%=basePath%>/api/administrator/' + id,
+                success: function (res) {
+                    if (res == "SUCCESS")
+                        alert("删除成功！")
+                    else if (res == "NOT_FOUND")
+                        alert("无该用户！")
+                    else if (res == "DB_ERROR")
+                        alert("数据库出错！")
+                    location.replace("queryAdmin.jsp");
+                },
+                error: function () {
+                    alert("操作失败！")
+                }
+            })
+        }
     };
 </script>
