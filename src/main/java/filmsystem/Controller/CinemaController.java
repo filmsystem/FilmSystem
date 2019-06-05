@@ -151,4 +151,17 @@ public class CinemaController {
             return "DB_ERROR";
         }
     }
+
+    @RequestMapping(value = "/cinemaStatis/top5/{id}", method = RequestMethod.GET)
+    public String countTop5(@PathVariable Integer id,
+                                            Model model, HttpSession session){
+        try{
+            session.setAttribute("turnoverStatistic",statisticsService.countTurnoverByDayInAWeek(id));
+            return "SUCCESS";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "DB_ERROR";
+        }
+    }
 }

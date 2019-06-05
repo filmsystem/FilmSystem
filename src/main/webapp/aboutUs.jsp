@@ -67,10 +67,10 @@
         <li><p style="margin-left:10%;width:1100px;"  class="sui-text-xlarge"><a class="sui-text-disabled">·16122224 沈宇琪</a></p></li>
     </ul>
 
-    <input type="text" class="layui-input" id="test1" value="2099-01-01 00:00:00">
-    <div><input type="text" value="" size="15" id="homecity_name" name="homecity_name" mod="address|notice" mod_address_source="hotel" mod_address_suggest="@Beijing|北京|53@Shanghai|上海|321@Shenzhen|深圳|91@Guangzhou|广州|80@Qingdao|青岛|292@Chengdu|成都|324@Hangzhou|杭州|383@Wuhan|武汉|192@Tianjin|天津|343@Dalian|大连|248@Xiamen|厦门|61@Chongqing|重庆|394@" mod_address_reference="cityid" mod_notice_tip="中文/拼音" />
-        <input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
-    </div>
+    <%--<input type="text" class="layui-input" id="test1" value="2099-01-01 00:00:00">--%>
+    <%--<div><input type="text" value="" size="15" id="homecity_name" name="homecity_name" mod="address|notice" mod_address_source="hotel" mod_address_suggest="@Beijing|北京|53@Shanghai|上海|321@Shenzhen|深圳|91@Guangzhou|广州|80@Qingdao|青岛|292@Chengdu|成都|324@Hangzhou|杭州|383@Wuhan|武汉|192@Tianjin|天津|343@Dalian|大连|248@Xiamen|厦门|61@Chongqing|重庆|394@" mod_address_reference="cityid" mod_notice_tip="中文/拼音" />--%>
+        <%--<input id="cityid" name="cityid" type="hidden" value="{$cityid}" />--%>
+    <%--</div>--%>
     <div id="jsContainer" class="jsContainer" style="height:0">
         <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
         <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>

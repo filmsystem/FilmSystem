@@ -4,6 +4,7 @@ import filmsystem.DAO.BookingRecordDAO;
 import filmsystem.Service.IStatisticsService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service("statisticsService")
@@ -23,5 +24,10 @@ public class StatisticsServiceImpl implements IStatisticsService {
     @Override
     public HashMap<String, Float> countTurnoverByDayInAWeek(int cinemaId) {
         return (HashMap<String,Float>)bookingRecordDAO.countTurnoverByDayInAWeek(cinemaId);
+    }
+
+    @Override
+    public HashMap<String, ArrayList<Float>> countTop5(int cinemaId) {
+        return (HashMap<String, ArrayList<Float>>)bookingRecordDAO.countTimesByFilm2(cinemaId);
     }
 }

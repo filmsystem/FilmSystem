@@ -120,7 +120,7 @@
                 </div>
             </div>
         </td>
-        <td><button data-toggle="modal" data-target="#myModal" data-keyboard="false"  class="sui-btn btn-bordered btn-large btn-warning">评分</button>
+        <%--<td><button data-toggle="modal" data-target="#myModal" data-keyboard="false"  class="sui-btn btn-bordered btn-large btn-warning">评分</button>--%>
             <div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -176,21 +176,6 @@
                 }
             })
         }
-        <%--$.ajax({--%>
-            <%--type: "GET",--%>
-            <%--url: '<%=basePath%>/api/filmcomment?filmId=' + <%=filmId%>,--%>
-            <%--success: function (res) {--%>
-                <%--if (res != "SUCCESS")--%>
-                    <%--alert("数据获取出错！")--%>
-                <%--if(location.href.indexOf("#reloaded")==-1){--%>
-                    <%--location.href=location.href+"#reloaded";--%>
-                    <%--location.reload();--%>
-                <%--}--%>
-            <%--},--%>
-            <%--error: function () {--%>
-                <%--alert("操作失败！")--%>
-            <%--}--%>
-        <%--})--%>
     };
 </script>
 <script src="/FilmSystem/layui/layui.js" charset="utf-8"></script>

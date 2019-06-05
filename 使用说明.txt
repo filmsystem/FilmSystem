@@ -1,0 +1,13 @@
+如何配置
+1. 通过Navicat将本项目的数据库movie.sql导入（本项目数据库版本 MySQL 8.0.14）
+2. 使用idea打开项目文件夹
+3. 通过Maven将项目中使用的包导入
+4. 配置Tomcat（本项目使用Tomcat8.5.39）
+5. 点击菜单栏中 File → Project Structure →Modules，在Sources部分将src / main / java / resources设为Resources文件夹
+6. 运行项目
+
+注意
+1. 务必在联网的情况下使用本项目。如果没有联网则可能导致界面布局异常、部分功能也将无法使用。
+2. 数据库的用户名与密码修改在 src / main / java / resources  / applicationContext.xml 文件中，修改property name="user" 以及 property name="password" 两个标签中的value即可。
+3. 本项目中admin下的addFilm使用了豆瓣API。由于豆瓣API限制，如果频繁使用会导致该功能无法正常使用。
+4. 本项目使用数据库版本为 MySQL 8.0.14，如果是其他版本则需要在pom.xml中更换相应版本的数据库驱动包，否则可能会无法使用。
